@@ -1,0 +1,129 @@
+﻿@page "/Patient/Details/{Id:int}"
+
+@layout NurseLayout
+
+@inject PatientService Service
+
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services;
+
+<div class="container-fluid">
+    <h3>Patient Details</h3>
+
+    <table class="table table-hover">
+        <tr>
+            <td>First Name: </td>
+            <td>@patient.FirstName</td>
+        </tr>
+        <tr>
+            <td>Middle Name: </td>
+            <td>@patient.MiddleName</td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td>@patient.LastName</td>
+        </tr>
+        <tr>
+            <td>Mobile:</td>
+            <td>@patient.Mobile</td>
+        </tr>
+        <tr>
+            <td>Type: </td>
+            <td>@patient.Type</td>
+        </tr>
+        <tr>
+            <td>National Id:</td>
+            <td>@patient.NationalId</td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td>@patient.DateOfBirth</td>
+        </tr>
+        <tr>
+            <td>Blood Type:</td>
+            <td>@patient.BloodType</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>@patient.Email</td>
+        </tr>
+        <tr>
+            <td>Gender: </td>
+            <td>@patient.Gender</td>
+        </tr>
+        <tr>
+            <td>Language: </td>
+            <td>@patient.Language</td>
+        </tr>
+        <tr>
+            <td>Level of Risk: </td>
+            <td>@patient.LevelOfRisk</td>
+        </tr>
+        <tr>
+            <td>Photo: </td>
+            <td>@patient.Image</td>
+        </tr>
+        <tr>
+            <td>Archive: </td>
+            <td>@patient.IsArchived</td>
+        </tr>
+    </table>
+
+    @*<table class="table table-hover">
+        <tr>
+            <td>Country: </td>
+            <td>@patient.Address.Country</td>
+        </tr>
+        <tr>
+            <td>City: </td>
+            <td>@patient.Address.City</td>
+        </tr>
+        <tr>
+            <td>Street Name: </td>
+            <td>@patient.Address.StreetName</td>
+        </tr>
+        <tr>
+            <td>Unit Number: </td>
+            <td>@patient.Address.UnitNumber</td>
+        </tr>
+        <tr>
+            <td>Building Number: </td>
+            <td>@patient.Address.BuildingNumber</td>
+        </tr>
+        <tr>
+            <td>Zip Code: </td>
+            <td>@patient.Address.ZipCode</td>
+        </tr>
+    </table>*@
+
+    <!--<EditForm Model="Patient">
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" type="checkbox" value="" id="Check1">
+                <label class="form-check-label" for="Check1">
+                    Archive
+                </label>
+            </InputCheckbox>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Update Patient Info</button>-->
+    @*<div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-outline-primary">Print Badge</button>
+            </div>
+        </div>*@
+    <!--</EditForm>-->
+
+    <a href="/Patient/List" class="btn btn-info" role="button">Cancel</a>
+</div>
+
+@code {
+
+    Patient patient = new Patient();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        patient = Service.GetPatient(Id);
+    }
+}

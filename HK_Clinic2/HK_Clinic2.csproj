@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Radzen.Blazor" Version="2.17.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Address\" />
+    <Folder Include="Pages\Allergy\" />
+    <Folder Include="Pages\Clinic\" />
+    <Folder Include="Pages\Employee\" />
+    <Folder Include="Pages\Equipment\" />
+    <Folder Include="Pages\Event\" />
+    <Folder Include="Pages\External_Medical_Report\" />
+    <Folder Include="Pages\FamilyDoctor\" />
+    <Folder Include="Pages\Medical_Incident\" />
+    <Folder Include="Pages\Medicine\" />
+    <Folder Include="Pages\Notification\" />
+    <Folder Include="Pages\Parent\" />
+    <Folder Include="Pages\Prescription\" />
+    <Folder Include="Pages\Sick_Leave\" />
+    <Folder Include="Pages\Vitals\" />
+  </ItemGroup>
+
+</Project>

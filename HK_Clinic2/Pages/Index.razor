@@ -1,0 +1,94 @@
+﻿@page "/"
+
+@layout MainLayout
+
+@using HK_Clinic2.Models
+
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+
+
+<div class="container-fluid" align="center">
+
+    <h3>Welcome to HK Clinic</h3>
+    <br />
+    <h5>Please enter your username and password to Log in</h5>
+    <EditForm Model="db.User">
+        <fieldset>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group col-3">
+                <label for="username">Username:*</label>
+                <InputText type="text" id="username" name="username" @bind-Value="@username" class="form-control" Placeholder="abc1"></InputText>
+                <div class="invalid-feedback">
+                    Please enter a username.
+                </div>
+            </div>
+
+            <div class="form-group col-3">
+                <label for="password">Password:*</label>
+                <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control"></InputText>
+                <div class="invalid-feedback">
+                    Please enter a password.
+                </div>
+
+            </div>
+            <div>
+                <label style="color:red; font:smaller">@message</label>
+            </div>
+            <br />  <br />
+            <div>
+                <button type="submit" class="btn btn-outline-primary" @onclick="LoginButtonClicked">Log in</button>
+            </div>
+        </fieldset>
+    </EditForm>
+</div>
+
+@code {
+
+    HKClinicDbContext db = new HKClinicDbContext();
+
+    private List<User> usersList;
+    private List<Nurse> nursesList;
+    private List<Teacher> teachersList;
+
+    int userId;
+    string username;
+    string password;
+    int type;
+    string message;
+    bool found = false;
+    string nurseName;
+    string teacherName;
+
+    protected void LoginButtonClicked()
+    {
+        usersList = db.User.Where(c => c.Username == username && c.Password == password).ToList();
+
+        if (usersList.Count != 0)
+        {
+            type = usersList[0].Type;
+            userId = usersList[0].UserId;
+
+            if (type == 1)
+            {
+                nursesList = db.Nurse.Where(c => c.UserId == userId).ToList();
+                nurseName = nursesList[0].EmployeeId.ToString();
+
+                //navigationManager.NavigateTo($"/Visit/List/{nurseName}");
+                navigationManager.NavigateTo($"/Patient/List");
+
+            }
+            else if (type == 2)
+            {
+                teachersList = db.Teacher.Where(c => c.UserId == userId).ToList();
+                teacherName = teachersList[0].EmployeeId.ToString();
+
+                navigationManager.NavigateTo($"/Visit/List");
+            }
+        }
+        else
+            message = "Invalid username or password";
+    }
+
+
+}

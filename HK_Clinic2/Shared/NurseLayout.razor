@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="top-row px-4">
+        <label style="color:red">Hello @nurseName</label>
+
+        <a href="/About" target="_blank">About</a>
+        <a href="/ContactUs" target="_blank">Contact Us</a>
+        <a href="/Help" target="_blank">Help</a>
+    </div>
+
+    <div class="content px-4">
+        @Body
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int nurseName { get; set; }
+
+}

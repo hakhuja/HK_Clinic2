@@ -1,0 +1,96 @@
+﻿@page "/Patient/List"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject PatientService Service
+
+<h2>Patients</h2>
+
+<a href="Patient/Add">
+    <span class="oi oi-plus"></span> &nbsp;
+    Add New Patient
+</a>
+
+<div class="mt-2"></div>
+
+@if (Patients == null)
+{
+    <p>Loading data ...</p>
+}
+else
+{
+    <select class="form-control" @onchange="ShowStudent">
+        <option value="">-- Select Patient Type --</option>
+        @foreach (var item in typeList)
+        {
+            <option value="@item.TypeId">@item.TypeName</option>
+        }
+    </select>
+
+    <table style="visibility:@visible" id="PatientsTable" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Patient Type</th>
+                <th>@HeaderType</th>
+                <th>Display/Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Patients)
+            {
+                <tr>
+                    <td>@item.FirstName @item.MiddleName @item.LastName</td>
+                    <td>@item.Type</td>
+                    <td>@item.StudentId</td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;<a href="Patient/Details/@item.PatientId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Patient/Edit/@item.PatientId"><span class="oi oi-pencil"></span></a> &nbsp;
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    HKClinicDbContext db = new HKClinicDbContext();
+
+    string visible = "hidden";
+
+    // Create a list of patients to be displayed in the component
+    private List<Patient> Patients = new List<Patient>();
+
+    private List<PType> typeList = new List<PType>();
+
+    private List<PType> FillTypeList()
+    {
+        typeList.Add(new PType(1, "Student"));
+        typeList.Add(new PType(2, "Employee"));
+        return typeList;
+    }
+
+    protected override void OnInitialized()
+    {
+        // Get the patients from the service
+        FillTypeList();
+        Patients = Service.GetPatients();
+    }
+
+    int type { get; set; }
+
+    string HeaderType = "Student";
+
+    private void ShowStudent(ChangeEventArgs typeEvent)
+    {
+        type = int.Parse(typeEvent.Value.ToString());
+        if (type == 1) HeaderType = "Student ID";
+        else HeaderType = "Employee ID";
+        Patients = db.Patient.Where(c => c.Type == type).ToList();
+        visible = "visible";
+    }
+}
