@@ -26,7 +26,7 @@ namespace HK_Clinic2.Services
         public List<Visit> GetVisits()
         {
             // Include patient and appointment entities to be loaded with Visit
-            return db.Visit.ToList();
+            return db.Visit.Include("Patient").Include("Treatment").ToList();
         }
 
         /// <summary>

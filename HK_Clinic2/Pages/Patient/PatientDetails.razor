@@ -7,10 +7,14 @@
 @using HK_Clinic2.Models;
 @using HK_Clinic2.Services;
 
-<div class="container-fluid">
+<div class="container">
     <h3>Patient Details</h3>
 
     <table class="table table-hover">
+        <tr>
+            <td>Patient ID: </td>
+            <td>@patient.PatientId</td>
+        </tr>
         <tr>
             <td>First Name: </td>
             <td>@patient.FirstName</td>
@@ -111,8 +115,9 @@
             </div>
         </div>*@
     <!--</EditForm>-->
-
-    <a href="/Patient/List" class="btn btn-info" role="button">Cancel</a>
+    <br />
+    <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Cancel</a>
+    <div class="mt-4"></div>
 </div>
 
 @code {

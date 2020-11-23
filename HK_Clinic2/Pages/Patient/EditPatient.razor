@@ -1,0 +1,232 @@
+﻿@page "/Patient/Edit/{Id:int}"
+
+@layout NurseLayout
+
+@inject NavigationManager NavigationManager
+
+@inject PatientService Service
+
+@inject HKClinicDbContext db
+
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services;
+
+<div class="container">
+    <h3>Edit Patient Information</h3>
+    <fieldset>
+        <legend>Edit</legend>
+        <EditForm Model="patient" OnValidSubmit="UpdatePatient">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="first-name">First Name:*</label>
+                    <InputText id="first-name" @bind-Value="patient.FirstName" class="form-control" placeholder="Enter Patient's Fisrt Name" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="middle-name">Middle Name:*</label>
+                    <InputText id="middle-name" @bind-Value="patient.MiddleName" class="form-control" placeholder="Enter Patient's Middle Name" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="last-name">Last Name:*</label>
+                    <InputText id="last-name" @bind-Value="patient.LastName" class="form-control" placeholder="Enter Patient's Last Name" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="national-id">National ID:*</label>
+                    <InputText id="national-id" @bind-Value="patient.NationalId" class="form-control" placeholder="Enter the National ID of the Patient" />
+                </div>
+
+                <div class="form-group col-3">
+                    <label for="mobile">Mobile Number:</label>
+                    <InputText id="mobile" @bind-Value="patient.Mobile" class="form-control" placeholder="0500000000" />
+                </div>
+
+                <div class="form-group col-3">
+                    <label for="birthDate">Date Of Birth:</label>
+                    <InputDate id="birthDate" @bind-Value="patient.DateOfBirth" class="form-control" />
+                </div>
+
+                <div class="form-group col-3">
+                    <label for="email" class="control-label">Email: </label>
+                    <InputText type="email" id="email" @bind-Value="patient.Email" class="form-control" placeholder="sam@example.com" />
+                    <ValidationMessage For="@(() => patient.Email)" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label style="display: flex; align-items: center">
+                        <span style="margin-right: 32px">Patient Type:*</span>
+                    </label>
+                    <RadzenDropDown Data="@type" @bind-Value="patient.Type" />
+                </div>
+
+                <div class="form-group col-3">
+                    <label style="display: flex; align-items: center">
+                        <span style="margin-right: 32px">Gender:*</span>
+                    </label>
+                    <RadzenDropDown Data="@gender" @bind-Value="patient.Gender" />
+                </div>
+
+                <div class="form-group col-3">
+                    <label style="display: flex; align-items: center">
+                        <span style="margin-right: 32px">Language:</span>
+                    </label>
+                    <RadzenDropDown Data="@language" @bind-Value="patient.Language" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label style="display: flex; align-items: center">
+                        <span style="margin-right: 32px">Address:*</span>
+                    </label>
+                    <RadzenDropDown AllowClear="true" TValue="int"
+                                    LoadData="@LoadData" AllowFiltering="true"
+                                    Data="@patientAddress" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
+                                    Change="@(args => Change(args, "Address DropDown "))" />
+                </div>
+                <div class="form-group col-3">
+                    <label style="display: flex; align-items: center">
+                        <span style="margin-right: 32px">Patient Level of Risk:*</span>
+                    </label>
+                    <RadzenDropDown Data="@levelOfRisks" @bind-Value="patient.LevelOfRisk" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="country">Country:*</label>
+                    <InputText id="country" @bind-Value="address.Country" class="form-control" placeholder="Enter Country" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="city">City:*</label>
+                    <InputText id="city" @bind-Value="address.City" class="form-control" placeholder="Enter City" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="street-name">Street Name:*</label>
+                    <InputText id="street-name" @bind-Value="address.StreetName" class="form-control" placeholder="Enter Street Name" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="building-number">Building Number:</label>
+                    <InputNumber id="building-number" @bind-Value="address.BuildingNumber" class="form-control" placeholder="Enter Building Number" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="unit-number">Unit Number:</label>
+                    <InputNumber id="unit-number" @bind-Value="address.UnitNumber" class="form-control" placeholder="Enter Unit Number" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="zip-code">Zip Code:</label>
+                    <InputText id="zip-code" @bind-Value="address.ZipCode" class="form-control" placeholder="Enter Zip Code" />
+                </div>
+            </div>
+            <br />
+            <div class="file-field">
+                <label for="Photo">Photo:</label>
+                <br />
+                <div class="btn btn-primary btn-sm float-left">
+                    <span>Choose file</span>
+                    <input type="file">
+                </div>
+            </div>
+            <br /><br />
+            <fieldset>
+                <legend>Archive</legend>
+
+                <div class="form-check">
+                    <InputCheckbox id="ischeckedarchive" @bind-Value="isArchived" class="form-check-input" />
+                    <label class="form-check-label" for="ischeckedarchive">Archive Patient Profile</label>
+                </div>
+
+            </fieldset>
+            <br />
+            <div class="mt-4"></div>
+
+            <button type="submit" class="btn btn-outline-primary">Edit</button>
+            <a href="Visitor/List" class="btn btn-outline-secondary">Cancel</a>
+            <div class="mt-4"></div>
+        </EditForm>
+    </fieldset>
+</div>
+<br />
+
+<p>@message</p>
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    Patient patient = new Patient();
+
+    Address address = new Address();
+
+    string message;
+
+    private bool isArchived = false;
+
+    //Code for drop down list
+
+    IEnumerable<PatientGender> gender = Enum.GetValues(typeof(PatientGender)).Cast<PatientGender>();
+
+    IEnumerable<PatientLanguage> language = Enum.GetValues(typeof(PatientLanguage)).Cast<PatientLanguage>();
+
+    IEnumerable<PatientType> type = Enum.GetValues(typeof(PatientType)).Cast<PatientType>();
+
+    IEnumerable<PatientLevelOfRisk> levelOfRisks = Enum.GetValues(typeof(PatientLevelOfRisk)).Cast<PatientLevelOfRisk>();
+
+    IEnumerable<Address> patientAddress;
+
+
+    protected override void OnInitialized()
+    {
+        patient = Service.GetPatient(Id);
+    }
+
+    public void UpdatePatient()
+    {
+        // Update the patient properties
+        patient.IsArchived = isArchived;
+
+        // Edit patient
+        Service.UpdatePatient(patient);
+
+        message = "Patient updated successfully";
+        NavigationManager.NavigateTo("Patient/List");
+    }
+
+    void Change(object value, string name)
+    {
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+
+        //events.Add(DateTime.Now, $"{name} value changed to {str}");
+        StateHasChanged();
+    }
+
+    void LoadData(LoadDataArgs args)
+    {
+        var query = db.Address.AsQueryable();
+
+
+        if (!string.IsNullOrEmpty(args.Filter))
+        {
+            //query = query.Where(c => c.AddressId.ToLower().Contains(args.Filter.ToLower()) || c.StreetName.ToLower().Contains(args.Filter.ToLower()));
+        }
+
+        patientAddress = query.ToList();
+
+        InvokeAsync(StateHasChanged);
+    }
+}

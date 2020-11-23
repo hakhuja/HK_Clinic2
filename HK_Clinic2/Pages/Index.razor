@@ -83,7 +83,7 @@
                 teachersList = db.Teacher.Where(c => c.UserId == userId).ToList();
                 teacherName = teachersList[0].EmployeeId.ToString();
 
-                navigationManager.NavigateTo($"/Visit/List");
+                navigationManager.NavigateTo($"/Teacher/Visit/List");
             }
         }
         else

@@ -1,0 +1,67 @@
+﻿@page "/Visit/Details/{Id:int}"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject VisitService Service
+
+<div class="container">
+    <h3>Visit Details</h3>
+
+    <table class="table table-hover">
+        <tr>
+            <td>Visit Id: </td>
+            <td>@visit.VisitId</td>
+        </tr>
+        <tr>
+            <td>First Name: </td>
+            <td>@visit.Patient.FirstName</td>
+        </tr>
+        <tr>
+            <td>Middle Name: </td>
+            <td>@visit.Patient.MiddleName</td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td>@visit.Patient.LastName</td>
+        </tr>
+        <tr>
+            <td>Sign-in: </td>
+            <td>@visit.VisitDateTime</td>
+        </tr>
+        <tr>
+            <td>Sign-out: </td>
+            <td>@visit.Assessment</td>
+        </tr>
+        <tr>
+            <td>Treatment: </td>
+            <td>@visit.Treatment.Description</td>
+        </tr>
+        <tr>
+            <td>Status: </td>
+            <td>@visit.Status</td>
+        </tr>
+        <tr>
+            <td>Note: </td>
+            <td>@visit.Note</td>
+        </tr>
+    </table>
+    <br />
+    <a href="/Visit/List" class="btn btn-outline-secondary" role="button">Cancel</a>
+    <div class="mt-4"></div>
+</div>
+
+@code {
+
+    Visit visit = new Visit();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        visit = Service.GetVisit(Id);
+    }
+}
