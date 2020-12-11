@@ -2,12 +2,147 @@
 
 @layout NurseLayout
 
-<h2>Dashboard</h2>
-
-<h3>Date and Time: @DateTime.Now</h3>
-
-<div>
-    <h4>Today's Patients</h4>
-    <h4>Today's Appointments</h4>
-    <h4>Today's Visits</h4>
+<div class="row">
+    <h1 class="col">Dashboard</h1>
+    <div class="col">
+        <h3 class="float-right"><strong>Date and Time: @DateTime.Now</strong></h3>
+    </div>
 </div>
+<hr />
+<div class="row">
+    <h3>Today's Patients</h3>
+</div>
+
+<div class="row">
+    <h3>Today's Appointments</h3>
+</div>
+<hr />
+<div>
+    <h3>Total Medicine Consumption Per Day</h3>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <RadzenChart>
+                <RadzenPieSeries Data="@MedicineConsumption" Title="NumberOfUsage" CategoryProperty="Medicine" ValueProperty="NumberOfUsage" />
+            </RadzenChart>
+        </div>
+    </div>
+</div>
+@code {
+    class DataItem
+    {
+        public string Medicine { get; set; }
+        public double NumberOfUsage { get; set; }
+    }
+
+    DataItem[] MedicineConsumption = new DataItem[] {
+        new DataItem
+        {
+            Medicine = "Buscopan tablet",
+            NumberOfUsage = 15
+        },
+        new DataItem
+        {
+            Medicine = "Scopinal syrup",
+            NumberOfUsage = 2
+        },
+        new DataItem
+        {
+            Medicine = "Panadol extra",
+            NumberOfUsage = 83
+        },
+        new DataItem
+        {
+            Medicine = "Panadol mild",
+            NumberOfUsage = 24
+        },
+        new DataItem
+        {
+            Medicine = "Panadol cold and flu tablet",
+            NumberOfUsage = 21
+        },
+        new DataItem
+        {
+            Medicine = "Solpadeine capsule",
+            NumberOfUsage = 4
+        },
+        new DataItem
+        {
+            Medicine = "Solpadeine soluble",
+            NumberOfUsage = 2
+        },
+    };
+}
+
+@*<h1>Radzen Blazor Chart column series</h1>
+<div class="row">
+    <div class="col-md-6 col-sm-12 p-4">
+        <RadzenChart>
+            <RadzenColumnSeries Data="@revenue2020" CategoryProperty="Quarter" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue" />
+            <RadzenColumnSeries Data="@revenue2019" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue" />
+            <RadzenColumnOptions Radius="5" />
+            <RadzenValueAxis Formatter="@FormatAsUSD">
+                <RadzenGridLines Visible="true" />
+                <RadzenAxisTitle Text="Revenue in USD" />
+            </RadzenValueAxis>
+        </RadzenChart>
+    </div>
+</div>
+@code {
+    class DataItem
+    {
+        public string Quarter { get; set; }
+        public double Revenue { get; set; }
+    }
+
+    string FormatAsUSD(object value)
+    {
+        return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("en-US"));
+    }
+
+    DataItem[] revenue2019 = new DataItem[] {
+        new DataItem
+        {
+            Quarter = "Q1",
+            Revenue = 234000
+        },
+        new DataItem
+        {
+            Quarter = "Q2",
+            Revenue = 284000
+        },
+        new DataItem
+        {
+            Quarter = "Q3",
+            Revenue = 274000
+        },
+        new DataItem
+        {
+            Quarter = "Q4",
+            Revenue = 294000
+        },
+    };
+
+    DataItem[] revenue2020 = new DataItem[] {
+        new DataItem
+        {
+            Quarter = "Q1",
+            Revenue = 254000
+        },
+        new DataItem
+        {
+            Quarter = "Q2",
+            Revenue = 324000
+        },
+        new DataItem
+        {
+            Quarter = "Q3",
+            Revenue = 354000
+        },
+        new DataItem
+        {
+            Quarter = "Q4",
+            Revenue = 394000
+        },
+
+    };
+}*@
