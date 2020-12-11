@@ -12,10 +12,10 @@ namespace HK_Clinic2.Models
     public partial class Student_Appointment
     {
         public int PatientId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The First Name field is required.")]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Last Name field is required.")]
         public string LastName { get; set; }
         public int BloodType { get; set; }
         public int LevelOfRisk { get; set; }

@@ -12,6 +12,7 @@ namespace HK_Clinic2.Models
         {
             TypeId = id; TypeName = name;
         }
+
         [Key]
         public int TypeId { get; set; }
 

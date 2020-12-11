@@ -22,14 +22,15 @@ namespace HK_Clinic2.Models
 
         [Key]
         public int PatientId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The First Name field is required.")]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Last Name field is required.")]
         public string LastName { get; set; }
         [Column(TypeName = "date")]
         public DateTime DateOfBirth { get; set; }
         [StringLength(10)]
+        [Range(10,10, ErrorMessage ="The Mobile field must contain 10 digits")]
         public string Mobile { get; set; }
         [StringLength(50)]
         public string NationalId { get; set; }

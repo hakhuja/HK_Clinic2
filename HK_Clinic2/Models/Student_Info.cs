@@ -12,10 +12,10 @@ namespace HK_Clinic2.Models
     public partial class Student_Info
     {
         public int PatientId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The First Name field is required.")]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Last Name field is required.")]
         public string LastName { get; set; }
         [Required]
         public string Image { get; set; }
@@ -27,14 +27,14 @@ namespace HK_Clinic2.Models
         public string Expr2 { get; set; }
         [Required]
         [StringLength(10)]
+        [Range(10, 10, ErrorMessage = "The Mobile field must contain 10 digits")]
         public string Mobile { get; set; }
         public string Email { get; set; }
         public int Class { get; set; }
         [Required]
         [StringLength(10)]
+        [Range(10, 10, ErrorMessage = "The First Gurdian Mobile field must contain 10 digits")]
         public string FirstGuardianMobile { get; set; }
-        [StringLength(10)]
-        public string SecondGuardianMobile { get; set; }
         public int EducationLevel { get; set; }
         [Required]
         public string Expr3 { get; set; }

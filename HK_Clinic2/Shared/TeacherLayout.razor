@@ -40,12 +40,28 @@
         <a href="/About" target="_blank">About</a>
         <a href="/ContactUs" target="_blank">Contact Us</a>
         <a href="/Help" target="_blank">Help</a>
+        <div>
+            <RadzenProfileMenu>
+                <Template>
+                    <RadzenGravatar Email="user@example.com">
+                    </RadzenGravatar>
+                </Template>
+                <ChildContent>
+                    <RadzenProfileMenuItem Text="My account" Path="/Account" Icon="account_circle"></RadzenProfileMenuItem>
+                    @*<RadzenProfileMenuItem Text="Setting" Path="/Settings" Icon="line_weight"></RadzenProfileMenuItem>*@
+                </ChildContent>
+            </RadzenProfileMenu>
+        </div>
+
     </div>
 
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+<RadzenDialog />
+<RadzenNotification />
 
 @code {
     [Parameter]

@@ -19,12 +19,13 @@ namespace HK_Clinic2.Models
 
         [Key]
         public int ParentId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The First Name field is required.")]
         public string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Last Name field is required.")]
         public string LastName { get; set; }
         [Required]
         [StringLength(10)]
+        [Range(10, 10, ErrorMessage = "The Mobile field must contain 10 digits")]
         public string Mobile { get; set; }
         public string Email { get; set; }
         public int Guardian { get; set; }

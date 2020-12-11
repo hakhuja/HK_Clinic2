@@ -13,7 +13,7 @@
 
 <div class="container">
     <h3>Edit Patient Information</h3>
-    <fieldset>
+    <RadzenFieldset Text="Edit">
         <legend>Edit</legend>
         <EditForm Model="patient" OnValidSubmit="UpdatePatient">
             <DataAnnotationsValidator />
@@ -142,15 +142,14 @@
                 </div>
             </div>
             <br /><br />
-            <fieldset>
-                <legend>Archive</legend>
+            <RadzenFieldset Text="Archive">
 
                 <div class="form-check">
                     <InputCheckbox id="ischeckedarchive" @bind-Value="isArchived" class="form-check-input" />
                     <label class="form-check-label" for="ischeckedarchive">Archive Patient Profile</label>
                 </div>
 
-            </fieldset>
+            </RadzenFieldset>
             <br />
             <div class="mt-4"></div>
 
@@ -158,7 +157,7 @@
             <a href="Visitor/List" class="btn btn-outline-secondary">Cancel</a>
             <div class="mt-4"></div>
         </EditForm>
-    </fieldset>
+    </RadzenFieldset>
 </div>
 <br />
 

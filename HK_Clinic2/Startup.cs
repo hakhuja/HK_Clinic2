@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Radzen;
+using NotificationService = Radzen.NotificationService;
 
 namespace HK_Clinic2
 {
@@ -33,6 +35,9 @@ namespace HK_Clinic2
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
+            services.AddScoped<DialogService>();
+            services.AddScoped<NotificationService>();
+
             // Add DbContext to services
             services.AddDbContext<HKClinicDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -48,7 +53,6 @@ namespace HK_Clinic2
             services.AddScoped<FamilyDoctorService>();
             services.AddScoped<InventoryService>();
             services.AddScoped<MedicalIncidentService>();
-            services.AddScoped<NotificationService>();
             services.AddScoped<ParentService>();
             services.AddScoped<PatientService>();
             services.AddScoped<SickLeaveService>();

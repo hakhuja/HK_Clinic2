@@ -18,10 +18,12 @@ namespace HK_Clinic2.Models
 
         [Key]
         public int ClassId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Class Number field is required.")]
         [StringLength(5)]
         public string ClassNumber { get; set; }
+        [Required]
         public int Grade { get; set; }
+        [Required]
         [Column(TypeName = "date")]
         public DateTime Year { get; set; }
 

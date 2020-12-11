@@ -21,9 +21,9 @@ namespace HK_Clinic2.Models
         public int AddressId { get; set; }
         public int? BuildingNumber { get; set; }
         public int? UnitNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Street Name field is required.")]
         public string StreetName { get; set; }
-        [StringLength(5)]
+        [Range(5, 5, ErrorMessage = "Zip Code must contain 5 digits")]
         public string ZipCode { get; set; }
         [Required]
         public string City { get; set; }

@@ -20,7 +20,7 @@ namespace HK_Clinic2.Models
         public DateTime AttachmentDateTime { get; set; }
         [Column(TypeName = "date")]
         public DateTime MedicalReportDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Scanned File field is required.")]
         public string ScannedFile { get; set; }
         public int PatientId { get; set; }
 

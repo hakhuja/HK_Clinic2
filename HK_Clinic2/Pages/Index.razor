@@ -9,38 +9,41 @@
 
 <div class="container-fluid" align="center">
 
-    <h3>Welcome to HK Clinic</h3>
+    <h3><strong>Welcome to HK Clinic</strong></h3>
     <br />
     <h5>Please enter your username and password to Log in</h5>
-    <EditForm Model="db.User">
-        <fieldset>
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="form-group col-3">
-                <label for="username">Username:*</label>
-                <InputText type="text" id="username" name="username" @bind-Value="@username" class="form-control" Placeholder="abc1"></InputText>
-                <div class="invalid-feedback">
-                    Please enter a username.
-                </div>
-            </div>
 
-            <div class="form-group col-3">
-                <label for="password">Password:*</label>
-                <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control"></InputText>
-                <div class="invalid-feedback">
-                    Please enter a password.
+    <div>
+        <EditForm Model="db.User">
+            <RadzenFieldset Text="Login" class="col-4">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="form-group">
+                    <label for="username">Username:*</label>
+                    <InputText type="text" id="username" name="username" @bind-Value="@username" class="form-control" Placeholder="abc1"></InputText>
+                    <div class="invalid-feedback">
+                        Please enter a username.
+                    </div>
                 </div>
 
-            </div>
-            <div>
-                <label style="color:red; font:smaller">@message</label>
-            </div>
-            <br />  <br />
-            <div>
-                <button type="submit" class="btn btn-outline-primary" @onclick="LoginButtonClicked">Log in</button>
-            </div>
-        </fieldset>
-    </EditForm>
+                <div class="form-group">
+                    <label for="password">Password:*</label>
+                    <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control"></InputText>
+                    <div class="invalid-feedback">
+                        Please enter a password.
+                    </div>
+
+                </div>
+                <div>
+                    <label style="color:red; font:smaller">@message</label>
+                </div>
+                <br />
+                <div>
+                    <button type="submit" class="btn btn-outline-primary" @onclick="LoginButtonClicked">Log in</button>
+                </div>
+            </RadzenFieldset>
+        </EditForm>
+    </div>
 </div>
 
 @code {
@@ -75,7 +78,7 @@
                 nurseName = nursesList[0].EmployeeId.ToString();
 
                 //navigationManager.NavigateTo($"/Visit/List/{nurseName}");
-                navigationManager.NavigateTo($"/Patient/List");
+                navigationManager.NavigateTo($"/Dashboard");
 
             }
             else if (type == 2)

@@ -17,8 +17,7 @@
         <RadzenTabsItem Text="Add Address">
             <div class="container-fluid">
 
-                <fieldset>
-                    <legend>Add New Address</legend>
+                <RadzenFieldset Text="Add New Address Details">
                     <EditForm Model="address" OnValidSubmit="CreateAddress">
                         <DataAnnotationsValidator />
                         <ValidationSummary />
@@ -27,6 +26,7 @@
                             <div class="form-group col-4">
                                 <label for="country">Country:*</label>
                                 <InputText id="country" @bind-Value="address.Country" class="form-control" placeholder="Enter Country" />
+
                             </div>
 
                             <div class="form-group col-4">
@@ -54,6 +54,7 @@
                             <div class="form-group col-4">
                                 <label for="zip-code">Zip Code:</label>
                                 <InputText id="zip-code" @bind-Value="address.ZipCode" class="form-control" placeholder="Enter Zip Code" />
+                                <small style="display: block">(5 characters)</small>
                             </div>
                         </div>
                         <br />
@@ -62,15 +63,14 @@
                         <button type="submit" class="btn btn-outline-primary" style=" width: 80px;">Save</button>
                         <a href="/Patient/List" class="btn btn-outline-secondary">Cancel</a>
                     </EditForm>
-                </fieldset>
+                </RadzenFieldset>
             </div>
             <br><br><br>
         </RadzenTabsItem>
         <RadzenTabsItem Text="Add New Patient">
             <div class="container-fluid">
 
-                <fieldset>
-                    <legend>Add New Patient Information</legend>
+                <RadzenFieldset Text="Personal information">
                     <EditForm Model="patient" OnValidSubmit="CreatePatient">
                         <DataAnnotationsValidator />
                         <ValidationSummary />
@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="form-group col-4">
-                                <label for="middle-name">Middle Name:*</label>
+                                <label for="middle-name">Middle Name:</label>
                                 <InputText id="middle-name" @bind-Value="patient.MiddleName" class="form-control" placeholder="Enter Patient's Middle Name" />
                             </div>
 
@@ -171,15 +171,14 @@
 
                         <div class="mt-4">
 
-                            <fieldset>
-                                <legend>Archive</legend>
+                            <RadzenFieldset Text="Archive">
 
                                 <div class="form-check">
                                     <InputCheckbox id="ischeckedarchive" @bind-Value="isArchived" class="form-check-input" />
                                     <label class="form-check-label" for="ischeckedarchive">Archive Patient Profile</label>
                                 </div>
 
-                            </fieldset>
+                            </RadzenFieldset>
                         </div>
                         <br />
 
@@ -187,7 +186,7 @@
                         &nbsp;&nbsp;
                         <a href="Patient/List" class="btn btn-outline-secondary">Cancel</a>
                     </EditForm>
-                </fieldset>
+                </RadzenFieldset>
             </div>
         </RadzenTabsItem>
         <br><br><br>
