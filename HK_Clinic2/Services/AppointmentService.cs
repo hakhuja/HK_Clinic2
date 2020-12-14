@@ -24,7 +24,7 @@ namespace HK_Clinic2.Services
         /// <returns>List of all Appointments</returns>
         public List<Appointment> GetAppointments()
         {
-            return db.Appointment.Include("Patient").ToList();
+            return db.Appointment.ToList();
         }
 
         /// <summary>

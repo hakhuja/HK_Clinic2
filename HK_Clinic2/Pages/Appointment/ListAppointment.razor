@@ -30,7 +30,7 @@ else
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Patient Name</th>
+                @*<th>Patient Name</th>*@
                 <th>Appointment Date and Time</th>
                 <th>Reason</th>
                 <th>Status</th>
@@ -43,7 +43,7 @@ else
             @foreach (var item in appointments)
             {
                 <tr>
-                    <td>@item.Patient.FirstName @item.Patient.MiddleName @item.Patient.LastName</td>
+                    @*<td>@item.Patient.FirstName @item.Patient.MiddleName @item.Patient.LastName</td>*@
                     <td>@item.AppointmentDateTime</td>
                     <td>@item.Reason</td>
                     <td>@item.Status</td>
