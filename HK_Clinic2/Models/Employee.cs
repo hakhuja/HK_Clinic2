@@ -20,7 +20,7 @@ namespace HK_Clinic2.Models
         public int EmployeeId { get; set; }
         [Required(ErrorMessage = "The Emergency Contact Number field is required.")]
         [StringLength(10)]
-        [Range(10, 10, ErrorMessage = "The Mobile field must contain 10 digits")]
+        [Range(0000000000, 9999999999, ErrorMessage = "The Mobile field must contain 10 digits")]
         public string EmergencyContactNumber { get; set; }
         public int MaritalStatus { get; set; }
 

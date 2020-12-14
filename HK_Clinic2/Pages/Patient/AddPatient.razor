@@ -60,7 +60,7 @@
                         <br />
 
                         <div class="mt-4"></div>
-                        <button type="submit" class="btn btn-outline-primary" style=" width: 80px;">Save</button>
+                        <button type="submit" class="btn btn-outline-primary" style="width: 80px;" href="/Patient/Add" >Save</button>
                         <a href="/Patient/List" class="btn btn-outline-secondary">Cancel</a>
                     </EditForm>
                 </RadzenFieldset>
@@ -167,19 +167,6 @@
                             </div>
                         </div>
 
-                        <br />
-
-                        <div class="mt-4">
-
-                            <RadzenFieldset Text="Archive">
-
-                                <div class="form-check">
-                                    <InputCheckbox id="ischeckedarchive" @bind-Value="isArchived" class="form-check-input" />
-                                    <label class="form-check-label" for="ischeckedarchive">Archive Patient Profile</label>
-                                </div>
-
-                            </RadzenFieldset>
-                        </div>
                         <br />
 
                         <button type="submit" class="btn btn-outline-primary">Add Patient</button>

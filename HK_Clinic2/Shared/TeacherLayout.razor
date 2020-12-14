@@ -1,7 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="sidebar">
-    @*<NavMenu />*@
     <div class="top-row pl-4 navbar navbar-dark">
         <img src="/css/Pictures/Logo.png" alt="Logo" width="75" height="50">
         <a class="navbar-brand" href="">HK Clinic</a>
@@ -13,20 +12,8 @@
     <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
         <ul class="nav flex-column">
             <li class="nav-item px-3">
-                <NavLink class="nav-link" href="/Patient/List" Match="NavLinkMatch.All">
-                    <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                    </svg> &nbsp; &nbsp;Patients
-                </NavLink>
-            </li>
-            <li class="nav-item px-3">
                 <NavLink class="nav-link" href="/Appointment/List" Match="NavLinkMatch.All">
                     <span class="oi oi-clock"></span> Appointments
-                </NavLink>
-            </li>
-            <li class="nav-item px-3">
-                <NavLink class="nav-link" href="/Visit/List" Match="NavLinkMatch.All">
-                    <span class="oi oi-calendar"></span> Visits
                 </NavLink>
             </li>
         </ul>
@@ -48,7 +35,7 @@
                 </Template>
                 <ChildContent>
                     <RadzenProfileMenuItem Text="My account" Path="/Account" Icon="account_circle"></RadzenProfileMenuItem>
-                    @*<RadzenProfileMenuItem Text="Setting" Path="/Settings" Icon="line_weight"></RadzenProfileMenuItem>*@
+                    @*<RadzenProfileMenuItem Text="Settings" Path="/Settings" Icon="line_weight"></RadzenProfileMenuItem>*@
                 </ChildContent>
             </RadzenProfileMenu>
         </div>

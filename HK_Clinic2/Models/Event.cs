@@ -25,6 +25,7 @@ namespace HK_Clinic2.Models
         public DateTime? EndDateTime { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
+        [Range(0, 99, ErrorMessage = "The range for the Capacity is 0 - 99")]
         public int? Capacity { get; set; }
         public int? Type { get; set; }
 

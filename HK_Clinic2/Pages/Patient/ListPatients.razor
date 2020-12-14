@@ -45,7 +45,10 @@ else
                 <tr>
                     <td>@item.FirstName @item.MiddleName @item.LastName</td>
                     <td>@item.Type</td>
-                    <td>@item.StudentId</td>
+                    <td>
+                        @if(item.Type == 1) @item.StudentId
+                        else @item.EmployeeId
+                    </td>
                     <td>
                         &nbsp;&nbsp;&nbsp;<a href="Patient/Details/@item.PatientId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="Patient/Edit/@item.PatientId"><span class="oi oi-pencil"></span></a> &nbsp;

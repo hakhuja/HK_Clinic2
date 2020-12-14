@@ -19,15 +19,15 @@ namespace HK_Clinic2.Models
 
         [Key]
         public int AddressId { get; set; }
+        [Range(0,999999, ErrorMessage = "The range for the Building Number is 0 - 999999")]
         public int? BuildingNumber { get; set; }
+        [Range(0, 999999, ErrorMessage = "The range for the Unit Number is 0 - 999999")]
         public int? UnitNumber { get; set; }
         [Required(ErrorMessage = "The Street Name field is required.")]
         public string StreetName { get; set; }
-        [Range(5, 5, ErrorMessage = "Zip Code must contain 5 digits")]
+        [Range(00000, 99999, ErrorMessage = "Zip Code must contain 5 digits")]
         public string ZipCode { get; set; }
-        [Required]
         public string City { get; set; }
-        [Required]
         public string Country { get; set; }
 
         [InverseProperty(nameof(Patient.Address))]

@@ -19,10 +19,10 @@ namespace HK_Clinic2.Models
 
         [Key]
         public int UserId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Username field is required.")]
         [StringLength(30)]
         public string Username { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Password field is required.")]
         [StringLength(50)]
         public string Password { get; set; }
         public int Type { get; set; }

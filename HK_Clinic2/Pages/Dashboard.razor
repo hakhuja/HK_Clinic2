@@ -1,6 +1,7 @@
 ﻿@page "/Dashboard"
 
 @layout NurseLayout
+@using System.Globalization
 
 <div class="row">
     <h1 class="col">Dashboard</h1>
@@ -8,17 +9,17 @@
         <h3 class="float-right"><strong>Date and Time: @DateTime.Now</strong></h3>
     </div>
 </div>
-<hr />
+@*<hr />
 <div class="row">
     <h3>Today's Patients</h3>
 </div>
 
 <div class="row">
     <h3>Today's Appointments</h3>
-</div>
+</div>*@
 <hr />
 <div>
-    <h3>Total Medicine Consumption Per Day</h3>
+    <h2>Total Medicine Consumption Per Day</h2>
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <RadzenChart>
@@ -27,6 +28,7 @@
         </div>
     </div>
 </div>
+
 @code {
     class DataItem
     {
@@ -72,77 +74,157 @@
         },
     };
 }
-
-@*<h1>Radzen Blazor Chart column series</h1>
+<hr />
+<h2>Cost of Medicine per month in 2019 and 2020</h2>
 <div class="row">
-    <div class="col-md-6 col-sm-12 p-4">
+    <div class="col-md-12 col-sm-12 p-4">
         <RadzenChart>
-            <RadzenColumnSeries Data="@revenue2020" CategoryProperty="Quarter" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue" />
-            <RadzenColumnSeries Data="@revenue2019" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue" />
-            <RadzenColumnOptions Radius="5" />
-            <RadzenValueAxis Formatter="@FormatAsUSD">
+            <RadzenColumnSeries Data="@expenses2019" CategoryProperty="Month" Title="2020" LineType="LineType.Dashed" ValueProperty="Expenses" />
+            <RadzenColumnSeries Data="@expenses2020" CategoryProperty="Month" Title="2019" ValueProperty="Expenses" />
+            <RadzenColumnOptions Radius="10" />
+            <RadzenValueAxis Formatter="@FormatAsSAR">
                 <RadzenGridLines Visible="true" />
-                <RadzenAxisTitle Text="Revenue in USD" />
+                <RadzenAxisTitle Text="Expenses in SAR" />
             </RadzenValueAxis>
         </RadzenChart>
     </div>
 </div>
+
 @code {
-    class DataItem
+    class DataItem2
     {
-        public string Quarter { get; set; }
-        public double Revenue { get; set; }
+        public string Month { get; set; }
+        public double Expenses { get; set; }
     }
 
-    string FormatAsUSD(object value)
+    string FormatAsSAR(object value)
     {
-        return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("en-US"));
+        return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("ar-SAR"));
     }
 
-    DataItem[] revenue2019 = new DataItem[] {
-        new DataItem
+    DataItem2[] expenses2019 = new DataItem2[] {
+        new DataItem2
         {
-            Quarter = "Q1",
-            Revenue = 234000
+            Month = "January",
+            Expenses = 234000
         },
-        new DataItem
+        new DataItem2
         {
-            Quarter = "Q2",
-            Revenue = 284000
+            Month = "February",
+            Expenses = 284000
         },
-        new DataItem
+        new DataItem2
         {
-            Quarter = "Q3",
-            Revenue = 274000
+            Month = "March",
+            Expenses = 274000
         },
-        new DataItem
+        new DataItem2
         {
-            Quarter = "Q4",
-            Revenue = 294000
+            Month = "April",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "May",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "June",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "July",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "August",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "September",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "October",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "November",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "December",
+            Expenses = 294000
         },
     };
 
-    DataItem[] revenue2020 = new DataItem[] {
-        new DataItem
+    DataItem2[] expenses2020 = new DataItem2[] {
+        new DataItem2
         {
-            Quarter = "Q1",
-            Revenue = 254000
+            Month = "January",
+            Expenses = 254000
         },
-        new DataItem
+        new DataItem2
         {
-            Quarter = "Q2",
-            Revenue = 324000
+            Month = "February",
+            Expenses = 324000
         },
-        new DataItem
+        new DataItem2
         {
-            Quarter = "Q3",
-            Revenue = 354000
+            Month = "March",
+            Expenses = 354000
         },
-        new DataItem
+        new DataItem2
         {
-            Quarter = "Q4",
-            Revenue = 394000
+            Month = "April",
+            Expenses = 394000
         },
-
+        new DataItem2
+        {
+            Month = "May",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "June",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "July",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "August",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "September",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "October",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "November",
+            Expenses = 294000
+        },
+        new DataItem2
+        {
+            Month = "December",
+            Expenses = 294000
+        },      
     };
-}*@
+}

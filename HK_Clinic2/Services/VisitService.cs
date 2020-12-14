@@ -54,33 +54,5 @@ namespace HK_Clinic2.Services
             }
             return false;
         }
-
-        /// <summary>
-        /// Delete a visit
-        /// </summary>
-        /// <param name="id">Id of the visit to delete</param>
-        /// <returns>True if visit is deleted successfuly otherwise false</returns>
-        public bool DeleteVisit(int id)
-        {
-            var visit = db.Visit.Find(id);
-            if (visit != null)
-            {
-                db.Visit.Remove(visit);
-                db.SaveChanges();
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Edit a visit
-        /// </summary>
-        /// <param name="visit">visit object</param>
-        public void UpdateVisit(Visit visit)
-        {
-            // Change the state of the visit object to modified, so it will be update in database
-            db.Entry(visit).State = EntityState.Modified;
-            db.SaveChanges();
-        }
     }
 }

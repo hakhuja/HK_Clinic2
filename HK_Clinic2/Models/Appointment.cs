@@ -25,6 +25,8 @@ namespace HK_Clinic2.Models
         public string Note { get; set; }
         public int TeacherId { get; set; }
         public int NurseId { get; set; }
+        //public int PatientId { get; set; }
+
 
         [ForeignKey(nameof(NurseId))]
         [InverseProperty("Appointments")]
@@ -32,6 +34,9 @@ namespace HK_Clinic2.Models
         [ForeignKey(nameof(TeacherId))]
         [InverseProperty("Appointments")]
         public virtual Teacher Teacher { get; set; }
+        //[ForeignKey(nameof(PatientId))]
+        //[InverseProperty("Appointments")]
+        //public virtual Patient Patient { get; set; }
         [InverseProperty(nameof(Notification.Appointment))]
         public virtual ICollection<Notification> Notifications { get; set; }
         [InverseProperty(nameof(Visit.Appointment))]

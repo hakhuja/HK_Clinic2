@@ -22,27 +22,15 @@ namespace HK_Clinic2.Models
         public int BloodType { get; set; }
         public int LevelOfRisk { get; set; }
         [Required]
-        public string Expr1 { get; set; }
-        [Required]
-        public string Expr2 { get; set; }
-        [Required]
         [StringLength(10)]
-        [Range(10, 10, ErrorMessage = "The Mobile field must contain 10 digits")]
+        [Range(0000000000, 9999999999, ErrorMessage = "The Mobile field must contain 10 digits")]
         public string Mobile { get; set; }
         public string Email { get; set; }
-        public int Class { get; set; }
+        public int ClassNumber { get; set; }
         [Required]
         [StringLength(10)]
-        [Range(10, 10, ErrorMessage = "The First Gurdian Mobile field must contain 10 digits")]
+        [Range(000000000, 9999999999, ErrorMessage = "The First Gurdian Mobile field must contain 10 digits")]
         public string FirstGuardianMobile { get; set; }
         public int EducationLevel { get; set; }
-        [Required]
-        public string Expr3 { get; set; }
-        [Required]
-        public string Expr4 { get; set; }
-        [Required]
-        [StringLength(10)]
-        public string Expr5 { get; set; }
-        public string Expr6 { get; set; }
     }
 }

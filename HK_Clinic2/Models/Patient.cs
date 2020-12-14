@@ -30,7 +30,7 @@ namespace HK_Clinic2.Models
         [Column(TypeName = "date")]
         public DateTime DateOfBirth { get; set; }
         [StringLength(10)]
-        [Range(10,10, ErrorMessage ="The Mobile field must contain 10 digits")]
+        [Range(0000000000, 9999999999, ErrorMessage ="The Mobile field must contain 10 digits")]
         public string Mobile { get; set; }
         [StringLength(50)]
         public string NationalId { get; set; }
@@ -66,6 +66,8 @@ namespace HK_Clinic2.Models
         public virtual ICollection<Prescription> Prescriptions { get; set; }
         [InverseProperty(nameof(Visit.Patient))]
         public virtual ICollection<Visit> Visits { get; set; }
+        //[InverseProperty(nameof(Appointment.Patient))]
+        //public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
 public enum PatientType

@@ -12,7 +12,8 @@ namespace HK_Clinic2.Models
     {
         [Key]
         public int InventoryId { get; set; }
-        [StringLength(50)]
+        [StringLength(20)]
+        [Range(0, 9999999999999999999, ErrorMessage = "The range for the Building Number is 0 - 999999")]
         public string SerialNumber { get; set; }
         [StringLength(50)]
         public string Manufacturer { get; set; }

@@ -15,19 +15,16 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
 
-        @*I should add a component that contains ID's of all patients*@
-        <div class="form-group">
-            <label for="patientId">Patient ID: </label>
-            <select id="patientId" class="form-control">
-                <option>
-                    @foreach (var item in patients)
-                    {
-                        @item.PatientId
-                    }
-                </option>
+        <div>
+            <select class="form-control">
+                <option value="">-- Select Patient ID --</option>
+                @foreach (var item in patients)
+                {
+                    <option value="@item.PatientId">@item.PatientId</option>
+                }
             </select>
         </div>
-
+        <br /> 
         <div class="form-group">
             <label for="VisitDateTime">Visit Date and Time: </label>
             <input type="datetime-local" name="VisitDateTime">

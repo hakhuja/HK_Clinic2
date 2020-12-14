@@ -1,12 +1,72 @@
 ﻿@page "/Appointment/List"
 
-@using HK_Clinic2.Models
+@layout NurseLayout
+
+@using HK_Clinic2.Models;
 @using HK_Clinic2.Services
+
 
 @inject AppointmentService Service
 
+
 <h2>Appointments</h2>
+
+<a href="Appointment/Add">
+    <span class="oi oi-plus"></span> &nbsp;
+    Add Appointment
+</a>
+
+<div class="mt-2"></div>
+
+@if (appointments == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Appointment Date and Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Note</th>
+                <th>Display/Print</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in appointments)
+            {
+                <tr>
+                    <td>@item.Patient.FirstName @item.Patient.MiddleName @item.Patient.LastName</td>
+                    <td>@item.AppointmentDateTime</td>
+                    <td>@item.Reason</td>
+                    <td>@item.Status</td>
+                    <td>@item.Note</td>
+                    <td>
+                        <a href="Appointment/Details/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;
+                        <a href="Appointment/Print/@item.AppointmentId"><span class="oi oi-print"></span></a>&nbsp;
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 
 @code {
 
+    // Create a list of Appointments to be displayed in the component
+    List<Appointment> appointments = new List<Appointment>();
+
+    protected override void OnInitialized()
+    {
+        // Get the Visit from the service
+        appointments = Service.GetAppointments();
+    }
 }

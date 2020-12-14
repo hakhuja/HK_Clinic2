@@ -24,10 +24,12 @@ namespace HK_Clinic2.Models
         [StringLength(50)]
         public string Name { get; set; }
         public string Description { get; set; }
+        [Range(0, 999, ErrorMessage = "The range for the Quantity in Stock is 0 - 999")]
         public int QuantityInStock { get; set; }
         public DateTime RegistrationDateTime { get; set; }
         [Column(TypeName = "date")]
         public DateTime ExpiryDate { get; set; }
+        [Range(0, 999, ErrorMessage = "The range for the Limit is 0 - 999")]
         public int Limit { get; set; }
         public int Type { get; set; }
 

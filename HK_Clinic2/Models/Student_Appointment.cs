@@ -19,7 +19,7 @@ namespace HK_Clinic2.Models
         public string LastName { get; set; }
         public int BloodType { get; set; }
         public int LevelOfRisk { get; set; }
-        public int Class { get; set; }
+        public int ClassNumber { get; set; }
         public DateTime AppointmentDateTime { get; set; }
         public string Reason { get; set; }
         public int Status { get; set; }
