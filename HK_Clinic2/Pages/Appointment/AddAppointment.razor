@@ -1,0 +1,83 @@
+﻿@page "/Appointment/Add"
+
+@layout TeacherLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject AppointmentService Service
+@inject PatientService PService
+
+
+<h3>Add an Appointment</h3>
+<div class="container">
+    <EditForm Model="appointment" OnValidSubmit="CreateAppointment">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div>
+            <select class="form-control">
+                <option value="">-- Select Patient ID --</option>
+                @foreach (var item in patients)
+                {
+                    <option value="@item.PatientId">@item.PatientId</option>
+                }
+            </select>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="AppointmentDateTime">Appointment Date and Time: </label>
+            <input type="datetime-local" name="AppointmentDateTime">
+        </div>
+
+        <div class="form-group">
+            <label for="reason">Reason: </label>
+            <textarea class="form-control" id="reason" rows="3"></textarea>
+        </div>
+
+        <label>Appointment Status: </label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="status" value="option1">
+            <label class="form-check-label" for="status">
+                Confirmed
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="status2" value="option2" checked>
+            <label class="form-check-label" for="status2">
+                Pending
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="status2" value="option2">
+            <label class="form-check-label" for="status2">
+                Canceled
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label for="note">Note: </label>
+            <textarea class="form-control" id="note" rows="3"></textarea>
+        </div>
+
+        <br>
+
+        <div class="mt-2"></div>
+        <br>
+        <button type="submit" class="btn btn-outline-primary">Save</button>
+        <a href="Appointment/List" class="btn btn-outline-secondary" role="button">Cancel</a>
+
+    </EditForm>
+</div>
+
+@code {
+    Appointment appointment = new Appointment();
+
+    List<Patient> patients = new List<Patient>();
+
+    private void CreateAppointment()
+    {
+        Service.AddAppointment(appointment);
+        appointment = new Appointment();
+    }
+}

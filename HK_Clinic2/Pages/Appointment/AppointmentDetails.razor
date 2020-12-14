@@ -1,0 +1,51 @@
+﻿@page "/Appointment/Details/{Id:int}"
+
+@layout TeacherLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject AppointmentService Service
+
+<div class="container">
+    <h3>Appointment Details</h3>
+
+    <table class="table table-hover">
+        <tr>
+            <td>Appointment Id: </td>
+            <td>@appointment.AppointmentId</td>
+        </tr>
+        <tr>
+            <td>Appointment Date and Time: </td>
+            <td>@appointment.AppointmentDateTime</td>
+        </tr>
+        <tr>
+            <td>Reason: </td>
+            <td>@appointment.Reason</td>
+        </tr>
+        <tr>
+            <td>Status: </td>
+            <td>@appointment.Status</td>
+        </tr>
+        <tr>
+            <td>Note: </td>
+            <td>@appointment.Note</td>
+        </tr>
+    </table>
+    <br />
+    <a href="/Appointment/List" class="btn btn-outline-secondary" role="button">Cancel</a>
+    <div class="mt-4"></div>
+</div>
+
+@code {
+
+    Appointment appointment = new Appointment();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        appointment = Service.GetAppointment(Id);
+    }
+}
