@@ -21,6 +21,7 @@ namespace HK_Clinic2.Models
         [StringLength(10)]
         [Range(0, 9999999999, ErrorMessage = "The Mobile field must contain 10 digits")]
         public string Mobile { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
         public int StudentId { get; set; }
 

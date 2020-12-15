@@ -33,3 +33,7 @@ namespace HK_Clinic2.Models
         public virtual ICollection<Student> Students { get; set; }
     }
 }
+public enum GradeEnum
+{
+    KG1 = 1, KG2, KG3, Grade_1, Grade_2, Grade_3, Grade_4, Grade_5, Grade_6, Grade_7, Grade_8, Grade_9, Grade_10, Grade_11, Grade_12
+}

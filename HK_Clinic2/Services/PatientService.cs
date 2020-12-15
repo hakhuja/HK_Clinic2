@@ -25,7 +25,7 @@ namespace HK_Clinic2.Services
         public List<Patient> GetPatients()
         {
             //return db.Patient.Include("Student").Include("Employee").ToList();
-            return db.Patient.Include("Address").ToList();
+            return db.Patient.Include("Address").Include("Student").ToList();
         }
 
         /// <summary>

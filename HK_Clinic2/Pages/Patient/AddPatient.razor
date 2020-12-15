@@ -11,6 +11,8 @@
 @inject NavigationManager NavigationManager
 @inject HKClinicDbContext db
 
+<h3>Add the patient's address first then add the patient's information</h3>
+<br />
 <RadzenTabs>
 
     <Tabs>
@@ -60,7 +62,7 @@
                         <br />
 
                         <div class="mt-4"></div>
-                        <button type="submit" class="btn btn-outline-primary" style="width: 80px;" href="/Patient/Add" >Save</button>
+                        <button type="submit" class="btn btn-outline-primary" style="width: 80px;" href="/Patient/Add">Save</button>
                         <a href="/Patient/List" class="btn btn-outline-secondary">Cancel</a>
                     </EditForm>
                 </RadzenFieldset>
@@ -120,21 +122,28 @@
                                 <label style="display: flex; align-items: center">
                                     <span style="margin-right: 32px">Patient Type:*</span>
                                 </label>
-                                <RadzenDropDown Data="@type" @bind-Value="patient.Type" />
+                                <RadzenDropDown Data="@types" @bind-Value="patientType" Change="ChooseType" />
                             </div>
 
                             <div class="form-group col-3">
                                 <label style="display: flex; align-items: center">
                                     <span style="margin-right: 32px">Gender:*</span>
                                 </label>
-                                <RadzenDropDown Data="@gender" @bind-Value="patient.Gender" />
+                                <RadzenDropDown Data="@genders" @bind-Value="patientGender" Change="ChooseGender" />
                             </div>
 
                             <div class="form-group col-3">
                                 <label style="display: flex; align-items: center">
                                     <span style="margin-right: 32px">Language:</span>
                                 </label>
-                                <RadzenDropDown Data="@language" @bind-Value="patient.Language" />
+                                <RadzenDropDown Data="@languages" @bind-Value="patientLanguage" Change="ChooseLanguage" />
+                            </div>
+
+                            <div class="form-group col-3">
+                                <label style="display: flex; align-items: center">
+                                    <span style="margin-right: 32px">Patient Level of Risk:*</span>
+                                </label>
+                                <RadzenDropDown Data="@levelOfRisks" @bind-Value="patientLevelOfRisk" Change="ChooseLevelOfRisk" />
                             </div>
                         </div>
 
@@ -148,27 +157,56 @@
                                                 Data="@patientAddress" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
                                                 Change="@(args => Change(args, "Address DropDown "))" />
                             </div>
-                            <div class="form-group col-3">
-                                <label style="display: flex; align-items: center">
-                                    <span style="margin-right: 32px">Patient Level of Risk:*</span>
-                                </label>
-                                <RadzenDropDown Data="@levelOfRisks" @bind-Value="patient.LevelOfRisk" />
-                            </div>
                         </div>
-
-                        <br />
 
                         <div class="file-field">
                             <label for="Photo">Photo:</label>
                             <br />
                             <div class="btn btn-primary btn-sm float-left">
                                 <span>Choose file</span>
-                                <input type="file">
+                                <input type="file" @bind-value="patient.Image">
                             </div>
                         </div>
+                        <br /><br /><br />
+                        <RadzenFieldset Text="Student Information">
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <label for="student-id">Student ID:*</label>
+                                    <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
+                                </div>
 
-                        <br />
+                                <div class="form-group col-3">
+                                    <label for="education-level">Education Level:*</label>
+                                    <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
+                                        @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
+                                        {                                          
+                                            <option value="@item">@item</option>
+                                        }
+                                    </InputSelect>
+                                </div>
 
+                                @*<div class="form-group col-2">
+                                        <label for="grade">Grade:*</label>
+                                        <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
+                                            @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
+                                            {
+                                                <option value="@item">@item</option>
+                                            }
+                                        </InputSelect>
+                                    </div>
+
+                                    <div class="form-group col-2">
+                                        <label for="class-number">Class Number:*</label>
+                                        <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
+                                    </div>
+
+                                    <div class="form-group col-2">
+                                        <label for="year">Year:*</label>
+                                        <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
+                                    </div>*@
+                            </div>
+                        </RadzenFieldset>
+                        <br /><br /><br />
                         <button type="submit" class="btn btn-outline-primary">Add Patient</button>
                         &nbsp;&nbsp;
                         <a href="Patient/List" class="btn btn-outline-secondary">Cancel</a>
@@ -185,30 +223,67 @@
 
     Address address = new Address();
 
+    Student student = new Student();
+
     private List<Address> addresses = new List<Address>();
 
     private List<Patient> patients = new List<Patient>();
 
     private bool isArchived = false;
 
-    //Execute when component starts / initializes
-    protected override void OnInitialized()
-    {
-        patients = Service.GetPatients();
-        //addresses = AddressService.GetAddresses();
-    }
+    int typeValue;
+    int genderValue;
+    int languageValue;
+    int levelOfRiskValue;
 
     //Code for drop down list
 
-    IEnumerable<PatientGender> gender = Enum.GetValues(typeof(PatientGender)).Cast<PatientGender>();
+    IEnumerable<PatientGender> genders = Enum.GetValues(typeof(PatientGender)).Cast<PatientGender>();
 
-    IEnumerable<PatientLanguage> language = Enum.GetValues(typeof(PatientLanguage)).Cast<PatientLanguage>();
+    IEnumerable<PatientLanguage> languages = Enum.GetValues(typeof(PatientLanguage)).Cast<PatientLanguage>();
 
-    IEnumerable<PatientType> type = Enum.GetValues(typeof(PatientType)).Cast<PatientType>();
+    IEnumerable<PatientType> types = Enum.GetValues(typeof(PatientType)).Cast<PatientType>();
 
     IEnumerable<PatientLevelOfRisk> levelOfRisks = Enum.GetValues(typeof(PatientLevelOfRisk)).Cast<PatientLevelOfRisk>();
 
     IEnumerable<Address> patientAddress;
+
+    PatientGender patientGender = PatientGender.Female;
+
+    PatientLanguage patientLanguage = PatientLanguage.English;
+
+    PatientType patientType = PatientType.Student;
+
+    PatientLevelOfRisk patientLevelOfRisk = PatientLevelOfRisk.Low;
+
+    public void ChooseType()
+    {
+        typeValue = (int)patientType;
+        patient.Type = typeValue;
+    }
+
+    public void ChooseGender()
+    {
+        genderValue = (int)patientGender;
+        patient.Gender = genderValue;
+    }
+
+    public void ChooseLanguage()
+    {
+        languageValue = (int)patientLanguage;
+        patient.Language = languageValue;
+    }
+
+    public void ChooseLevelOfRisk()
+    {
+        levelOfRiskValue = (int)patientLevelOfRisk;
+        patient.LevelOfRisk = levelOfRiskValue;
+    }
+
+    protected override void OnInitialized()
+    {
+        patients = Service.GetPatients();
+    }
 
     private void CreatePatient()
     {
@@ -227,7 +302,7 @@
     {
         AdService.AddNewAddress(address);
 
-        // To empty the form, find more elegant why
+        // To empty the form
         address = new Address();
 
         // May navigate to the Employees component
@@ -238,19 +313,12 @@
     {
         var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
 
-        //events.Add(DateTime.Now, $"{name} value changed to {str}");
         StateHasChanged();
     }
 
     void LoadData(LoadDataArgs args)
     {
         var query = db.Address.AsQueryable();
-
-
-        if (!string.IsNullOrEmpty(args.Filter))
-        {
-            //query = query.Where(c => c.AddressId.ToLower().Contains(args.Filter.ToLower()) || c.StreetName.ToLower().Contains(args.Filter.ToLower()));
-        }
 
         patientAddress = query.ToList();
 

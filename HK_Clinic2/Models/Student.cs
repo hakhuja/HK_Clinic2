@@ -19,6 +19,7 @@ namespace HK_Clinic2.Models
         }
 
         [Key]
+        [MinLength(0, ErrorMessage ="The minimum length of the Student ID is 0")]
         public int StudentId { get; set; }
         public int EducationLevel { get; set; }
         public int? ClassId { get; set; }
@@ -33,4 +34,8 @@ namespace HK_Clinic2.Models
         [InverseProperty(nameof(Student_Parent.Student))]
         public virtual ICollection<Student_Parent> Student_Parents { get; set; }
     }
+}
+public enum EducationLevelEnum
+{
+    Elementary_School = 1, Middle_School, High_School
 }

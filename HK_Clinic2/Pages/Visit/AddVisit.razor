@@ -7,93 +7,89 @@
 
 @inject VisitService Service
 @inject PatientService PService
+@inject NavigationManager NavigationManager
 
 
-<h3>Add a Visit</h3>
 <div class="container">
-    <EditForm Model="visit" OnValidSubmit="CreateVisit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+    <h3>Add a Visit</h3>
+    <RadzenFieldset Text="Add a Visit">
+        <EditForm Model="visit" OnValidSubmit="CreateVisit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="col-4">
+                <label for="VisitDateTime">Visit Date and Time:*</label>
+                <input type="datetime-local" id="VisitDateTime" class="form-control" />
+            </div>
+            <br />
+            <div class="col-4">
+                <label for="patientId">Patient ID:*</label>
+                <InputSelect class="form-control" id="patientId" @bind-Value="visit.PatientId">
+                    @foreach (var patient in patients)
+                    {
+                        <option value="@patient.PatientId">@patient.StudentId</option>
+                    }
+                </InputSelect>
+            </div>
+            <br />
+            <div class="col-4">
+                <label for="assessment">Assessment:*</label>
+                <InputSelect class="form-control" id="assessment" @bind-Value="visit.Assessment">
+                    @foreach (var assessment in Enum.GetValues(typeof(PatientAssessment)))
+                    {
+                        <option value="@assessment">@assessment</option>
+                    }
+                </InputSelect>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="treatment">Treatment:* </label>
+                <InputTextArea class="form-control" id="treatment" rows="3" @bind-Value="treatment.Description"></InputTextArea>
+            </div>
+            <div class="form-group">
+                <label for="note">Note: </label>
+                <InputTextArea class="form-control" id="note" rows="3" @bind-Value="visit.Note"></InputTextArea>
+            </div>
 
-        <div>
-            <select class="form-control">
-                <option value="">-- Select Patient ID --</option>
-                @foreach (var item in patients)
-                {
-                    <option value="@item.PatientId">@item.PatientId</option>
-                }
-            </select>
-        </div>
-        <br /> 
-        <div class="form-group">
-            <label for="VisitDateTime">Visit Date and Time: </label>
-            <input type="datetime-local" name="VisitDateTime">
-        </div>
+            <label>Visit Status: </label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="status" value="option1" checked>
+                <label class="form-check-label" for="status">
+                    Completed
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="status2" value="option2">
+                <label class="form-check-label" for="status2">
+                    Incomplete
+                </label>
+            </div>
 
-        <div class="form-group">
-            <label for="inputAssessment">Assessment: </label>
-            <select id="inputAssessment" class="form-control">
-                <option selected> --- Choose an Assessment --- </option>
-                <option value="1">Stomach Pain</option>
-                <option value="2">Headache</option>
-                <option value="3">Minor Accidents (Head/Body Bumped)</option>
-                <option value="4">Muscle/Body Pain</option>
-                <option value="5">Minor Wounds</option>
-                <option value="6">Diabetic</option>
-                <option value="7">Sore Throat</option>
-                <option value="8">Fever</option>
-                <option value="9">Dizziness</option>
-                <option value="10">Nausea and Vomiting</option>
-                <option value="11">Toothache</option>
-                <option value="12">Nose Bleeding</option>
-                <option value="13">Cough</option>
-                <option value="14">Eye Irritation</option>
-                <option value="15">Ear Pain</option>
-                <option value="17">Difficulty of Breathing</option>
-                <option value="18">Diarrhea</option>
-                <option value="19">Flu (Colds and Runny Nose)</option>
-                <option value="20">Allergies (Itchiness)</option>
-                <option value="21">Asthma</option>
-                <option value="22">Insect Bites</option>
-            </select>
-        </div>
+            <br>
 
-        <div class="form-group">
-            <label for="note">Note: </label>
-            <textarea class="form-control" id="note" rows="3"></textarea>
-        </div>
+            <div class="mt-2"></div>
+            <br>
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+            <a href="Visit/List" class="btn btn-outline-secondary" role="button">Cancel</a>
 
-        <label>Visit Status: </label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="status" value="option1" checked>
-            <label class="form-check-label" for="status">
-                Completed
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="status2" value="option2">
-            <label class="form-check-label" for="status2">
-                Incomplete
-            </label>
-        </div>
-
-        <br>
-
-        <div class="mt-2"></div>
-        <br>
-        <button type="submit" class="btn btn-outline-primary">Save</button>
-        <a href="Visit/List" class="btn btn-outline-secondary" role="button">Cancel</a>
-
-    </EditForm>
+        </EditForm>
+    </RadzenFieldset>
 </div>
 
 @code {
     Visit visit = new Visit();
+    Treatment treatment = new Treatment();
+
     List<Patient> patients = new List<Patient>();
+    List<Student_Info> students;
 
     private void CreateVisit()
     {
         Service.AddVisit(visit);
+
+        // To empty the form
         visit = new Visit();
+
+        // May navigate to the Visit/List component
+        NavigationManager.NavigateTo("Visit/List");
     }
 }
