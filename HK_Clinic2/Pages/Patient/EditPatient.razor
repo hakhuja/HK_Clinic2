@@ -14,7 +14,6 @@
 <div class="container">
     <h3>Edit Patient Information</h3>
     <RadzenFieldset Text="Edit">
-        <legend>Edit</legend>
         <EditForm Model="patient" OnValidSubmit="UpdatePatient">
             <DataAnnotationsValidator />
             <ValidationSummary />
@@ -215,19 +214,12 @@
     {
         var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
 
-        //events.Add(DateTime.Now, $"{name} value changed to {str}");
         StateHasChanged();
     }
 
     void LoadData(LoadDataArgs args)
     {
         var query = db.Address.AsQueryable();
-
-
-        if (!string.IsNullOrEmpty(args.Filter))
-        {
-            //query = query.Where(c => c.AddressId.ToLower().Contains(args.Filter.ToLower()) || c.StreetName.ToLower().Contains(args.Filter.ToLower()));
-        }
 
         patientAddress = query.ToList();
 

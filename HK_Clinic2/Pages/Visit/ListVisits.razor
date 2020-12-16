@@ -36,7 +36,7 @@ else
                 <th>Treatment</th>
                 <th>Status</th>
                 <th>Note</th>
-                <th>Display/Print</th>
+                <th>Display/Edit/Print</th>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +52,7 @@ else
                     <td>@item.Note</td>
                     <td>
                         <a href="Visit/Details/@item.VisitId"><span class="oi oi-list"></span></a> &nbsp;
+                        <a href="Visit/Edit/@item.VisitId"><span class="oi oi-pencil"></span></a> &nbsp;
                         <a href="Visit/Print/@item.VisitId"><span class="oi oi-print"></span></a>&nbsp;
                     </td>
                 </tr>

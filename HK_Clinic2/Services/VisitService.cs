@@ -54,5 +54,17 @@ namespace HK_Clinic2.Services
             }
             return false;
         }
+
+        /// <summary>
+        /// Update a visit
+        /// </summary>
+        /// <param name="visit">visit object</param>
+
+        public void UpdateVisit(Visit visit)
+        {
+            // Change the state of the visit object to modified, so it will be update in database
+            db.Entry(visit).State = EntityState.Modified;
+            db.SaveChanges();
+        }
     }
 }
