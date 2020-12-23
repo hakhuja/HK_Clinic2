@@ -1,0 +1,76 @@
+﻿@page "/Address/List"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services
+
+
+@inject AddressService Service
+
+
+<h2>Addresses</h2>
+
+<a href="Address/Add">
+    <span class="oi oi-plus"></span> &nbsp;
+    Add New Address
+</a>
+
+<div class="mt-2"></div>
+
+@if (addresses == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>City</th>
+                <th>Street Name</th>
+                <th>Building Number</th>
+                <th>Unit Number</th>
+                <th>Zip Code</th>
+                <th>Display/Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in addresses)
+            {
+                <tr>
+                    <td>@item.Country</td>
+                    <td>@item.City</td>
+                    <td>@item.StreetName</td>
+                    <td>@item.BuildingNumber</td>
+                    <td>@item.UnitNumber</td>
+                    <td>@item.ZipCode</td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="Address/Details/@item.AddressId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Address/Edit/@item.AddressId"><span class="oi oi-pencil"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Address/Delete/@item.AddressId"><span class="oi oi-trash"></span></a>&nbsp;
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    // Create a list of addresses to be displayed in the component
+    List<Address> addresses = new List<Address>();
+
+    protected override void OnInitialized()
+    {
+        // Get the address from the service
+        addresses = Service.GetAddresses();
+    }
+}

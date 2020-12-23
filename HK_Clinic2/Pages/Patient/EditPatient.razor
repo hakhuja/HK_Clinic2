@@ -63,21 +63,28 @@
                     <label style="display: flex; align-items: center">
                         <span style="margin-right: 32px">Patient Type:*</span>
                     </label>
-                    <RadzenDropDown Data="@type" @bind-Value="patient.Type" />
+                    <RadzenDropDown Data="@types" @bind-Value="patientType" Change="ChooseType" />
                 </div>
 
                 <div class="form-group col-3">
                     <label style="display: flex; align-items: center">
                         <span style="margin-right: 32px">Gender:*</span>
                     </label>
-                    <RadzenDropDown Data="@gender" @bind-Value="patient.Gender" />
+                    <RadzenDropDown Data="@genders" @bind-Value="patientGender" Change="ChooseGender" />
                 </div>
 
                 <div class="form-group col-3">
                     <label style="display: flex; align-items: center">
                         <span style="margin-right: 32px">Language:</span>
                     </label>
-                    <RadzenDropDown Data="@language" @bind-Value="patient.Language" />
+                    <RadzenDropDown Data="@languages" @bind-Value="patientLanguage" Change="ChooseLanguage" />
+                </div>
+
+                <div class="form-group col-3">
+                    <label style="display: flex; align-items: center">
+                        <span style="margin-right: 32px">Patient Level of Risk:*</span>
+                    </label>
+                    <RadzenDropDown Data="@levelOfRisks" @bind-Value="patientLevelOfRisk" Change="ChooseLevelOfRisk" />
                 </div>
             </div>
 
@@ -91,45 +98,6 @@
                                     Data="@patientAddress" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
                                     Change="@(args => Change(args, "Address DropDown "))" />
                 </div>
-                <div class="form-group col-3">
-                    <label style="display: flex; align-items: center">
-                        <span style="margin-right: 32px">Patient Level of Risk:*</span>
-                    </label>
-                    <RadzenDropDown Data="@levelOfRisks" @bind-Value="patient.LevelOfRisk" />
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-4">
-                    <label for="country">Country:*</label>
-                    <InputText id="country" @bind-Value="address.Country" class="form-control" placeholder="Enter Country" />
-                </div>
-
-                <div class="form-group col-4">
-                    <label for="city">City:*</label>
-                    <InputText id="city" @bind-Value="address.City" class="form-control" placeholder="Enter City" />
-                </div>
-
-                <div class="form-group col-4">
-                    <label for="street-name">Street Name:*</label>
-                    <InputText id="street-name" @bind-Value="address.StreetName" class="form-control" placeholder="Enter Street Name" />
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-4">
-                    <label for="building-number">Building Number:</label>
-                    <InputNumber id="building-number" @bind-Value="address.BuildingNumber" class="form-control" placeholder="Enter Building Number" />
-                </div>
-
-                <div class="form-group col-4">
-                    <label for="unit-number">Unit Number:</label>
-                    <InputNumber id="unit-number" @bind-Value="address.UnitNumber" class="form-control" placeholder="Enter Unit Number" />
-                </div>
-
-                <div class="form-group col-4">
-                    <label for="zip-code">Zip Code:</label>
-                    <InputText id="zip-code" @bind-Value="address.ZipCode" class="form-control" placeholder="Enter Zip Code" />
-                </div>
             </div>
             <br />
             <div class="file-field">
@@ -140,23 +108,18 @@
                     <input type="file">
                 </div>
             </div>
-            <br /><br />
             <br />
-
-            <div class="mt-4">
-
+            <br />
+            <div class="mt-5">
                 <RadzenFieldset Text="Archive">
-
                     <div class="form-check">
                         <InputCheckbox id="ischeckedarchive" @bind-Value="isArchived" class="form-check-input" />
                         <label class="form-check-label" for="ischeckedarchive">Archive Patient Profile</label>
                     </div>
-
                 </RadzenFieldset>
             </div>
             <br />
             <div class="mt-4"></div>
-
             <button type="submit" class="btn btn-outline-primary">Edit</button>
             <a href="Patient/List" class="btn btn-outline-secondary">Cancel</a>
             <div class="mt-4"></div>
@@ -180,18 +143,54 @@
 
     private bool isArchived = false;
 
+    int typeValue;
+    int genderValue;
+    int languageValue;
+    int levelOfRiskValue;
+
     //Code for drop down list
 
-    IEnumerable<PatientGender> gender = Enum.GetValues(typeof(PatientGender)).Cast<PatientGender>();
+    IEnumerable<PatientGender> genders = Enum.GetValues(typeof(PatientGender)).Cast<PatientGender>();
 
-    IEnumerable<PatientLanguage> language = Enum.GetValues(typeof(PatientLanguage)).Cast<PatientLanguage>();
+    IEnumerable<PatientLanguage> languages = Enum.GetValues(typeof(PatientLanguage)).Cast<PatientLanguage>();
 
-    IEnumerable<PatientType> type = Enum.GetValues(typeof(PatientType)).Cast<PatientType>();
+    IEnumerable<PatientType> types = Enum.GetValues(typeof(PatientType)).Cast<PatientType>();
 
     IEnumerable<PatientLevelOfRisk> levelOfRisks = Enum.GetValues(typeof(PatientLevelOfRisk)).Cast<PatientLevelOfRisk>();
 
     IEnumerable<Address> patientAddress;
 
+    PatientGender patientGender = PatientGender.Female;
+
+    PatientLanguage patientLanguage = PatientLanguage.English;
+
+    PatientType patientType = PatientType.Student;
+
+    PatientLevelOfRisk patientLevelOfRisk = PatientLevelOfRisk.Low;
+
+    public void ChooseType()
+    {
+        typeValue = (int)patientType;
+        patient.Type = typeValue;
+    }
+
+    public void ChooseGender()
+    {
+        genderValue = (int)patientGender;
+        patient.Gender = genderValue;
+    }
+
+    public void ChooseLanguage()
+    {
+        languageValue = (int)patientLanguage;
+        patient.Language = languageValue;
+    }
+
+    public void ChooseLevelOfRisk()
+    {
+        levelOfRiskValue = (int)patientLevelOfRisk;
+        patient.LevelOfRisk = levelOfRiskValue;
+    }
 
     protected override void OnInitialized()
     {

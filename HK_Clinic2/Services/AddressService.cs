@@ -28,7 +28,7 @@ namespace HK_Clinic2.Services
             return db.Address.SingleOrDefault(c => c.AddressId == id);
         }
 
-        public bool AddNewAddress(Address address)
+        public bool AddAddress(Address address)
         {
             if (address != null)
             {

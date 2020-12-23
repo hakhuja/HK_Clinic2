@@ -79,8 +79,9 @@ else
 
     protected override void OnInitialized()
     {
-        // Get the patients from the service
         FillTypeList();
+
+        // Get the patients from the service
         Patients = Service.GetPatients();
     }
 

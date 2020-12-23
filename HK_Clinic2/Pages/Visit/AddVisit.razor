@@ -18,7 +18,7 @@
             <ValidationSummary />
             <div class="col-4">
                 <label for="VisitDateTime">Visit Date and Time:*</label>
-                <input type="datetime-local" id="VisitDateTime" class="form-control" />
+                <input type="datetime-local" id="VisitDateTime" class="form-control" @bind-value="visit.VisitDateTime" />
             </div>
             <br />
             <div class="col-4">
@@ -63,14 +63,9 @@
                     Incomplete
                 </label>
             </div>
-
-            <br>
-
-            <div class="mt-2"></div>
-            <br>
-            <button type="submit" class="btn btn-outline-primary">Save</button>
+            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-outline-primary">Add Visit</button>
             <a href="Visit/List" class="btn btn-outline-secondary" role="button">Cancel</a>
-
         </EditForm>
     </RadzenFieldset>
 </div>
@@ -80,7 +75,6 @@
     Treatment treatment = new Treatment();
 
     List<Patient> patients = new List<Patient>();
-    List<Student_Info> students;
 
     private void CreateVisit()
     {

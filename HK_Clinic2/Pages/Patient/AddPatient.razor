@@ -11,222 +11,190 @@
 @inject NavigationManager NavigationManager
 @inject HKClinicDbContext db
 
-<h3>Add the patient's address first then add the patient's information</h3>
-<br />
-<RadzenTabs>
+<div class="container-fluid">
+    <h3>Add the patient's address from the link below if it is not existed in the Address drop down list</h3>
+    <a href="Address/Add">
+        <span class="oi oi-plus"></span> &nbsp;
+        Add New Address
+    </a>
+    <div class="mt-4"></div>
+    <RadzenFieldset Text="Add a Patient">
+        <EditForm Model="patient" OnValidSubmit="CreatePatient">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <RadzenFieldset Text="Personal information">
+                <div class="form-row">
+                    <div class="form-group col-3">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">Address:*</span>
+                        </label>
+                        <RadzenDropDown AllowClear="true" TValue="int"
+                                        LoadData="@LoadData" AllowFiltering="true"
+                                        Data="@patientAddress" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
+                                        Change="@(args => Change(args, "Address DropDown "))" />
+                    </div>
+                </div>
 
-    <Tabs>
-        <RadzenTabsItem Text="Add Address">
-            <div class="container-fluid">
+                <div class="form-row">
+                    <div class="form-group col-4">
+                        <label for="first-name">First Name:*</label>
+                        <InputText id="first-name" @bind-Value="patient.FirstName" class="form-control" placeholder="Enter Patient's Fisrt Name" />
+                    </div>
 
-                <RadzenFieldset Text="Add New Address Details">
-                    <EditForm Model="address" OnValidSubmit="CreateAddress">
-                        <DataAnnotationsValidator />
-                        <ValidationSummary />
+                    <div class="form-group col-4">
+                        <label for="middle-name">Middle Name:</label>
+                        <InputText id="middle-name" @bind-Value="patient.MiddleName" class="form-control" placeholder="Enter Patient's Middle Name" />
+                    </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-4">
-                                <label for="country">Country:*</label>
-                                <InputText id="country" @bind-Value="address.Country" class="form-control" placeholder="Enter Country" />
+                    <div class="form-group col-4">
+                        <label for="last-name">Last Name:*</label>
+                        <InputText id="last-name" @bind-Value="patient.LastName" class="form-control" placeholder="Enter Patient's Last Name" />
+                    </div>
+                </div>
 
-                            </div>
+                <div class="form-row">
+                    <div class="form-group col-3">
+                        <label for="national-id">National ID:*</label>
+                        <InputText id="national-id" @bind-Value="patient.NationalId" class="form-control" placeholder="Enter the National ID of the Patient" />
+                    </div>
 
-                            <div class="form-group col-4">
-                                <label for="city">City:*</label>
-                                <InputText id="city" @bind-Value="address.City" class="form-control" placeholder="Enter City" />
-                            </div>
+                    <div class="form-group col-3">
+                        <label for="mobile">Mobile Number:</label>
+                        <InputText id="mobile" @bind-Value="patient.Mobile" class="form-control" placeholder="0500000000" />
+                    </div>
 
-                            <div class="form-group col-4">
-                                <label for="street-name">Street Name:*</label>
-                                <InputText id="street-name" @bind-Value="address.StreetName" class="form-control" placeholder="Enter Street Name" />
-                            </div>
-                        </div>
+                    <div class="form-group col-3">
+                        <label for="birthDate">Date Of Birth:</label>
+                        <InputDate id="birthDate" @bind-Value="patient.DateOfBirth" class="form-control" />
+                    </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-4">
-                                <label for="building-number">Building Number:</label>
-                                <InputNumber id="building-number" @bind-Value="address.BuildingNumber" class="form-control" placeholder="Enter Building Number" />
-                            </div>
+                    <div class="form-group col-3">
+                        <label for="email" class="control-label">Email: </label>
+                        <InputText type="email" id="email" @bind-Value="patient.Email" class="form-control" placeholder="sam@example.com" />
+                        <ValidationMessage For="@(() => patient.Email)" />
+                    </div>
+                </div>
 
-                            <div class="form-group col-4">
-                                <label for="unit-number">Unit Number:</label>
-                                <InputNumber id="unit-number" @bind-Value="address.UnitNumber" class="form-control" placeholder="Enter Unit Number" />
-                            </div>
+                <div class="form-row">
+                    <div class="form-group col-3">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">Patient Type:*</span>
+                        </label>
+                        <RadzenDropDown Data="@types" @bind-Value="patientType" Change="ChooseType" />
+                    </div>
 
-                            <div class="form-group col-4">
-                                <label for="zip-code">Zip Code:</label>
-                                <InputText id="zip-code" @bind-Value="address.ZipCode" class="form-control" placeholder="Enter Zip Code" />
-                                <small style="display: block">(5 characters)</small>
-                            </div>
-                        </div>
-                        <br />
+                    <div class="form-group col-3">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">Gender:*</span>
+                        </label>
+                        <RadzenDropDown Data="@genders" @bind-Value="patientGender" Change="ChooseGender" />
+                    </div>
 
-                        <div class="mt-4"></div>
-                        <button type="submit" class="btn btn-outline-primary" style="width: 80px;" href="/Patient/Add">Save</button>
-                        <a href="/Patient/List" class="btn btn-outline-secondary">Cancel</a>
-                    </EditForm>
-                </RadzenFieldset>
-            </div>
-            <br><br><br>
-        </RadzenTabsItem>
-        <RadzenTabsItem Text="Add New Patient">
-            <div class="container-fluid">
+                    <div class="form-group col-3">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">Language:</span>
+                        </label>
+                        <RadzenDropDown Data="@languages" @bind-Value="patientLanguage" Change="ChooseLanguage" />
+                    </div>
 
-                <RadzenFieldset Text="Personal information">
-                    <EditForm Model="patient" OnValidSubmit="CreatePatient">
-                        <DataAnnotationsValidator />
-                        <ValidationSummary />
+                    <div class="form-group col-3">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">Patient Level of Risk:*</span>
+                        </label>
+                        <RadzenDropDown Data="@levelOfRisks" @bind-Value="patientLevelOfRisk" Change="ChooseLevelOfRisk" />
+                    </div>
+                </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-4">
-                                <label for="first-name">First Name:*</label>
-                                <InputText id="first-name" @bind-Value="patient.FirstName" class="form-control" placeholder="Enter Patient's Fisrt Name" />
-                            </div>
+                <div class="file-field">
+                    <label for="Photo">Photo:</label>
+                    <br />
+                    <div class="btn btn-primary btn-sm float-left">
+                        <span>Choose file</span>
+                        <input type="file" @bind-value="patient.Image">
+                    </div>
+                    <br />
+                </div>
+                <br />
+            </RadzenFieldset>
+            <br />
+            <RadzenFieldset Text="Student Information">
+                <div class="form-row">
+                    <div class="form-group col-3">
+                        <label for="student-id">Student ID:*</label>
+                        <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
+                    </div>
 
-                            <div class="form-group col-4">
-                                <label for="middle-name">Middle Name:</label>
-                                <InputText id="middle-name" @bind-Value="patient.MiddleName" class="form-control" placeholder="Enter Patient's Middle Name" />
-                            </div>
+                    @*<div class="form-group col-3">
+                        <label for="education-level">Education Level:*</label>
+                        <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
+                            @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </InputSelect>
+                    </div>*@
 
-                            <div class="form-group col-4">
-                                <label for="last-name">Last Name:*</label>
-                                <InputText id="last-name" @bind-Value="patient.LastName" class="form-control" placeholder="Enter Patient's Last Name" />
-                            </div>
-                        </div>
+                    @*<div class="form-group col-2">
+                        <label for="grade">Grade:*</label>
+                        <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
+                            @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </InputSelect>
+                    </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-3">
-                                <label for="national-id">National ID:*</label>
-                                <InputText id="national-id" @bind-Value="patient.NationalId" class="form-control" placeholder="Enter the National ID of the Patient" />
-                            </div>
+                    <div class="form-group col-2">
+                        <label for="class-number">Class Number:*</label>
+                        <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
+                    </div>
 
-                            <div class="form-group col-3">
-                                <label for="mobile">Mobile Number:</label>
-                                <InputText id="mobile" @bind-Value="patient.Mobile" class="form-control" placeholder="0500000000" />
-                            </div>
+                    <div class="form-group col-2">
+                        <label for="year">Year:*</label>
+                        <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
+                    </div>*@
+                </div>
+            </RadzenFieldset>
+            <br />
+            <RadzenFieldset Text="Employee Information">
+                <div class="form-row">
+                    <div class="form-group col-3">
+                        <label for="student-id">Employee ID:*</label>
+                        <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
+                    </div>
 
-                            <div class="form-group col-3">
-                                <label for="birthDate">Date Of Birth:</label>
-                                <InputDate id="birthDate" @bind-Value="patient.DateOfBirth" class="form-control" />
-                            </div>
+                    @*<div class="form-group col-3">
+                        <label for="emergency-contact-number">Emergency Contact Number:</label>
+                        <InputText id="emergency-contact-number" @bind-Value="patient.Employee.EmergencyContactNumber" class="form-control" placeholder="0500000000" />
+                    </div>*@
 
-                            <div class="form-group col-3">
-                                <label for="email" class="control-label">Email: </label>
-                                <InputText type="email" id="email" @bind-Value="patient.Email" class="form-control" placeholder="sam@example.com" />
-                                <ValidationMessage For="@(() => patient.Email)" />
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-3">
-                                <label style="display: flex; align-items: center">
-                                    <span style="margin-right: 32px">Patient Type:*</span>
-                                </label>
-                                <RadzenDropDown Data="@types" @bind-Value="patientType" Change="ChooseType" />
-                            </div>
-
-                            <div class="form-group col-3">
-                                <label style="display: flex; align-items: center">
-                                    <span style="margin-right: 32px">Gender:*</span>
-                                </label>
-                                <RadzenDropDown Data="@genders" @bind-Value="patientGender" Change="ChooseGender" />
-                            </div>
-
-                            <div class="form-group col-3">
-                                <label style="display: flex; align-items: center">
-                                    <span style="margin-right: 32px">Language:</span>
-                                </label>
-                                <RadzenDropDown Data="@languages" @bind-Value="patientLanguage" Change="ChooseLanguage" />
-                            </div>
-
-                            <div class="form-group col-3">
-                                <label style="display: flex; align-items: center">
-                                    <span style="margin-right: 32px">Patient Level of Risk:*</span>
-                                </label>
-                                <RadzenDropDown Data="@levelOfRisks" @bind-Value="patientLevelOfRisk" Change="ChooseLevelOfRisk" />
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-3">
-                                <label style="display: flex; align-items: center">
-                                    <span style="margin-right: 32px">Address:*</span>
-                                </label>
-                                <RadzenDropDown AllowClear="true" TValue="int"
-                                                LoadData="@LoadData" AllowFiltering="true"
-                                                Data="@patientAddress" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
-                                                Change="@(args => Change(args, "Address DropDown "))" />
-                            </div>
-                        </div>
-
-                        <div class="file-field">
-                            <label for="Photo">Photo:</label>
-                            <br />
-                            <div class="btn btn-primary btn-sm float-left">
-                                <span>Choose file</span>
-                                <input type="file" @bind-value="patient.Image">
-                            </div>
-                        </div>
-                        <br /><br /><br />
-                        <RadzenFieldset Text="Student Information">
-                            <div class="form-row">
-                                <div class="form-group col-3">
-                                    <label for="student-id">Student ID:*</label>
-                                    <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
-                                </div>
-
-                                <div class="form-group col-3">
-                                    <label for="education-level">Education Level:*</label>
-                                    <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
-                                        @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
-                                        {                                          
-                                            <option value="@item">@item</option>
-                                        }
-                                    </InputSelect>
-                                </div>
-
-                                @*<div class="form-group col-2">
-                                        <label for="grade">Grade:*</label>
-                                        <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
-                                            @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
-                                            {
-                                                <option value="@item">@item</option>
-                                            }
-                                        </InputSelect>
-                                    </div>
-
-                                    <div class="form-group col-2">
-                                        <label for="class-number">Class Number:*</label>
-                                        <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
-                                    </div>
-
-                                    <div class="form-group col-2">
-                                        <label for="year">Year:*</label>
-                                        <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
-                                    </div>*@
-                            </div>
-                        </RadzenFieldset>
-                        <br /><br /><br />
-                        <button type="submit" class="btn btn-outline-primary">Add Patient</button>
-                        &nbsp;&nbsp;
-                        <a href="Patient/List" class="btn btn-outline-secondary">Cancel</a>
-                    </EditForm>
-                </RadzenFieldset>
-            </div>
-        </RadzenTabsItem>
-        <br><br><br>
-    </Tabs>
-</RadzenTabs>
+                    @*<div class="form-group col-3">
+                        <label for="marital-status">Marital Status:</label>
+                        <InputSelect class="form-control" id="marital-status" @bind-Value="patient.Employee.MaritalStatus">
+                            @foreach (var item in Enum.GetValues(typeof(MaritalStatusEnum)))
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </InputSelect>
+                    </div>*@
+                </div>
+            </RadzenFieldset>
+            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-outline-primary">Add Patient</button>
+            &nbsp;&nbsp;
+            <a href="Patient/List" class="btn btn-outline-secondary">Cancel</a>
+            <div class="mt-4"></div>
+        </EditForm>
+    </RadzenFieldset>
+</div>
 
 @code {
     Patient patient = new Patient();
 
-    Address address = new Address();
+    //Student student = new Student();
 
-    Student student = new Student();
-
+    //Used for the dropdown list
     private List<Address> addresses = new List<Address>();
-
     private List<Patient> patients = new List<Patient>();
 
     private bool isArchived = false;
@@ -296,17 +264,6 @@
 
         // May navigate to the Patient/List component
         NavigationManager.NavigateTo("Patient/List");
-    }
-
-    private void CreateAddress()
-    {
-        AdService.AddNewAddress(address);
-
-        // To empty the form
-        address = new Address();
-
-        // May navigate to the Employees component
-        NavigationManager.NavigateTo("/Patient/List");
     }
 
     void Change(object value, string name)

@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Address\" />
     <Folder Include="Pages\Allergy\" />
     <Folder Include="Pages\Clinic\" />
     <Folder Include="Pages\Employee\" />

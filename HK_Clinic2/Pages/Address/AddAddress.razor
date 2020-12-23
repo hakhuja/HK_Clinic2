@@ -1,0 +1,76 @@
+﻿@page "/Address/Add"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject AddressService Service
+@inject NavigationManager NavigationManager
+
+
+<div class="container">
+    <h3>Add a New Address</h3>
+    <RadzenFieldset Text="Add an Address">
+        <EditForm Model="address" OnValidSubmit="CreateAddress">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="country">Country:*</label>
+                    <InputText id="country" @bind-Value="address.Country" class="form-control" placeholder="Enter Country" />
+
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="city">City:*</label>
+                    <InputText id="city" @bind-Value="address.City" class="form-control" placeholder="Enter City" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="street-name">Street Name:*</label>
+                    <InputText id="street-name" @bind-Value="address.StreetName" class="form-control" placeholder="Enter Street Name" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="building-number">Building Number:</label>
+                    <InputNumber id="building-number" @bind-Value="address.BuildingNumber" class="form-control" placeholder="Enter Building Number" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="unit-number">Unit Number:</label>
+                    <InputNumber id="unit-number" @bind-Value="address.UnitNumber" class="form-control" placeholder="Enter Unit Number" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="zip-code">Zip Code:</label>
+                    <InputText id="zip-code" @bind-Value="address.ZipCode" class="form-control" placeholder="Enter Zip Code" />
+                    <small style="display: block">(5 Digits)</small>
+                </div>
+            </div>
+            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-outline-primary">Add Address</button>
+            <a href="Address/List" class="btn btn-outline-secondary" role="button">Cancel</a>
+            <div class="mt-4"></div>
+        </EditForm>
+    </RadzenFieldset>
+</div>
+
+@code {
+    Address address = new Address();
+
+    List<Address> addresses = new List<Address>();
+
+    private void CreateAddress()
+    {
+        Service.AddAddress(address);
+
+        // To empty the form
+        address = new Address();
+
+        // May navigate to the Address/List component
+        NavigationManager.NavigateTo("Address/List");
+    }
+}

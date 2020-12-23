@@ -34,3 +34,7 @@ namespace HK_Clinic2.Models
         public virtual ICollection<Patient> Patients { get; set; }
     }
 }
+public enum MaritalStatusEnum
+{
+    Single = 1, Married, Divorced, Widow, Other
+}
