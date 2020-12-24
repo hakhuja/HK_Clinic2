@@ -30,11 +30,11 @@ else
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Country</th>
-                <th>City</th>
                 <th>Street Name</th>
                 <th>Building Number</th>
                 <th>Unit Number</th>
+                <th>Country</th>
+                <th>City</th>
                 <th>Zip Code</th>
                 <th>Display/Edit/Delete</th>
             </tr>
@@ -43,20 +43,20 @@ else
 
             @foreach (var item in addresses)
             {
-                <tr>
-                    <td>@item.Country</td>
-                    <td>@item.City</td>
-                    <td>@item.StreetName</td>
-                    <td>@item.BuildingNumber</td>
-                    <td>@item.UnitNumber</td>
-                    <td>@item.ZipCode</td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="Address/Details/@item.AddressId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="Address/Edit/@item.AddressId"><span class="oi oi-pencil"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="Address/Delete/@item.AddressId"><span class="oi oi-trash"></span></a>&nbsp;
-                    </td>
-                </tr>
+            <tr>
+                <td>@item.StreetName</td>
+                <td>@item.BuildingNumber</td>
+                <td>@item.UnitNumber</td>
+                <td>@item.Country</td>
+                <td>@item.City</td>
+                <td>@item.ZipCode</td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="Address/Details/@item.AddressId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="Address/Edit/@item.AddressId"><span class="oi oi-pencil"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="Address/Delete/@item.AddressId"><span class="oi oi-trash"></span></a>&nbsp;
+                </td>
+            </tr>
             }
         </tbody>
     </table>

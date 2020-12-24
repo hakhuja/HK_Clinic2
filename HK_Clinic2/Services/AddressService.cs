@@ -51,7 +51,7 @@ namespace HK_Clinic2.Services
             return false;
         }
 
-        public void EditAddress(Address address)
+        public void UpdateAddress(Address address)
         {
             db.Entry(address).State = EntityState.Modified;
             db.SaveChanges();

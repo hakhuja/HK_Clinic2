@@ -1,0 +1,56 @@
+﻿@page "/Address/Details/{Id:int}"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject AddressService Service
+
+<div class="container">
+    <h3>Address Details</h3>
+    <RadzenFieldset Text="Address Details">
+        <table class="table table-hover">
+            <tr>
+                <td>Street Name: </td>
+                <td>@address.StreetName</td>
+            </tr>
+            <tr>
+                <td>Unit Number: </td>
+                <td>@address.UnitNumber</td>
+            </tr>
+            <tr>
+                <td>Building Number: </td>
+                <td>@address.BuildingNumber</td>
+            </tr>
+            <tr>
+                <td>Country: </td>
+                <td>@address.Country</td>
+            </tr>
+            <tr>
+                <td>City: </td>
+                <td>@address.City</td>
+            </tr>
+            <tr>
+                <td>Zip Code: </td>
+                <td>@address.ZipCode</td>
+            </tr>
+        </table>
+        <br />
+        <a href="/Address/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+        <div class="mt-4"></div>
+    </RadzenFieldset>
+</div>
+
+@code {
+
+    Address address = new Address();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        address = Service.GetAddress(Id);
+    }
+}

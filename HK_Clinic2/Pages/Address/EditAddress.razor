@@ -1,18 +1,18 @@
-﻿@page "/Address/Add"
+﻿@page "/Address/Edit/{Id:int}"
 
 @layout NurseLayout
 
-@using HK_Clinic2.Models
-@using HK_Clinic2.Services
-
-@inject AddressService Service
 @inject NavigationManager NavigationManager
+@inject AddressService Service
+@inject HKClinicDbContext db
 
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services;
 
 <div class="container">
-    <h3>Add a New Address</h3>
-    <RadzenFieldset Text="Add an Address">
-        <EditForm Model="address" OnValidSubmit="CreateAddress">
+    <h3>Edit an Address</h3>
+    <RadzenFieldset Text="Edit">
+        <EditForm Model="address" OnValidSubmit="UpdateAddress">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="form-row">
@@ -55,8 +55,9 @@
                     <ValidationMessage For="@(() => address.ZipCode)" />
                 </div>
             </div>
+            <br>
             <div class="mt-4"></div>
-            <button type="submit" class="btn btn-outline-primary">Add Address</button>
+            <button type="submit" class="btn btn-outline-primary">Edit</button>
             &nbsp;&nbsp;
             <a href="Address/List" class="btn btn-outline-secondary" role="button">Cancel</a>
             <div class="mt-4"></div>
@@ -64,17 +65,27 @@
     </RadzenFieldset>
 </div>
 
-@code {
+<p>@message</p>
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    string message;
+
     Address address = new Address();
 
-    private void CreateAddress()
+    protected override void OnInitialized()
     {
-        Service.AddAddress(address);
+        address = Service.GetAddress(Id);
+    }
 
-        // To empty the form
-        address = new Address();
+    public void UpdateAddress()
+    {
+        // Edit Address
+        Service.UpdateAddress(address);
 
-        // May navigate to the Address/List component
+        message = "Address updated successfully";
         NavigationManager.NavigateTo("Address/List");
     }
 }
