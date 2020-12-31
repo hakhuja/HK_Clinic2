@@ -23,7 +23,7 @@ namespace HK_Clinic2.Models
         [StringLength(30)]
         public string Username { get; set; }
         [Required(ErrorMessage = "The Password field is required.")]
-        [StringLength(50)]
+        [StringLength(30)]
         public string Password { get; set; }
         public int Type { get; set; }
 

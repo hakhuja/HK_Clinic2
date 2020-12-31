@@ -1,8 +1,7 @@
 ﻿@inherits LayoutComponentBase
-
 @*<div class="sidebar">
-    <NavMenu />
-</div>*@
+        <NavMenu />
+    </div>*@
 
 <div class="main">
     <div class="top-row px-4">
@@ -13,10 +12,15 @@
 
     <div class="content px-4">
         @Body
+        <br />
+        <footer class="footer-main-layout1" style="text-align:center">
+            <p style=" color: black;">
+                <span class="material-icons">copyright</span>
+                2020 All Rights Reserved
+            </p>
+        </footer>
     </div>
 </div>
 
 <RadzenDialog />
 <RadzenNotification />
-
-@*<footer>2020 All Rights Reserved</footer>*@

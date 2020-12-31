@@ -21,6 +21,7 @@ namespace HK_Clinic2.Models
         [Required(ErrorMessage = "The Emergency Contact Number field is required.")]
         [StringLength(10)]
         [Range(0000000000, 9999999999, ErrorMessage = "The Mobile field must contain 10 digits")]
+        [RegularExpression("(05)(5|0|3|6|4|9|1|8|7)([0-9]{7})", ErrorMessage = "Wrong mobile number format. Ex. 05XXXXXXXX ")]
         public string EmergencyContactNumber { get; set; }
         public int MaritalStatus { get; set; }
 

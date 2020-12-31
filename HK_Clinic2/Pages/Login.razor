@@ -20,7 +20,7 @@
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="username">Username:*</label>
-                    <InputText type="text" id="username" name="username" @bind-Value="@username" class="form-control" Placeholder="abc1"></InputText>
+                    <InputText type="text" id="username" name="username" @bind-Value="@username" class="form-control" Placeholder="Enter your username"></InputText>
                     <div class="invalid-feedback">
                         Please enter a username.
                     </div>
@@ -28,11 +28,10 @@
 
                 <div class="form-group">
                     <label for="password">Password:*</label>
-                    <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control"></InputText>
+                    <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control" Placeholder="Enter your password"></InputText>
                     <div class="invalid-feedback">
                         Please enter a password.
                     </div>
-
                 </div>
                 <div>
                     <label style="color:red; font:smaller">@message</label>

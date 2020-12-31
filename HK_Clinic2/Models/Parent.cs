@@ -26,6 +26,7 @@ namespace HK_Clinic2.Models
         [Required]
         [StringLength(10)]
         [Range(00000000000, 9999999999, ErrorMessage = "The Mobile field must contain 10 digits")]
+        [RegularExpression("(05)(5|0|3|6|4|9|1|8|7)([0-9]{7})", ErrorMessage = "Wrong mobile number format. Ex. 05XXXXXXXX ")]
         public string Mobile { get; set; }
         [EmailAddress]
         public string Email { get; set; }

@@ -197,7 +197,7 @@ app {
 }
 */
 
-#page-container{
+/*#page-container{
     position: relative;
     min-height: 100vh;
 }
@@ -218,4 +218,25 @@ app {
     padding: 1px;
     background-color: #F8F9FA;
     color: black;
+}
+*/
+.wrapper {
+    width: 100%;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -20px; /*the bottom margin is the negative value of the footer's height*/
+}
+
+.push {
+    height: 20px; /*'.push' must be the same height as 'footer'*/
+}
+
+.footer {
+    position: absolute;
+    height: 20px;
+    width: 99%;
+    margin: auto;
+    bottom: 0px;
+    text-align: center;
 }

@@ -39,16 +39,19 @@
                     <div class="form-group col-4">
                         <label for="first-name">First Name:*</label>
                         <InputText id="first-name" @bind-Value="patient.FirstName" class="form-control" placeholder="Enter Patient's Fisrt Name" />
+                        <ValidationMessage For="@(() => patient.FirstName)" />
                     </div>
 
                     <div class="form-group col-4">
                         <label for="middle-name">Middle Name:</label>
                         <InputText id="middle-name" @bind-Value="patient.MiddleName" class="form-control" placeholder="Enter Patient's Middle Name" />
+                        <ValidationMessage For="@(() => patient.MiddleName)" />
                     </div>
 
                     <div class="form-group col-4">
                         <label for="last-name">Last Name:*</label>
                         <InputText id="last-name" @bind-Value="patient.LastName" class="form-control" placeholder="Enter Patient's Last Name" />
+                        <ValidationMessage For="@(() => patient.LastName)" />
                     </div>
                 </div>
 
@@ -56,16 +59,19 @@
                     <div class="form-group col-3">
                         <label for="national-id">National ID:*</label>
                         <InputText id="national-id" @bind-Value="patient.NationalId" class="form-control" placeholder="Enter the National ID of the Patient" />
+                        <ValidationMessage For="@(() => patient.NationalId)" />
                     </div>
 
                     <div class="form-group col-3">
                         <label for="mobile">Mobile Number:</label>
                         <InputText id="mobile" @bind-Value="patient.Mobile" class="form-control" placeholder="0500000000" />
+                        <ValidationMessage For="@(() => patient.Mobile)" />
                     </div>
 
                     <div class="form-group col-3">
                         <label for="birthDate">Date Of Birth:</label>
-                        <InputDate id="birthDate" @bind-Value="patient.DateOfBirth" class="form-control" />
+                        <InputDate id="birthDate" @bind-Value="patient.DateOfBirth" @bind-Value:format="yyyy-MM-dd" class="form-control" />
+                        <ValidationMessage For="@(() => patient.DateOfBirth)" />
                     </div>
 
                     <div class="form-group col-3">
@@ -81,6 +87,7 @@
                             <span style="margin-right: 32px">Patient Type:*</span>
                         </label>
                         <RadzenDropDown Data="@types" @bind-Value="patientType" Change="ChooseType" />
+                        <ValidationMessage For="@(() => patientType)" />
                     </div>
 
                     <div class="form-group col-3">
@@ -88,6 +95,7 @@
                             <span style="margin-right: 32px">Gender:*</span>
                         </label>
                         <RadzenDropDown Data="@genders" @bind-Value="patientGender" Change="ChooseGender" />
+                        <ValidationMessage For="@(() => patientGender)" />
                     </div>
 
                     <div class="form-group col-3">
@@ -95,6 +103,7 @@
                             <span style="margin-right: 32px">Language:</span>
                         </label>
                         <RadzenDropDown Data="@languages" @bind-Value="patientLanguage" Change="ChooseLanguage" />
+                        <ValidationMessage For="@(() => patientLanguage)" />
                     </div>
 
                     <div class="form-group col-3">
@@ -102,6 +111,7 @@
                             <span style="margin-right: 32px">Patient Level of Risk:*</span>
                         </label>
                         <RadzenDropDown Data="@levelOfRisks" @bind-Value="patientLevelOfRisk" Change="ChooseLevelOfRisk" />
+                        <ValidationMessage For="@(() => patientLevelOfRisk)" />
                     </div>
                 </div>
 
@@ -122,37 +132,40 @@
                     <div class="form-group col-3">
                         <label for="student-id">Student ID:*</label>
                         <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
+                        <ValidationMessage For="@(() => patient.StudentId)" />
                     </div>
 
                     @*<div class="form-group col-3">
-                        <label for="education-level">Education Level:*</label>
-                        <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
-                            @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
-                            {
-                                <option value="@item">@item</option>
-                            }
-                        </InputSelect>
-                    </div>*@
+                            <label for="education-level">Education Level:*</label>
+                            <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
+                                @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </InputSelect>
+                        </div>*@
 
                     @*<div class="form-group col-2">
-                        <label for="grade">Grade:*</label>
-                        <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
-                            @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
-                            {
-                                <option value="@item">@item</option>
-                            }
-                        </InputSelect>
-                    </div>
+                            <label for="grade">Grade:*</label>
+                            <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
+                                @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </InputSelect>
+                        </div>
 
-                    <div class="form-group col-2">
-                        <label for="class-number">Class Number:*</label>
-                        <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
-                    </div>
+                        <div class="form-group col-2">
+                            <label for="class-number">Class Number:*</label>
+                            <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
+                                                    <ValidationMessage For="@(() => student.Class.ClassNumber)" />
+                        </div>
 
-                    <div class="form-group col-2">
-                        <label for="year">Year:*</label>
-                        <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
-                    </div>*@
+                        <div class="form-group col-2">
+                            <label for="year">Year:*</label>
+                            <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
+                                                    <ValidationMessage For="@(() => student.Class.Year)" />
+                        </div>*@
                 </div>
             </RadzenFieldset>
             <br />
@@ -161,22 +174,24 @@
                     <div class="form-group col-3">
                         <label for="student-id">Employee ID:*</label>
                         <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
+                        <ValidationMessage For="@(() => patient.EmployeeId)" />
                     </div>
 
                     @*<div class="form-group col-3">
-                        <label for="emergency-contact-number">Emergency Contact Number:</label>
-                        <InputText id="emergency-contact-number" @bind-Value="patient.Employee.EmergencyContactNumber" class="form-control" placeholder="0500000000" />
-                    </div>*@
+                            <label for="emergency-contact-number">Emergency Contact Number:</label>
+                            <InputText id="emergency-contact-number" @bind-Value="patient.Employee.EmergencyContactNumber" class="form-control" placeholder="0500000000" />
+                            <ValidationMessage For="@(() => patient.Employee.EmergencyContactNumber)" />
+                        </div>*@
 
                     @*<div class="form-group col-3">
-                        <label for="marital-status">Marital Status:</label>
-                        <InputSelect class="form-control" id="marital-status" @bind-Value="patient.Employee.MaritalStatus">
-                            @foreach (var item in Enum.GetValues(typeof(MaritalStatusEnum)))
-                            {
-                                <option value="@item">@item</option>
-                            }
-                        </InputSelect>
-                    </div>*@
+                            <label for="marital-status">Marital Status:</label>
+                            <InputSelect class="form-control" id="marital-status" @bind-Value="patient.Employee.MaritalStatus">
+                                @foreach (var item in Enum.GetValues(typeof(MaritalStatusEnum)))
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </InputSelect>
+                        </div>*@
                 </div>
             </RadzenFieldset>
             <div class="mt-4"></div>

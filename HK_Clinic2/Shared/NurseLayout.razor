@@ -20,6 +20,7 @@
                 </Template>
                 <ChildContent>
                     <RadzenProfileMenuItem Text="My account" Path="/Account" Icon="account_circle"></RadzenProfileMenuItem>
+                    <RadzenProfileMenuItem Text="Log out" Path="/" Icon="power_settings_new"></RadzenProfileMenuItem>
                     @*<RadzenProfileMenuItem Text="Setting" Path="/Settings" Icon="line_weight"></RadzenProfileMenuItem>*@
                 </ChildContent>
             </RadzenProfileMenu>
@@ -28,6 +29,13 @@
 
     <div class="content px-4">
         @Body
+        <br />
+        <footer class="footer-main-layout1" style="text-align:center">
+            <p style=" color: black;">
+                <span class="material-icons">copyright</span>
+                2020 All Rights Reserved
+            </p>
+        </footer>
         <RadzenDialog />
         <RadzenNotification />
     </div>
