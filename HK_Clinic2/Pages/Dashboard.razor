@@ -9,25 +9,52 @@
         <h3 class="float-right"><strong>Date and Time: @DateTime.Now</strong></h3>
     </div>
 </div>
-@*<hr />
-<div class="row">
-    <h3>Today's Patients</h3>
-</div>
-
-<div class="row">
-    <h3>Today's Appointments</h3>
-</div>*@
 <hr />
-<div>
-    <h2>Total Medicine Consumption Per Day</h2>
-    <div class="row">
-        <div class="col-md-6 col-sm-12">
-            <RadzenChart>
-                <RadzenPieSeries Data="@MedicineConsumption" Title="NumberOfUsage" CategoryProperty="Medicine" ValueProperty="NumberOfUsage" />
-            </RadzenChart>
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <RadzenCard Style="width:280px; margin-bottom: 30px; height:150px;">
+                <h3 style="text-align:center">Today's Visits</h3><br />
+                <h4 style="text-align:center">40</h4>
+            </RadzenCard>
+        </div>        
+        <div class="row">
+            <RadzenCard Style="width:280px; margin-bottom: 20px; height:150px;">
+                <h3 style="text-align:center">Total Visits this Week</h3><br />
+                <h4 style="text-align:center">150</h4>
+            </RadzenCard>
+        </div>    
+    </div>
+    <div class="col">
+        <div class="row">
+            <RadzenCard Style="width:280px; margin-bottom: 30px; height:150px;">
+                <h3 style="text-align:center">Today's Appointments</h3><br />
+                <h4 style="text-align:center">54</h4>
+            </RadzenCard>
+        </div>        
+        <div class="row">
+            <RadzenCard Style="width:280px; margin-bottom: 20px; height:150px;">
+                <h3 style="text-align:center">Total Appointments this Week</h3><br />
+                <h4 style="text-align:center">180</h4>
+            </RadzenCard>
         </div>
+  </div>
+    <div class="col">
+        <RadzenCard Style="width:600px; margin-bottom: 10px; height:400px;">
+            <div>
+                <h2>Total Medicine Consumption Per Day</h2>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <RadzenChart>
+                            <RadzenPieSeries Data="@MedicineConsumption" Title="NumberOfUsage" CategoryProperty="Medicine" ValueProperty="NumberOfUsage" />
+                        </RadzenChart>
+                    </div>
+                </div>
+            </div>
+        </RadzenCard>
     </div>
 </div>
+
 
 @code {
     class DataItem
@@ -75,21 +102,22 @@
     };
 }
 <hr />
-<h2>Cost of Medicine per month in 2019 and 2020</h2>
-<div class="row">
-    <div class="col-md-12 col-sm-12 p-4">
-        <RadzenChart>
-            <RadzenColumnSeries Data="@expenses2019" CategoryProperty="Month" Title="2020" LineType="LineType.Dashed" ValueProperty="Expenses" />
-            <RadzenColumnSeries Data="@expenses2020" CategoryProperty="Month" Title="2019" ValueProperty="Expenses" />
-            <RadzenColumnOptions Radius="10" />
-            <RadzenValueAxis Formatter="@FormatAsSAR">
-                <RadzenGridLines Visible="true" />
-                <RadzenAxisTitle Text="Expenses in SAR" />
-            </RadzenValueAxis>
-        </RadzenChart>
+<RadzenCard Style="width:1200px; height:500px;">
+    <h2>Cost of Medicine per month in 2019 and 2020</h2>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 p-4">
+            <RadzenChart>
+                <RadzenColumnSeries Data="@expenses2019" CategoryProperty="Month" Title="2020" LineType="LineType.Dashed" ValueProperty="Expenses" />
+                <RadzenColumnSeries Data="@expenses2020" CategoryProperty="Month" Title="2019" ValueProperty="Expenses" />
+                <RadzenColumnOptions Radius="10" />
+                <RadzenValueAxis Formatter="@FormatAsSAR">
+                    <RadzenGridLines Visible="true" />
+                    <RadzenAxisTitle Text="Expenses in SAR" />
+                </RadzenValueAxis>
+            </RadzenChart>
+        </div>
     </div>
-</div>
-
+</RadzenCard>
 @code {
     class DataItem2
     {
@@ -225,6 +253,6 @@
         {
             Month = "December",
             Expenses = 294000
-        },      
+        },
     };
 }

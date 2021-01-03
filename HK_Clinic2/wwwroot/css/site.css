@@ -197,7 +197,7 @@ app {
 }
 */
 
-/*#page-container{
+#page-container{
     position: relative;
     min-height: 100vh;
 }
@@ -206,7 +206,7 @@ app {
     padding-bottom: 2.5rem;
 }
 
-#footer {
+/*#footer {
     position: center;
     bottom: 0;
     left: 0;
@@ -232,11 +232,21 @@ app {
     height: 20px; /*'.push' must be the same height as 'footer'*/
 }
 
-.footer {
+/*.footer {
     position: absolute;
     height: 20px;
     width: 99%;
     margin: auto;
     bottom: 0px;
     text-align: center;
+}
+*/
+
+.footer {
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    height: auto;
+    width: 100%;
 }

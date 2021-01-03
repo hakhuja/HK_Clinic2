@@ -45,6 +45,7 @@ namespace HK_Clinic2.Models
         public virtual DbSet<Prescription> Prescription { get; set; }
         public virtual DbSet<Sick_Leave> Sick_Leave { get; set; }
         public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<Student_Appointment> Student_Appointment { get; set; }
         public virtual DbSet<Student_Info> Student_Info { get; set; }
         public virtual DbSet<Student_Parent> Student_Parent { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }

@@ -1,0 +1,56 @@
+﻿@page "/Appointment/Confirm/{Id:int}"
+
+@layout NurseLayout
+@inject AppointmentService Service
+@inject NavigationManager NavigationManager
+
+<h3>Confirm Appointment</h3>
+<br />
+<div class="col-5">
+    <div class="alert alert-success">
+        Do you want to confirm this appointment?
+    </div>
+</div>
+<div class="col-5">
+    <table class="table table-hover">
+        <tr>
+            <td>Appointment ID: </td>
+            <td>@appointment.AppointmentId</td>
+        </tr>
+        <tr>
+            <td>Appointment Date and Time: </td>
+            <td>@appointment.AppointmentDateTime</td>
+        </tr>
+        <tr>
+            <td>Reason: </td>
+            <td>@appointment.Reason</td>
+        </tr>
+        <tr>
+            <td>Note: </td>
+            <td>@appointment.Note</td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-success" @onclick="Confirm">Confirm Appointment</button>
+    &nbsp;&nbsp;
+    <a href="/Appointment/List" class="btn btn-secondary" role="button">Go back to the list</a>
+</div>
+
+@code {
+    Appointment appointment = new Appointment();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private void Confirm()
+    {
+        Service.ConfirmAppointment(Id);
+
+        NavigationManager.NavigateTo("Appointment/List");
+    }
+
+    protected override void OnInitialized()
+    {
+        appointment = Service.GetAppointment(Id);
+    }
+
+}

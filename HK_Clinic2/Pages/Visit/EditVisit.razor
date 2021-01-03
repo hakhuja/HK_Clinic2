@@ -4,6 +4,7 @@
 
 @inject NavigationManager NavigationManager
 @inject VisitService Service
+@inject PatientService PService
 @inject HKClinicDbContext db
 
 @using HK_Clinic2.Models;
@@ -23,10 +24,11 @@
             <br />
             <div class="col-4">
                 <label for="patientId">Patient ID:*</label>
-                <InputSelect class="form-control" id="patientId" @bind-Value="visit.PatientId">
-                    @foreach (var patient in patients)
+                <InputSelect @bind-Value="visit.PatientId" id="patientId" class="form-control">
+                    <option value="">Select a  Patient ID...</option>
+                    @foreach (var item in patients)
                     {
-                        <option value="@patient.PatientId">@patient.StudentId</option>
+                        <option value=@item.PatientId>@item.StudentId @item.EmployeeId</option>
                     }
                 </InputSelect>
                 <ValidationMessage For="@(() => visit.PatientId)" />
@@ -73,7 +75,7 @@
             <br>
             <div class="mt-4"></div>
             <button type="submit" class="btn btn-outline-primary">Edit</button>
-            <a href="Visit/List" class="btn btn-outline-secondary" role="button">Cancel</a>
+            <a href="Visit/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
             <div class="mt-4"></div>
         </EditForm>
     </RadzenFieldset>
@@ -94,6 +96,7 @@
     protected override void OnInitialized()
     {
         visit = Service.GetVisit(Id);
+        patients = PService.GetPatients();
     }
 
     public void UpdateVisit()

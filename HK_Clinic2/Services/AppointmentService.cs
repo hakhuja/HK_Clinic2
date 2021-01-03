@@ -63,5 +63,29 @@ namespace HK_Clinic2.Services
             db.Entry(appointment).State = EntityState.Modified;
             db.SaveChanges();
         }
+
+        public bool ConfirmAppointment(int id)
+        {
+            var appointment = db.Appointment.Find(id);
+            if (appointment != null)
+            {
+                //db.Appointment.Remove(appointment);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public bool CancelAppointment(int id)
+        {
+            var appointment = db.Appointment.Find(id);
+            if (appointment != null)
+            {
+                //db.Appointment.Remove(appointment);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
     }
 }

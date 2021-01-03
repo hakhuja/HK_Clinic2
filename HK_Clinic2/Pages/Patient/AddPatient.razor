@@ -12,7 +12,7 @@
 @inject HKClinicDbContext db
 
 <div class="container-fluid">
-    <h3>Add the patient's address from the link below if it is not existed in the Address drop down list</h3>
+    <h3>Add the patient's address from the link below if it is not existed in the Address dropdown list</h3>
     <a href="Address/Add">
         <span class="oi oi-plus"></span> &nbsp;
         Add New Address
@@ -23,17 +23,17 @@
             <DataAnnotationsValidator />
             <ValidationSummary />
             <RadzenFieldset Text="Personal information">
-                <div class="form-row">
+                @*<div class="form-row">
                     <div class="form-group col-3">
                         <label style="display: flex; align-items: center">
                             <span style="margin-right: 32px">Address:*</span>
                         </label>
                         <RadzenDropDown AllowClear="true" TValue="int"
                                         LoadData="@LoadData" AllowFiltering="true"
-                                        Data="@patientAddress" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
+                                        Data="@addresses" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
                                         Change="@(args => Change(args, "Address DropDown "))" />
                     </div>
-                </div>
+                </div>*@
 
                 <div class="form-row">
                     <div class="form-group col-4">
@@ -127,13 +127,13 @@
                 <br />
             </RadzenFieldset>
             <br />
-            <RadzenFieldset Text="Student Information">
-                <div class="form-row">
-                    <div class="form-group col-3">
+            <!--<RadzenFieldset Text="Student Information">
+                <div class="form-row">-->
+                    @*<div class="form-group col-3">
                         <label for="student-id">Student ID:*</label>
                         <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
                         <ValidationMessage For="@(() => patient.StudentId)" />
-                    </div>
+                    </div>*@
 
                     @*<div class="form-group col-3">
                             <label for="education-level">Education Level:*</label>
@@ -166,16 +166,16 @@
                             <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
                                                     <ValidationMessage For="@(() => student.Class.Year)" />
                         </div>*@
-                </div>
+                <!--</div>
             </RadzenFieldset>
             <br />
             <RadzenFieldset Text="Employee Information">
-                <div class="form-row">
-                    <div class="form-group col-3">
+                <div class="form-row">-->
+                    @*<div class="form-group col-3">
                         <label for="student-id">Employee ID:*</label>
                         <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
                         <ValidationMessage For="@(() => patient.EmployeeId)" />
-                    </div>
+                    </div>*@
 
                     @*<div class="form-group col-3">
                             <label for="emergency-contact-number">Emergency Contact Number:</label>
@@ -192,26 +192,26 @@
                                 }
                             </InputSelect>
                         </div>*@
-                </div>
-            </RadzenFieldset>
+                <!--</div>
+            </RadzenFieldset>-->
             <div class="mt-4"></div>
             <button type="submit" class="btn btn-outline-primary">Add Patient</button>
             &nbsp;&nbsp;
-            <a href="Patient/List" class="btn btn-outline-secondary">Cancel</a>
+            <a href="Patient/List" class="btn btn-outline-secondary">Go back to the list</a>
             <div class="mt-4"></div>
         </EditForm>
     </RadzenFieldset>
 </div>
 
 @code {
+    //Creating Patient object
     Patient patient = new Patient();
 
-    //Student student = new Student();
-
-    //Used for the dropdown list
-    private List<Address> addresses = new List<Address>();
+    //Used to get the list of patients from the dropdown
+    //private List<Address> addresses = new List<Address>();
     private List<Patient> patients = new List<Patient>();
 
+    //Used for the checkbox
     private bool isArchived = false;
 
     int typeValue;
@@ -219,8 +219,7 @@
     int languageValue;
     int levelOfRiskValue;
 
-    //Code for drop down list
-
+    //Code for the dropdown list
     IEnumerable<PatientGender> genders = Enum.GetValues(typeof(PatientGender)).Cast<PatientGender>();
 
     IEnumerable<PatientLanguage> languages = Enum.GetValues(typeof(PatientLanguage)).Cast<PatientLanguage>();
@@ -229,7 +228,7 @@
 
     IEnumerable<PatientLevelOfRisk> levelOfRisks = Enum.GetValues(typeof(PatientLevelOfRisk)).Cast<PatientLevelOfRisk>();
 
-    IEnumerable<Address> patientAddress;
+    IEnumerable<Address> addresses;
 
     PatientGender patientGender = PatientGender.Female;
 
@@ -281,6 +280,7 @@
         NavigationManager.NavigateTo("Patient/List");
     }
 
+    //Code used for the address dropdown list
     void Change(object value, string name)
     {
         var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
@@ -288,11 +288,12 @@
         StateHasChanged();
     }
 
+    //Code used for the address dropdown list
     void LoadData(LoadDataArgs args)
     {
         var query = db.Address.AsQueryable();
 
-        patientAddress = query.ToList();
+        addresses = query.ToList();
 
         InvokeAsync(StateHasChanged);
     }
