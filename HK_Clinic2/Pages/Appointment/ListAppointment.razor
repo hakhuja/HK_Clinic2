@@ -58,17 +58,129 @@ else
             }
         </tbody>
     </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Appointment Date and Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Note</th>
+                <th>Display/Confirm/Cancel</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in appointments)
+            {
+                <tr>
+                    <td>Ahmed Alhajri</td>
+                    <td>@item.AppointmentDateTime</td>
+                    <td>@item.Reason</td>
+                    <td>@item.Status</td>
+                    <td>@item.Note</td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/Details/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/Confirm/@item.AppointmentId"><span class="oi oi-check"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/Cancel/@item.AppointmentId"><span class="oi oi-x"></span></a> &nbsp;
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (appointments == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Appointment Date and Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Note</th>
+                <th>Display/Confirm/Cancel</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in appointments)
+            {
+                <tr>
+                    <td>Ahmed Alhajri</td>
+                    <td>@item.AppointmentDateTime</td>
+                    <td>@item.Reason</td>
+                    <td>@item.Status</td>
+                    <td>@item.Note</td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/Details/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/Confirm/@item.AppointmentId"><span class="oi oi-check"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/Cancel/@item.AppointmentId"><span class="oi oi-x"></span></a> &nbsp;
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Appointment Date and Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Note</th>
+                <th>Display/Confirm/Cancel</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in confirmedAppointments)
+            {
+                <tr>
+                    <td>Ahmed Alrajhi</td>
+                    <td>@item.AppointmentDateTime</td>
+                    <td>@item.Reason</td>
+                    <td>@item.Status</td>
+                    <td>@item.Note</td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/Details/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Visit/Add/@item.AppointmentId"><span class="oi oi-plus"></span></a>
+                        @*<a href="Appointment/Confirm/@item.AppointmentId"><span class="oi oi-check"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="Appointment/Cancel/@item.AppointmentId"><span class="oi oi-x"></span></a> &nbsp;*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 
-@code {
+    @code {
 
-    // Create a list of Appointments to be displayed in the component
-    List<Appointment> appointments = new List<Appointment>();
+        // Create a list of Appointments to be displayed in the component
+        List<Appointment> appointments = new List<Appointment>();
+        List<Appointment> confirmedAppointments = new List<Appointment>();
 
-    protected override void OnInitialized()
-    {
-        // Get the Appointments from the service
-        appointments = Service.GetAppointments();
+        protected override void OnInitialized()
+        {
+            // Get the Appointments from the service
+            appointments = Service.GetAppointments();
+
+            confirmedAppointments = Service.GetConfirmedAppointments();
+        }
+
+
     }
-}

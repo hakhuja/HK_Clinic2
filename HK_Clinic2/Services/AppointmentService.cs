@@ -27,6 +27,11 @@ namespace HK_Clinic2.Services
             return db.Appointment.ToList();
         }
 
+        public List<Appointment> GetConfirmedAppointments()
+        {
+            return db.Appointment.Where(x => x.Status == 1).ToList();
+        }
+
         /// <summary>
         /// Get an Appointment
         /// </summary>
@@ -69,7 +74,7 @@ namespace HK_Clinic2.Services
             var appointment = db.Appointment.Find(id);
             if (appointment != null)
             {
-                //db.Appointment.Remove(appointment);
+                appointment.Status = 1;
                 db.SaveChanges();
                 return true;
             }
@@ -80,7 +85,19 @@ namespace HK_Clinic2.Services
             var appointment = db.Appointment.Find(id);
             if (appointment != null)
             {
-                //db.Appointment.Remove(appointment);
+                appointment.Status = 3;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool PendingAppointment(int id)
+        {
+            var appointment = db.Appointment.Find(id);
+            if (appointment != null)
+            {
+                appointment.Status = 2;
                 db.SaveChanges();
                 return true;
             }

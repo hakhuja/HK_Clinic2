@@ -39,23 +39,26 @@
             <td>@address.ZipCode</td>
         </tr>
     </table>
-    <button type="submit" class="btn btn-danger" @onclick="RemoveAddress">Delete Address</button>
+    <button type="submit" class="btn btn-danger" @onclick="RemoveAddress">Delete</button>
     &nbsp;&nbsp;
     <a href="/Address/List" class="btn btn-info" role="button">Go back to the list</a>
 </div>
 
+<p style="color:red; text-align:center;">@message</p>
+
 @code {
-
-    Address address = new Address();
-
     [Parameter]
     public int Id { get; set; }
+
+    string message;
+
+    Address address = new Address();
 
     private void RemoveAddress()
     {
         Service.DeleteAddress(Id);
-
-        NavigationManager.NavigateTo("Address/List");
+        message = "Address deleted successfully";
+        //NavigationManager.NavigateTo("Address/List");
     }
 
     protected override void OnInitialized()

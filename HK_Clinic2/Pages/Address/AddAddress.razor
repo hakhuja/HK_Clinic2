@@ -64,7 +64,11 @@
     </RadzenFieldset>
 </div>
 
+<p style="color:green; text-align:center;">@message</p>
+
 @code {
+    string message;
+
     Address address = new Address();
 
     private void CreateAddress()
@@ -74,7 +78,9 @@
         // To empty the form
         address = new Address();
 
+        message = "Address added successfully";
+
         // May navigate to the Address/List component
-        NavigationManager.NavigateTo("Address/List");
+        //NavigationManager.NavigateTo("Address/List");
     }
 }

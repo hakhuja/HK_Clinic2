@@ -23,7 +23,7 @@
             <DataAnnotationsValidator />
             <ValidationSummary />
             <RadzenFieldset Text="Personal information">
-                @*<div class="form-row">
+                <div class="form-row">
                     <div class="form-group col-3">
                         <label style="display: flex; align-items: center">
                             <span style="margin-right: 32px">Address:*</span>
@@ -33,7 +33,7 @@
                                         Data="@addresses" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
                                         Change="@(args => Change(args, "Address DropDown "))" />
                     </div>
-                </div>*@
+                </div>
 
                 <div class="form-row">
                     <div class="form-group col-4">

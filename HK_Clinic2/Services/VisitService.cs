@@ -39,6 +39,11 @@ namespace HK_Clinic2.Services
             return db.Visit.SingleOrDefault(c => c.VisitId == id);
         }
 
+        public List<Treatment> GetTreatments()
+        {
+            return db.Treatment.ToList();
+        }
+
         /// <summary>
         /// Add a new visit
         /// </summary>
@@ -54,6 +59,17 @@ namespace HK_Clinic2.Services
             }
             return false;
         }
+        public bool AddTreatment(Treatment treatment)
+        {
+            if (treatment != null)
+            {
+                db.Treatment.Add(treatment);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// Update a visit
