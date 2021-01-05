@@ -19,6 +19,7 @@ namespace HK_Clinic2.Models
 
         [Key]
         public int AppointmentId { get; set; }
+        [Required(ErrorMessage = "The Appointment Date & Time field is required.")]
         public DateTime AppointmentDateTime { get; set; }
         public string Reason { get; set; }
         public int? Status { get; set; }
@@ -42,4 +43,8 @@ namespace HK_Clinic2.Models
         [InverseProperty(nameof(Visit.Appointment))]
         public virtual ICollection<Visit> Visits { get; set; }
     }
+}
+public enum AppointmentStatusEnum
+{
+    Confirmed = 1, Pending, Canceled
 }

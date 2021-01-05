@@ -129,70 +129,70 @@
             <br />
             <!--<RadzenFieldset Text="Student Information">
                 <div class="form-row">-->
-                    @*<div class="form-group col-3">
-                        <label for="student-id">Student ID:*</label>
-                        <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
-                        <ValidationMessage For="@(() => patient.StudentId)" />
-                    </div>*@
+            @*<div class="form-group col-3">
+                    <label for="student-id">Student ID:*</label>
+                    <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
+                    <ValidationMessage For="@(() => patient.StudentId)" />
+                </div>*@
 
-                    @*<div class="form-group col-3">
-                            <label for="education-level">Education Level:*</label>
-                            <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
-                                @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
-                                {
-                                    <option value="@item">@item</option>
-                                }
-                            </InputSelect>
-                        </div>*@
+            @*<div class="form-group col-3">
+                    <label for="education-level">Education Level:*</label>
+                    <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
+                        @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </InputSelect>
+                </div>*@
 
-                    @*<div class="form-group col-2">
-                            <label for="grade">Grade:*</label>
-                            <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
-                                @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
-                                {
-                                    <option value="@item">@item</option>
-                                }
-                            </InputSelect>
-                        </div>
+            @*<div class="form-group col-2">
+                    <label for="grade">Grade:*</label>
+                    <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
+                        @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </InputSelect>
+                </div>
 
-                        <div class="form-group col-2">
-                            <label for="class-number">Class Number:*</label>
-                            <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
-                                                    <ValidationMessage For="@(() => student.Class.ClassNumber)" />
-                        </div>
+                <div class="form-group col-2">
+                    <label for="class-number">Class Number:*</label>
+                    <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
+                                            <ValidationMessage For="@(() => student.Class.ClassNumber)" />
+                </div>
 
-                        <div class="form-group col-2">
-                            <label for="year">Year:*</label>
-                            <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
-                                                    <ValidationMessage For="@(() => student.Class.Year)" />
-                        </div>*@
-                <!--</div>
+                <div class="form-group col-2">
+                    <label for="year">Year:*</label>
+                    <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
+                                            <ValidationMessage For="@(() => student.Class.Year)" />
+                </div>*@
+            <!--</div>
             </RadzenFieldset>
             <br />
             <RadzenFieldset Text="Employee Information">
                 <div class="form-row">-->
-                    @*<div class="form-group col-3">
-                        <label for="student-id">Employee ID:*</label>
-                        <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
-                        <ValidationMessage For="@(() => patient.EmployeeId)" />
-                    </div>*@
+            @*<div class="form-group col-3">
+                    <label for="student-id">Employee ID:*</label>
+                    <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
+                    <ValidationMessage For="@(() => patient.EmployeeId)" />
+                </div>*@
 
-                    @*<div class="form-group col-3">
-                            <label for="emergency-contact-number">Emergency Contact Number:</label>
-                            <InputText id="emergency-contact-number" @bind-Value="patient.Employee.EmergencyContactNumber" class="form-control" placeholder="0500000000" />
-                            <ValidationMessage For="@(() => patient.Employee.EmergencyContactNumber)" />
-                        </div>*@
+            @*<div class="form-group col-3">
+                    <label for="emergency-contact-number">Emergency Contact Number:</label>
+                    <InputText id="emergency-contact-number" @bind-Value="patient.Employee.EmergencyContactNumber" class="form-control" placeholder="0500000000" />
+                    <ValidationMessage For="@(() => patient.Employee.EmergencyContactNumber)" />
+                </div>*@
 
-                    @*<div class="form-group col-3">
-                            <label for="marital-status">Marital Status:</label>
-                            <InputSelect class="form-control" id="marital-status" @bind-Value="patient.Employee.MaritalStatus">
-                                @foreach (var item in Enum.GetValues(typeof(MaritalStatusEnum)))
-                                {
-                                    <option value="@item">@item</option>
-                                }
-                            </InputSelect>
-                        </div>*@
-                <!--</div>
+            @*<div class="form-group col-3">
+                    <label for="marital-status">Marital Status:</label>
+                    <InputSelect class="form-control" id="marital-status" @bind-Value="patient.Employee.MaritalStatus">
+                        @foreach (var item in Enum.GetValues(typeof(MaritalStatusEnum)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </InputSelect>
+                </div>*@
+            <!--</div>
             </RadzenFieldset>-->
             <div class="mt-4"></div>
             <button type="submit" class="btn btn-outline-primary">Add Patient</button>
@@ -202,14 +202,17 @@
         </EditForm>
     </RadzenFieldset>
 </div>
+<br />
+<p style="color:green; text-align:center;">@message</p>
 
 @code {
     //Creating Patient object
     Patient patient = new Patient();
 
-    //Used to get the list of patients from the dropdown
-    //private List<Address> addresses = new List<Address>();
-    private List<Patient> patients = new List<Patient>();
+    string message;
+
+    //Used to get the list of patients
+    List<Patient> patients = new List<Patient>();
 
     //Used for the checkbox
     private bool isArchived = false;
@@ -276,8 +279,7 @@
         // To empty the form
         patient = new Patient();
 
-        // May navigate to the Patient/List component
-        NavigationManager.NavigateTo("Patient/List");
+        message = "Patient added successfully";
     }
 
     //Code used for the address dropdown list

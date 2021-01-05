@@ -8,8 +8,6 @@
 @inject VisitService Service
 @inject TreatmentService TService
 @inject PatientService PService
-@inject NavigationManager NavigationManager
-
 
 <div class="container">
     <h3>Add a Visit</h3>
@@ -17,29 +15,29 @@
         <EditForm Model="visit" OnValidSubmit="CreateVisit">
             <DataAnnotationsValidator />
             <ValidationSummary />
-            <div class="row col-4">
+            <div class="form-group row col-4">
                 <label>Appointment ID: @Id</label>
             </div>
             <br />
-            <div class="row col-6">
-                <label for="patientId">Patient Name:*</label>
-                <select id="patientId" class="form-control" @onchange="VisitPatientSelected">
-                    <option value="">Select a  Patient Name...</option>
-                    @foreach (var item in patients)
-                    {
-                        <option value="@item.PatientId">@item.FirstName @item.LastName</option>
-                    }
-                </select>
-                <ValidationMessage For="@(() => visit.PatientId)" />
+            <div class="form-group">
+                <label>Visit Date & Time:* </label><br />
+                <RadzenDatePicker TValue="DateTime?" ShowTime="true" Change=@(args => OnChange()) HourFormat="12" DateFormat="MM/dd/yyyy h:mm tt" Placeholder="MM/dd/yyyy h:mm tt" />
+                <ValidationMessage For="@(() => visit.VisitDateTime)" />
             </div>
             <br />
-            <div class="row">
-                <div class="col">
-                    <label for="VisitDateTime">Visit Date and Time:*</label>
-                    <input type="datetime-local" id="VisitDateTime" class="form-control" @bind-value="visit.VisitDateTime" />
-                    <ValidationMessage For="@(() => visit.VisitDateTime)" />
+            <div class="form-group row">
+                <div class="form-group col">
+                    <label for="patientId">Patient Name:*</label>
+                    <select id="patientId" class="form-control" @onchange="VisitPatientSelected">
+                        <option value="">Select a  Patient Name...</option>
+                        @foreach (var item in patients)
+                        {
+                            <option value="@item.PatientId">@item.FirstName @item.LastName</option>
+                        }
+                    </select>
                 </div>
-                <div class="col">
+
+                <div class="form-group col">
                     <label for="assessment">Assessment:*</label>
                     <InputSelect class="form-control" id="assessment" @bind-Value="visit.Assessment" Placeholder="Select Assessment...">
                         @foreach (var assessment in Enum.GetValues(typeof(PatientAssessment)))
@@ -51,7 +49,7 @@
                 </div>
             </div>
             <br />
-            <div class="row">
+            <div class="form-group row">
                 <div class="form-group col">
                     <label for="treatment">Treatment:* </label>
                     <InputTextArea class="form-control" id="treatment" rows="3" @bind-Value="treatment.Description" placeholder="Was given a Tablet of Panadol"></InputTextArea>
@@ -66,11 +64,11 @@
             <div class="mt-4"></div>
             <button type="submit" class="btn btn-outline-primary">Add Visit</button>
             &nbsp;&nbsp;
-            <a href="Visit/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+            <a href="Appointment/List/Confirmed" class="btn btn-outline-secondary" role="button">Go back to the list</a>
         </EditForm>
     </RadzenFieldset>
 </div>
-
+<br />
 <p style="color:green; text-align:center;">@message</p>
 
 @code {
@@ -94,8 +92,14 @@
         visit.PatientId = int.Parse(e.Value.ToString());
     }
 
+    void OnChange()
+    {
+        visit.VisitDateTime = DateTime.Now;
+    }
+
     private void CreateVisit()
     {
+        visit.Status = 1;
         visit.AppointmentId = Id;
         TService.AddTreatment(treatment);
         int id = TService.GetTreatments().Last().TreatmentId;
@@ -104,5 +108,7 @@
 
         // To empty the form
         visit = new Visit();
+
+        message = "Visit added successfully";
     }
 }

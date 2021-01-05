@@ -32,8 +32,10 @@
     </table>
     <button type="submit" class="btn btn-success" @onclick="Confirm">Confirm Appointment</button>
     &nbsp;&nbsp;
-    <a href="/Appointment/List" class="btn btn-secondary" role="button">Go back to the list</a>
+    <a href="/Appointment/List/Pending" class="btn btn-secondary" role="button">Go back to the list</a>
 </div>
+<br />
+<p style="color:green; text-align:center;">@message</p>
 
 @code {
     Appointment appointment = new Appointment();
@@ -41,11 +43,12 @@
     [Parameter]
     public int Id { get; set; }
 
+    string message;
+
     private void Confirm()
     {
         Service.ConfirmAppointment(Id);
-
-        NavigationManager.NavigateTo("Appointment/List");
+        message = "Appointment confirmed successfully";
     }
 
     protected override void OnInitialized()

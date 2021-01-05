@@ -2,7 +2,6 @@
 
 @layout NurseLayout
 
-@inject NavigationManager NavigationManager
 @inject AddressService Service
 @inject HKClinicDbContext db
 
@@ -65,7 +64,7 @@
     </RadzenFieldset>
 </div>
 
-<p>@message</p>
+<p style="color:green; text-align:center;">@message</p>
 
 @code{
     [Parameter]
@@ -86,6 +85,5 @@
         Service.UpdateAddress(address);
 
         message = "Address updated successfully";
-        //NavigationManager.NavigateTo("Address/List");
     }
 }

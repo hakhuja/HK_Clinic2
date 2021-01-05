@@ -108,5 +108,16 @@ namespace HK_Clinic2.Services
             return false;
         }
 
+        public bool DeleteAppointment(int id)
+        {
+            var appointment = db.Appointment.Find(id);
+            if (appointment != null)
+            {
+                db.Appointment.Remove(appointment);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

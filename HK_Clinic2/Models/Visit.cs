@@ -56,3 +56,7 @@ public enum PatientAssessment
     Stomach_Pain = 1, Headache, Head_Body_Bumped, Body_Pain, Wounds, Diabetic, Sore_Throat, Cough, Fever, Flu, Dizziness, Nausea_and_Vomiting, Toothache, 
     Nose_Bleeding, Eye_Irritation, Ear_Pain, Breathing_Difficulty, Diarrhea, Itchiness, Asthma, Insect_Bites, Other
 }
+public enum VisitStatusEnum
+{
+    Completed = 1, Incomplete
+}

@@ -2,10 +2,7 @@
 
 @layout NurseLayout
 
-@inject NavigationManager NavigationManager
-
 @inject PatientService Service
-
 @inject HKClinicDbContext db
 
 @using HK_Clinic2.Models;
@@ -123,71 +120,72 @@
             </RadzenFieldset>
             <br />
             <!--<RadzenFieldset Text="Student Information">
-            <div class="form-row">
-                <div class="form-group col-3">
-                    <label for="student-id">Student ID:*</label>
-                    <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
-                    <ValidationMessage For="@(() => patient.StudentId)" />
-                </div>-->
+        <div class="form-row">-->
             @*<div class="form-group col-3">
-                    <label for="education-level">Education Level:*</label>
-                    <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
-                        @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </InputSelect>
-                </div>*@
+            <label for="student-id">Student ID:*</label>
+            <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
+            <ValidationMessage For="@(() => patient.StudentId)" />
+        </div>*@
+
+            @*<div class="form-group col-3">
+            <label for="education-level">Education Level:*</label>
+            <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
+                @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
+                {
+                    <option value="@item">@item</option>
+                }
+            </InputSelect>
+        </div>*@
 
             @*<div class="form-group col-2">
-                    <label for="grade">Grade:*</label>
-                    <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
-                        @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </InputSelect>
-                </div>
+            <label for="grade">Grade:*</label>
+            <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
+                @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
+                {
+                    <option value="@item">@item</option>
+                }
+            </InputSelect>
+        </div>
 
-                <div class="form-group col-2">
-                    <label for="class-number">Class Number:*</label>
-                    <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
-                                            <ValidationMessage For="@(() => student.Class.ClassNumber)" />
-                </div>
+        <div class="form-group col-2">
+            <label for="class-number">Class Number:*</label>
+            <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
+                                    <ValidationMessage For="@(() => student.Class.ClassNumber)" />
+        </div>
 
-                <div class="form-group col-2">
-                    <label for="year">Year:*</label>
-                    <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
-                                            <ValidationMessage For="@(() => student.Class.Year)" />
-                </div>*@
+        <div class="form-group col-2">
+            <label for="year">Year:*</label>
+            <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
+                                    <ValidationMessage For="@(() => student.Class.Year)" />
+        </div>*@
             <!--</div>
-            </RadzenFieldset>
-            <br />
-            <RadzenFieldset Text="Employee Information">
-                <div class="form-row">
-                    <div class="form-group col-3">
-                        <label for="student-id">Employee ID:*</label>
-                        <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
-                        <ValidationMessage For="@(() => patient.EmployeeId)" />
-                    </div>-->
+    </RadzenFieldset>
+    <br />
+    <RadzenFieldset Text="Employee Information">
+        <div class="form-row">-->
             @*<div class="form-group col-3">
-                    <label for="emergency-contact-number">Emergency Contact Number:</label>
-                    <InputText id="emergency-contact-number" @bind-Value="patient.Employee.EmergencyContactNumber" class="form-control" placeholder="0500000000" />
-                    <ValidationMessage For="@(() => patient.Employee.EmergencyContactNumber)" />
-                </div>*@
+            <label for="student-id">Employee ID:*</label>
+            <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
+            <ValidationMessage For="@(() => patient.EmployeeId)" />
+        </div>*@
 
             @*<div class="form-group col-3">
-                    <label for="marital-status">Marital Status:</label>
-                    <InputSelect class="form-control" id="marital-status" @bind-Value="patient.Employee.MaritalStatus">
-                        @foreach (var item in Enum.GetValues(typeof(MaritalStatusEnum)))
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </InputSelect>
-                </div>*@
+            <label for="emergency-contact-number">Emergency Contact Number:</label>
+            <InputText id="emergency-contact-number" @bind-Value="patient.Employee.EmergencyContactNumber" class="form-control" placeholder="0500000000" />
+            <ValidationMessage For="@(() => patient.Employee.EmergencyContactNumber)" />
+        </div>*@
+
+            @*<div class="form-group col-3">
+            <label for="marital-status">Marital Status:</label>
+            <InputSelect class="form-control" id="marital-status" @bind-Value="patient.Employee.MaritalStatus">
+                @foreach (var item in Enum.GetValues(typeof(MaritalStatusEnum)))
+                {
+                    <option value="@item">@item</option>
+                }
+            </InputSelect>
+        </div>*@
             <!--</div>
-            </RadzenFieldset>
-            <br />-->
+    </RadzenFieldset>-->
             <br />
             <div class="mt-5">
                 <RadzenFieldset Text="Archive">
@@ -207,20 +205,17 @@
     </RadzenFieldset>
 </div>
 <br />
-
-<p>@message</p>
+<p style="color:green; text-align:center;">@message</p>
 
 @code {
-
     [Parameter]
     public int Id { get; set; }
 
     Patient patient = new Patient();
 
-    Address address = new Address();
-
     string message;
-
+    
+    //Used for the checkbox
     private bool isArchived = false;
 
     int typeValue;
@@ -240,13 +235,13 @@
 
     IEnumerable<Address> addresses;
 
-    PatientGender patientGender = PatientGender.Female;
+    PatientGender patientGender;
 
-    PatientLanguage patientLanguage = PatientLanguage.English;
+    PatientLanguage patientLanguage;
 
-    PatientType patientType = PatientType.Student;
+    PatientType patientType;
 
-    PatientLevelOfRisk patientLevelOfRisk = PatientLevelOfRisk.Low;
+    PatientLevelOfRisk patientLevelOfRisk;
 
     public void ChooseType()
     {
@@ -286,7 +281,6 @@
         Service.UpdatePatient(patient);
 
         message = "Patient updated successfully";
-        NavigationManager.NavigateTo("Patient/List");
     }
 
     void Change(object value, string name)

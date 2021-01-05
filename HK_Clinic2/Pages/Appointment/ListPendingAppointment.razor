@@ -1,16 +1,16 @@
-﻿@*This page is for the nurse to check out the pending appointments to either confirmm it or cancel it*@
+﻿@*This page is for the nurse to check out the pending appointments to either confirm it or cancel it*@
 
-@page "/Appointment/List"
+@page "/Appointment/List/Pending"
 
 @layout NurseLayout
 
-@using HK_Clinic2.Models;
+@using HK_Clinic2.Models
 @using HK_Clinic2.Services
 
 @inject AppointmentService Service
 
 <h2>Pending Appointments</h2>
-
+<br />
 <div class="mt-2"></div>
 
 @if (appointments == null)
@@ -25,7 +25,6 @@ else
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Patient Name</th>
                 <th>Appointment Date and Time</th>
                 <th>Reason</th>
                 <th>Status</th>
@@ -38,14 +37,13 @@ else
             @foreach (var item in appointments)
             {
                 <tr>
-                    <td>Ahmed Alhajri</td>
                     <td>@item.AppointmentDateTime</td>
                     <td>@item.Reason</td>
                     <td>@item.Status</td>
                     <td>@item.Note</td>
                     <td>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="Appointment/Details/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/DetailsForNurse/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="Appointment/Confirm/@item.AppointmentId"><span class="oi oi-check"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="Appointment/Cancel/@item.AppointmentId"><span class="oi oi-x"></span></a> &nbsp;
                     </td>

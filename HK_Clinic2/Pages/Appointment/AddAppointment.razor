@@ -6,90 +6,105 @@
 @using HK_Clinic2.Services
 
 @inject AppointmentService Service
-@inject PatientService PService
-@inject NavigationManager NavigationManager
+@*@inject PatientService PService*@
+@inject TeacherService TService
+@inject NurseService NService
 
-
-<h3>Add an Appointment</h3>
 <div class="container">
-    <EditForm Model="appointment" OnValidSubmit="CreateAppointment">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <div class="col-4">
-            <label for="patientId">Patient ID:*</label>
-            <InputSelect @bind-Value="appointment.AppointmentId" id="patientId" class="form-control">
-                <option value="">Select a  Patient ID...</option>
-                @foreach (var item in patients)
-                {
-                    <option value=@item.PatientId>@item.StudentId @item.EmployeeId</option>
-                }
-            </InputSelect>
-        </div>
-
-        <div class="form-group col-4">
-            <label for="AppointmentDateTime">Appointment Date and Time: </label>
-            <input type="datetime-local" name="AppointmentDateTime" class="form-control" @bind-value="appointment.AppointmentDateTime">
-            <ValidationMessage For="@(() => appointment.AppointmentDateTime)" />
-        </div>
-
-        <div class="form-group col-4">
-            <label for="reason">Reason: </label>
-            <InputTextArea class="form-control" id="reason" rows="3" @bind-Value="appointment.Reason" placeholder="Enter the reason of the appointment..."></InputTextArea>
-            <ValidationMessage For="@(() => appointment.Reason)" />
-        </div>
-
-        <div class="form-group col-4">
-            <label for="note">Note: </label>
-            <InputTextArea class="form-control" id="note" rows="3" @bind-Value="appointment.Note" placeholder="Enter a note..."></InputTextArea>
-            <ValidationMessage For="@(() => appointment.Note)" />
-        </div>
-
-        @*<div>
-            <label>Appointment Status: </label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="status" value="option1">
-                <label class="form-check-label" for="status">
-                    Confirmed
-                </label>
+    <h3>Add an Appointment</h3>
+    <RadzenFieldset Text="Add an Appointment">
+        <EditForm Model="appointment" OnValidSubmit="CreateAppointment">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group row col-4">
+                <label style="margin-top: 10px">Appointment Date & Time:* </label>
+                <RadzenDatePicker TValue="DateTime?" ShowTime="true" Change=@(args => OnChange()) HourFormat="12" DateFormat="MM/dd/yyyy h:mm tt" Placeholder="MM/dd/yyyy h:mm tt" />
+                <ValidationMessage For="@(() => appointment.AppointmentDateTime)" />
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="status2" value="option2" checked>
-                <label class="form-check-label" for="status2">
-                    Pending
-                </label>
+
+            <div class="form-group row">
+                <div class="form-group col-4">
+                    <label for="teacherId">Teacher ID who scheduled the appointment:*</label>
+                    <select id="teacherId" class="form-control" @onchange="AppointmentTeacherSelected">
+                        <option value="">Select Teacher ID...</option>
+                        @foreach (var item in teachers)
+                        {
+                            <option value="@item.EmployeeId">@item.EmployeeId</option>
+                        }
+                    </select>
+                    <ValidationMessage For="@(() => appointment.TeacherId)" />
+                </div>
+                <div class="form-group col-4">
+                    <label for="nurseId">Nurse ID who this appointment is scheduled for:*</label>
+                    <select id="nurseId" class="form-control" @onchange="AppointmentNurseSelected">
+                        <option value="">Select Nurse ID...</option>
+                        @foreach (var item in nurses)
+                        {
+                            <option value="@item.EmployeeId">@item.EmployeeId</option>
+                        }
+                    </select>
+                    <ValidationMessage For="@(() => appointment.NurseId)" />
+                </div>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="status2" value="option2">
-                <label class="form-check-label" for="status2">
-                    Canceled
-                </label>
-            </div>
-            <ValidationMessage For="@(() => appointment.Status)" />
-        </div>*@
-        <div class="mt-4"></div>
-        <button type="submit" class="btn btn-outline-primary">Add Appointment</button>
-        &nbsp;&nbsp;
-        <a href="Appointment/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
-    </EditForm>
+
+            <div class="form-group row">
+                <div class="form-group col-4">
+                    <label for="reason">Reason: </label>
+                    <InputTextArea class="form-control" id="reason" rows="3" @bind-Value="appointment.Reason" placeholder="Enter the reason of the appointment..."></InputTextArea>
+                    <ValidationMessage For="@(() => appointment.Reason)" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="note">Note: </label>
+                    <InputTextArea class="form-control" id="note" rows="3" @bind-Value="appointment.Note" placeholder="Enter a note..."></InputTextArea>
+                </div>
+            </div>            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-outline-primary">Add Appointment</button>
+            &nbsp;&nbsp;
+            <a href="Appointment/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+        </EditForm>
+    </RadzenFieldset>
 </div>
+<br />
+<p style="color:green; text-align:center;">@message</p>
 
 @code {
     Appointment appointment = new Appointment();
 
-    List<Patient> patients = new List<Patient>();
+    List<Teacher> teachers = new List<Teacher>();
+    List<Nurse> nurses = new List<Nurse>();
+
+    string message;
 
     protected override void OnInitialized()
     {
-        patients = PService.GetPatients();
+        teachers = TService.GetTeachers();
+        nurses = NService.GetNurses();
+    }
+
+    void OnChange()
+    {
+        appointment.AppointmentDateTime = DateTime.Now;
+    }
+
+    private void AppointmentTeacherSelected(ChangeEventArgs e)
+    {
+        appointment.TeacherId = int.Parse(e.Value.ToString());
+    }
+
+    private void AppointmentNurseSelected(ChangeEventArgs e)
+    {
+        appointment.NurseId = int.Parse(e.Value.ToString());
     }
 
     private void CreateAppointment()
     {
+        appointment.Status = 2;
         Service.AddAppointment(appointment);
+
+        // To empty the form
         appointment = new Appointment();
 
-        // May navigate to the Appointment/List component
-        NavigationManager.NavigateTo("Appointment/List");
+        message = "Appointment added successfully";
     }
-
 }

@@ -53,12 +53,14 @@ namespace HK_Clinic2
             services.AddScoped<FamilyDoctorService>();
             services.AddScoped<InventoryService>();
             services.AddScoped<MedicalIncidentService>();
+            services.AddScoped<NurseService>();
             services.AddScoped<ParentService>();
             services.AddScoped<PatientService>();
             services.AddScoped<SickLeaveService>();
+            services.AddScoped<TeacherService>();
+            services.AddScoped<TreatmentService>();
             services.AddScoped<VisitService>();
             services.AddScoped<VitalsService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,51 @@
+﻿@page "/Appointment/Delete/{Id:int}"
+
+@layout NurseLayout
+
+@inject AppointmentService Service
+
+<h3>Delete Appointment</h3>
+<br />
+<div class="col-5">
+    <div class="alert alert-danger">
+        Do you want to delete this appointment?
+    </div>
+</div>
+<div class="col-5">
+    <table class="table table-hover">
+        <tr>
+            <td>Appointment ID: </td>
+            <td>@appointment.AppointmentId</td>
+        </tr>
+        <tr>
+            <td>Reason: </td>
+            <td>@appointment.Reason</td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-danger" @onclick="RemoveAppointment">Delete</button>
+    &nbsp;&nbsp;
+    <a href="/Appointment/List" class="btn btn-info" role="button">Go back to the list</a>
+</div>
+<br />
+<p style="color:red; text-align:center;">@message</p>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    string message;
+
+    Appointment appointment = new Appointment();
+
+    private void RemoveAppointment()
+    {
+        Service.DeleteAppointment(Id);
+        message = "Appointment deleted successfully";
+    }
+
+    protected override void OnInitialized()
+    {
+        appointment = Service.GetAppointment(Id);
+    }
+
+}

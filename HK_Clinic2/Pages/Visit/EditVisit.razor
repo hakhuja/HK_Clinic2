@@ -4,6 +4,7 @@
 
 @inject NavigationManager NavigationManager
 @inject VisitService Service
+@inject TreatmentService TService
 @inject PatientService PService
 @inject HKClinicDbContext db
 
@@ -22,16 +23,15 @@
                 <ValidationMessage For="@(() => visit.VisitDateTime)" />
             </div>
             <br />
-            <div class="col-4">
-                <label for="patientId">Patient ID:*</label>
-                <InputSelect @bind-Value="visit.PatientId" id="patientId" class="form-control">
-                    <option value="">Select a  Patient ID...</option>
+            <div class="form-group col-4">
+                <label for="patientId">Patient Name:*</label>
+                <select id="patientId" class="form-control" @onchange="VisitPatientSelected">
+                    <option value="">Select a  Patient Name...</option>
                     @foreach (var item in patients)
                     {
-                        <option value=@item.PatientId>@item.StudentId @item.EmployeeId</option>
+                        <option value="@item.PatientId">@item.FirstName @item.LastName</option>
                     }
-                </InputSelect>
-                <ValidationMessage For="@(() => visit.PatientId)" />
+                </select>
             </div>
             <br />
             <div class="col-4">
@@ -55,23 +55,6 @@
                 <InputTextArea class="form-control" id="note" rows="3" @bind-Value="visit.Note"></InputTextArea>
                 <ValidationMessage For="@(() => visit.Note)" />
             </div>
-
-            <div>
-                <label>Visit Status: </label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="status" value="option1">
-                    <label class="form-check-label" for="status">
-                        Completed
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="status2" value="option2">
-                    <label class="form-check-label" for="status2">
-                        Incomplete
-                    </label>
-                </div>
-                <ValidationMessage For="@(() => visit.Status)" />
-            </div>
             <br>
             <div class="mt-4"></div>
             <button type="submit" class="btn btn-outline-primary">Edit</button>
@@ -91,6 +74,7 @@
     string message;
 
     Visit visit = new Visit();
+    Treatment treatment = new Treatment();
 
     List<Patient> patients = new List<Patient>();
 
@@ -100,12 +84,20 @@
         patients = PService.GetPatients();
     }
 
+    private void VisitPatientSelected(ChangeEventArgs e)
+    {
+        visit.PatientId = int.Parse(e.Value.ToString());
+    }
+
     public void UpdateVisit()
     {
+        visit.Status = 1;
+        visit.AppointmentId = Id;
+        TService.UpdateTreatment(treatment);
+        int id = TService.GetTreatments().Last().TreatmentId;
         // Edit Visit
         Service.UpdateVisit(visit);
 
         message = "Visit updated successfully";
-        NavigationManager.NavigateTo("Visit/List");
     }
 }

@@ -7,13 +7,8 @@
 
 @inject AppointmentService Service
 
-<h2>Appointments</h2>
-
-<a href="Appointment/Add">
-    <span class="oi oi-plus"></span> &nbsp;
-    Add New Appointment
-</a>
-
+<h2>Confirmed Appointments</h2>
+<br />
 <div class="mt-2"></div>
 
 @if (confirmedAppointments == null)
@@ -28,7 +23,6 @@ else
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Patient Name</th>
                 <th>Appointment Date and Time</th>
                 <th>Reason</th>
                 <th>Status</th>
@@ -41,14 +35,13 @@ else
             @foreach (var item in confirmedAppointments)
             {
                 <tr>
-                    <td>Ahmed Alrajhi</td>
                     <td>@item.AppointmentDateTime</td>
                     <td>@item.Reason</td>
                     <td>@item.Status</td>
                     <td>@item.Note</td>
                     <td>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="Appointment/Details/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Appointment/DetailsForNurse/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="Visit/Add/@item.AppointmentId"><span class="oi oi-plus"></span></a>
                     </td>
                 </tr>
