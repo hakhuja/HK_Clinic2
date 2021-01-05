@@ -1,6 +1,6 @@
-﻿@page "/Appointment/List"
+﻿@page "/Appointment/List/Confirmed"
 
-@layout TeacherLayout
+@layout NurseLayout
 
 @using HK_Clinic2.Models;
 @using HK_Clinic2.Services
@@ -16,7 +16,7 @@
 
 <div class="mt-2"></div>
 
-@if (appointments == null)
+@if (confirmedAppointments == null)
 {
     <div class="d-flex align-items-center">
         <strong>Loading data ...</strong>
@@ -33,15 +33,15 @@ else
                 <th>Reason</th>
                 <th>Status</th>
                 <th>Note</th>
-                <th>Display@*/Confirm/Cancel*@</th>
+                <th>Display/Add Visit</th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach (var item in appointments)
+            @foreach (var item in confirmedAppointments)
             {
                 <tr>
-                    <td>Ahmed Alhajri</td>
+                    <td>Ahmed Alrajhi</td>
                     <td>@item.AppointmentDateTime</td>
                     <td>@item.Reason</td>
                     <td>@item.Status</td>
@@ -49,8 +49,7 @@ else
                     <td>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="Appointment/Details/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        @*<a href="Appointment/Confirm/@item.AppointmentId"><span class="oi oi-check"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="Appointment/Cancel/@item.AppointmentId"><span class="oi oi-x"></span></a> &nbsp;*@
+                        <a href="Visit/Add/@item.AppointmentId"><span class="oi oi-plus"></span></a>
                     </td>
                 </tr>
             }
@@ -58,14 +57,15 @@ else
     </table>
 }
 
+
 @code {
 
     // Create a list of Appointments to be displayed in the component
-    List<Appointment> appointments = new List<Appointment>();
+    List<Appointment> confirmedAppointments = new List<Appointment>();
 
     protected override void OnInitialized()
     {
-        // Get the Appointments from the service
-        appointments = Service.GetAppointments();
+        // Get the Confirmed Appointments from the service
+        confirmedAppointments = Service.GetConfirmedAppointments();
     }
 }

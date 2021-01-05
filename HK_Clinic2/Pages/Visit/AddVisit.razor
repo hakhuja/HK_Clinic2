@@ -6,6 +6,7 @@
 @using HK_Clinic2.Services
 
 @inject VisitService Service
+@inject TreatmentService TService
 @inject PatientService PService
 @inject NavigationManager NavigationManager
 
@@ -96,15 +97,12 @@
     private void CreateVisit()
     {
         visit.AppointmentId = Id;
-        Service.AddTreatment(treatment);
-        int id = Service.GetTreatments().Last().TreatmentId;
+        TService.AddTreatment(treatment);
+        int id = TService.GetTreatments().Last().TreatmentId;
         visit.TreatmentId = id;
         Service.AddVisit(visit);
 
         // To empty the form
         visit = new Visit();
-
-        // May navigate to the Visit/List component
-        //NavigationManager.NavigateTo("Visit/List");
     }
 }

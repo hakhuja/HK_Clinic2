@@ -31,6 +31,10 @@ namespace HK_Clinic2.Services
         {
             return db.Appointment.Where(x => x.Status == 1).ToList();
         }
+        public List<Appointment> GetPendingAppointments()
+        {
+            return db.Appointment.Where(x => x.Status == 2).ToList();
+        }
 
         /// <summary>
         /// Get an Appointment
