@@ -1,4 +1,6 @@
-﻿@page "/Appointment/DetailsForNurse/{Id:int}"
+﻿@*This page is to display the details of the appointment by the nurse*@
+
+@page "/Appointment/DetailsForNurse/{Id:int}"
 
 @layout NurseLayout
 
@@ -24,7 +26,7 @@
             <td>@appointment.Reason</td>
         </tr>
         <tr>
-            <td>Status: </td>
+            <td>Status: <small>1: Confirmed, 2: Pending, 3: Canceled</small></td>
             <td>@appointment.Status</td>
         </tr>
         <tr>

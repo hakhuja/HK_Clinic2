@@ -1,4 +1,6 @@
-﻿@page "/Appointment/List"
+﻿@*This page is to list all the appointments by the teacher*@
+
+@page "/Appointment/List"
 
 @layout TeacherLayout
 
@@ -51,7 +53,6 @@ else
                 <td>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="Appointment/Details/@item.AppointmentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;
-                    @*<a href="Appointment/Delete/@item.AppointmentId"><span class="oi oi-trash"></span></a> &nbsp;&nbsp;&nbsp;*@
                 </td>
             </tr>
             }

@@ -1,12 +1,14 @@
-﻿@page "/Address/Edit/{Id:int}"
+﻿@*This page is to edit an address*@
+
+@page "/Address/Edit/{Id:int}"
 
 @layout NurseLayout
 
-@inject AddressService Service
-@inject HKClinicDbContext db
-
 @using HK_Clinic2.Models;
 @using HK_Clinic2.Services;
+
+@inject AddressService Service
+@inject HKClinicDbContext db
 
 <div class="container">
     <h3>Edit an Address</h3>

@@ -1,4 +1,6 @@
-﻿@page "/Patient/List"
+﻿@*This page is to list all patients*@
+
+@page "/Patient/List"
 
 @layout NurseLayout
 
@@ -46,7 +48,7 @@ else
                     <td>@item.FirstName @item.MiddleName @item.LastName</td>
                     <td>@item.Type</td>
                     <td>
-                        @if(item.Type == 1) @item.StudentId
+                        @if (item.Type == 1)@item.StudentId
                         else @item.EmployeeId
                     </td>
                     <td>
