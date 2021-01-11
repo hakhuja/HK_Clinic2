@@ -1,70 +1,66 @@
-﻿@*This is a page to show the account's details*@
+﻿@*This is a page to show the account's details for the nurse layout*@
 
 @page "/MyAccount"
 
 @layout NurseLayout
 
-<RadzenFieldset Text="Personal information">
-    <div class="form-row">
-        <div class="form-group">
-            <label class="col">First Name:</label>
-            <label class="col">Noura</label>
-
-            <label class="col">Middle Name:</label>
-            <label class="col">Ahmed</label>
-
-            <label class="col">Last Name:</label>
-            <label class="col">Alghamdi</label>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label class="col">National ID:</label>
-            <label class="col">2151584164</label>
-
-            <label class="col">Mobile Number:</label>
-            <label class="col">0565458496</label>
-
-            <label class="col">Date Of Birth:</label>
-            <label class="col">01/01/1965</label>
-
-            <label class="col">Email:</label>
-            <label class="col">Noura@@gmail.com</label>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col">
-            <label>Type:</label>
-            <label>Employee</label>
-        </div>
-
-        <div class="form-group col">
-            <label>Gender:</label>
-            <label>Female</label>
-        </div>
-
-        <div class="form-group col">
-            <label>Language:</label>
-            <label>English</label>
-        </div>
-        <div class="form-group col">
-            <label>Level of Risk:</label>
-            <label>Low</label>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-3">
-            <label>Address:</label>
-            <label>Al Tahlia Street</label>
-        </div>
-    </div>
-    <div class="file-field">
-        <label for="Photo">Photo:</label>
-        <br />
-        <div class="btn btn-primary btn-sm float-left">
-            <span>Choose file</span>
-            <input type="file">
-        </div>
-        <br />
-    </div>
-</RadzenFieldset>
+<div class="container">
+    <h3>My Account</h3>
+    <RadzenFieldset Text="Personal Details">
+        <table class="table table-hover">
+            <tr>
+                <td>First Name:</td>
+                <td>Noura</td>
+            </tr>
+            <tr>
+                <td>Middle Name:</td>
+                <td>Ahmed</td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td>Alghamdi</td>
+            </tr>
+            <tr>
+                <td>National ID:</td>
+                <td>2151584164</td>
+            </tr>
+            <tr>
+                <td>Mobile Number:</td>
+                <td>0565458496</td>
+            </tr>
+            <tr>
+                <td>Date Of Birth:</td>
+                <td>01/01/1965</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>Noura@@gmail.com</td>
+            </tr>
+            <tr>
+                <td>Type:</td>
+                <td>Employee</td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>Female</td>
+            </tr>
+            <tr>
+                <td>Language:</td>
+                <td>English</td>
+            </tr>
+            <tr>
+                <td>Level of Risk:</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>Al Tahlia Street</td>
+            </tr>
+            <tr>
+                <td>Photo:</td>
+                <td>picture.png</td>
+            </tr>
+        </table>
+        <div class="mt-4"></div>
+    </RadzenFieldset>
+</div>
