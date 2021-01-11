@@ -26,18 +26,6 @@
             <ValidationSummary />
             <RadzenFieldset Text="Personal information">
                 <div class="form-row">
-                    <div class="form-group col-3">
-                        <label style="display: flex; align-items: center">
-                            <span style="margin-right: 32px">Address:*</span>
-                        </label>
-                        <RadzenDropDown AllowClear="true" TValue="int"
-                                        LoadData="@LoadData" AllowFiltering="true"
-                                        Data="@addresses" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
-                                        Change="@(args => Change(args, "Address DropDown "))" />
-                    </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group col-4">
                         <label for="first-name">First Name:*</label>
                         <InputText id="first-name" @bind-Value="patient.FirstName" class="form-control" placeholder="Enter Patient's Fisrt Name" />
@@ -84,36 +72,56 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-3">
+                    <div class="form-group col-4">
                         <label style="display: flex; align-items: center">
-                            <span style="margin-right: 32px">Patient Type:*</span>
+                            <span>Patient Type:*</span>
                         </label>
                         <RadzenDropDown Data="@types" @bind-Value="patientType" Change="ChooseType" />
                         <ValidationMessage For="@(() => patientType)" />
                     </div>
 
-                    <div class="form-group col-3">
+                    <div class="form-group col-4">
                         <label style="display: flex; align-items: center">
-                            <span style="margin-right: 32px">Gender:*</span>
+                            <span>Gender:*</span>
                         </label>
                         <RadzenDropDown Data="@genders" @bind-Value="patientGender" Change="ChooseGender" />
                         <ValidationMessage For="@(() => patientGender)" />
                     </div>
 
-                    <div class="form-group col-3">
+                    <div class="form-group col-4">
                         <label style="display: flex; align-items: center">
-                            <span style="margin-right: 32px">Language:</span>
+                            <span>Language:</span>
                         </label>
                         <RadzenDropDown Data="@languages" @bind-Value="patientLanguage" Change="ChooseLanguage" />
                         <ValidationMessage For="@(() => patientLanguage)" />
                     </div>
+                </div>
 
-                    <div class="form-group col-3">
+                <div class="form-row">
+                    <div class="form-group col">
                         <label style="display: flex; align-items: center">
-                            <span style="margin-right: 32px">Patient Level of Risk:*</span>
+                            <span>Patient Level of Risk:*</span>
                         </label>
                         <RadzenDropDown Data="@levelOfRisks" @bind-Value="patientLevelOfRisk" Change="ChooseLevelOfRisk" />
                         <ValidationMessage For="@(() => patientLevelOfRisk)" />
+                    </div>
+
+                    <div class="form-group col">
+                        <label style="display: flex; align-items: center">
+                            <span>Blood Type</span>
+                        </label>
+                        <RadzenDropDown Data="@bloodTypes" @bind-Value="patientBloodType" Change="ChooseBloodType" />
+                        <ValidationMessage For="@(() => patientBloodType)" />
+                    </div>
+
+                    <div class="form-group col">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">Address:*</span>
+                        </label>
+                        <RadzenDropDown AllowClear="true" TValue="int"
+                                        LoadData="@LoadData" AllowFiltering="true"
+                                        Data="@addresses" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
+                                        Change="@(args => Change(args, "Address DropDown "))" />
                     </div>
                 </div>
 
@@ -223,25 +231,21 @@
     int genderValue;
     int languageValue;
     int levelOfRiskValue;
+    int bloodTypeValue;
 
     //Code for the dropdown list
     IEnumerable<PatientGender> genders = Enum.GetValues(typeof(PatientGender)).Cast<PatientGender>();
-
     IEnumerable<PatientLanguage> languages = Enum.GetValues(typeof(PatientLanguage)).Cast<PatientLanguage>();
-
     IEnumerable<PatientType> types = Enum.GetValues(typeof(PatientType)).Cast<PatientType>();
-
     IEnumerable<PatientLevelOfRisk> levelOfRisks = Enum.GetValues(typeof(PatientLevelOfRisk)).Cast<PatientLevelOfRisk>();
-
+    IEnumerable<PatientBloodType> bloodTypes = Enum.GetValues(typeof(PatientBloodType)).Cast<PatientBloodType>();
     IEnumerable<Address> addresses;
 
     PatientGender patientGender = PatientGender.Female;
-
     PatientLanguage patientLanguage = PatientLanguage.English;
-
     PatientType patientType = PatientType.Student;
-
     PatientLevelOfRisk patientLevelOfRisk = PatientLevelOfRisk.Low;
+    PatientBloodType patientBloodType = PatientBloodType.A;
 
     public void ChooseType()
     {
@@ -265,6 +269,12 @@
     {
         levelOfRiskValue = (int)patientLevelOfRisk;
         patient.LevelOfRisk = levelOfRiskValue;
+    }
+
+    public void ChooseBloodType()
+    {
+        bloodTypeValue = (int)patientBloodType;
+        patient.BloodType = bloodTypeValue;
     }
 
     protected override void OnInitialized()

@@ -61,6 +61,8 @@ namespace HK_Clinic2
             services.AddScoped<TreatmentService>();
             services.AddScoped<VisitService>();
             services.AddScoped<VitalsService>();
+            services.AddSingleton<GlobalUsernameService>();
+            services.AddScoped<GlobalUsernameService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

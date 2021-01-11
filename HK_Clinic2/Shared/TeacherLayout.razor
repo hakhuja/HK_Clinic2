@@ -1,6 +1,7 @@
 ﻿@*This is the teacher layout*@
 
 @inherits LayoutComponentBase
+@inject GlobalUsernameService Service
 
 <div class="sidebar">
     <div class="top-row pl-4 navbar navbar-dark">
@@ -24,7 +25,7 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <label style="color:red">Hello @teacherName</label>
+        <label>Hello @Service.Username</label>
 
         <a href="/About" target="_blank">About</a>
         <a href="/ContactUs" target="_blank">Contact Us</a>
@@ -36,7 +37,7 @@
                     </RadzenGravatar>
                 </Template>
                 <ChildContent>
-                    <RadzenProfileMenuItem Text="My account" Path="/Account" Icon="account_circle"></RadzenProfileMenuItem>
+                    <RadzenProfileMenuItem Text="My account" Path="/MyProfile" Icon="account_circle"></RadzenProfileMenuItem>
                     <RadzenProfileMenuItem Text="Log out" Path="/" Icon="power_settings_new"></RadzenProfileMenuItem>
                     @*<RadzenProfileMenuItem Text="Settings" Path="/Settings" Icon="line_weight"></RadzenProfileMenuItem>*@
                 </ChildContent>
@@ -61,9 +62,6 @@
 <RadzenNotification />
 
 @code {
-    [Parameter]
-    public string teacherName { get; set; }
-
     private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;

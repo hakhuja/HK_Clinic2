@@ -88,3 +88,7 @@ public enum PatientLevelOfRisk
 {
     Low = 1, Medium, High
 }
+public enum PatientBloodType
+{
+    A = 1, B, AB, O
+}

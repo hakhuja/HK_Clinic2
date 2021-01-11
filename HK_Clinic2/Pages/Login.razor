@@ -6,7 +6,8 @@
 
 @using HK_Clinic2.Models
 
-@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@inject GlobalUsernameService Service
+@inject NavigationManager navigationManager
 
 
 <div class="container-fluid" align="center">
@@ -30,7 +31,8 @@
                 <div class="form-group row">
                     <label for="password" class="col-sm-3 col-form-label">Password:*</label>
                     <div class="col-sm-9">
-                        <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control" Placeholder="Enter your password"></InputText>
+                        <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control" aria-describedby="passwordHelp" Placeholder="Enter your password"></InputText>
+                        <small id="passwordHelp" class="text-muted">Must be 8-20 characters long.</small>
                     </div>                    
                 </div>
                 <div>
@@ -76,7 +78,8 @@
                 nursesList = db.Nurse.Where(c => c.UserId == userId).ToList();
                 nurseName = nursesList[0].EmployeeId.ToString();
 
-                //navigationManager.NavigateTo($"/Visit/List/{nurseName}");
+                Service.Username = nurseName;
+
                 navigationManager.NavigateTo($"/Dashboard");
 
             }
@@ -84,6 +87,8 @@
             {
                 teachersList = db.Teacher.Where(c => c.UserId == userId).ToList();
                 teacherName = teachersList[0].EmployeeId.ToString();
+
+                Service.Username = teacherName;
 
                 navigationManager.NavigateTo($"/Appointment/List");
             }

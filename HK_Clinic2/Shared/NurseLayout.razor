@@ -1,6 +1,7 @@
 ﻿@*This is the nurse layout*@
 
 @inherits LayoutComponentBase
+@inject GlobalUsernameService Service
 
 <div class="sidebar">
     <NavMenu />
@@ -8,7 +9,7 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <label style="color:red">Hello @nurseName</label>
+        <label>Hello @Service.Username</label>
 
         <a href="/About" target="_blank">About</a>
         <a href="/ContactUs" target="_blank">Contact Us</a>
@@ -21,12 +22,12 @@
                     </RadzenGravatar>
                 </Template>
                 <ChildContent>
-                    <RadzenProfileMenuItem Text="My account" Path="/Account" Icon="account_circle"></RadzenProfileMenuItem>
+                    <RadzenProfileMenuItem Text="My account" Path="/MyAccount" Icon="account_circle"></RadzenProfileMenuItem>
                     <RadzenProfileMenuItem Text="Log out" Path="/" Icon="power_settings_new"></RadzenProfileMenuItem>
                     @*<RadzenProfileMenuItem Text="Setting" Path="/Settings" Icon="line_weight"></RadzenProfileMenuItem>*@
                 </ChildContent>
             </RadzenProfileMenu>
-        </div>    
+        </div>
     </div>
 
     <div class="content px-4">
@@ -44,7 +45,4 @@
 </div>
 
 @code {
-    [Parameter]
-    public int nurseName { get; set; }
-
 }
