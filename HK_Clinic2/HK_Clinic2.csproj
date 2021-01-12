@@ -29,7 +29,6 @@
     <Folder Include="Pages\Medical_Incident\" />
     <Folder Include="Pages\Medicine\" />
     <Folder Include="Pages\Notification\" />
-    <Folder Include="Pages\Parent\" />
     <Folder Include="Pages\Prescription\" />
     <Folder Include="Pages\Sick_Leave\" />
     <Folder Include="Pages\Vitals\" />

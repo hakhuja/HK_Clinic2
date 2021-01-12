@@ -1,0 +1,76 @@
+﻿@*This page is to list all parents*@
+
+@page "/Parent/List"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services
+
+@inject ParentService Service
+
+<h2>Parents</h2>
+
+<a href="Parent/Add">
+    <span class="oi oi-plus"></span> &nbsp;
+    Add New Parent
+</a>
+
+<div class="mt-2"></div>
+
+@if (parents == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Guardian</th>
+                <th>Relationship</th>
+                <th>Display/Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in parents)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Mobile</td>
+                    <td>@item.Email</td>
+                    <td>@item.Guardian</td>
+                    <td>@item.Relationship</td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="Parent/Details/@item.ParentId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Parent/Edit/@item.ParentId"><span class="oi oi-pencil"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="Parent/Delete/@item.ParentId"><span class="oi oi-trash"></span></a>&nbsp;
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    // Create a list of parents to be displayed in the component
+    List<Parent> parents = new List<Parent>();
+
+    protected override void OnInitialized()
+    {
+        // Get parents from the service
+        parents = Service.GetParents();
+    }
+}

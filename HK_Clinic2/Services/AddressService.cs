@@ -55,7 +55,6 @@ namespace HK_Clinic2.Services
         {
             db.Entry(address).State = EntityState.Modified;
             db.SaveChanges();
-
         }
     }
 }

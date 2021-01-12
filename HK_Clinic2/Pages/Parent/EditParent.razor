@@ -1,0 +1,92 @@
+﻿@*This page is to edit a parent*@
+
+@page "/Parent/Edit/{Id:int}"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services;
+
+@inject ParentService Service
+@inject HKClinicDbContext db
+
+<div class="container">
+    <h3>Edit a parent</h3>
+    <RadzenFieldset Text="Edit">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="first-name">First Name:* </label>
+                    <input type="text" id="first-name" class="form-control" placeholder="Enter parent's first name" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="last-name">Last Name:* </label>
+                    <input type="text" id="last-name" class="form-control" placeholder="Enter parent's last name" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="mobile">Mobile: </label>
+                    <input type="text" id="mobile" class="form-control" placeholder="Enter mobile number" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="email">Email: </label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter email" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="guardian">Guardian: </label>
+                    <select id="guardian" class="form-control">
+                        <option selected>Select the guardian...</option>
+                        <option value="1">First</option>
+                        <option value="2">Second</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="relationship">Relationship: </label>
+                    <select id="relationship" class="form-control">
+                        <option selected>Select the guardian's relationship...</option>
+                        <option value="1">Father</option>
+                        <option value="2">Mother</option>
+                        <option value="3">Brother</option>
+                        <option value="4">Sister</option>
+                        <option value="5">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-outline-primary">Edit</button>
+            &nbsp;&nbsp;
+            <a href="Parent/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+            <div class="mt-4"></div>
+        </form>
+    </RadzenFieldset>
+</div>
+<br />
+<p style="color:green; text-align:center;">@message</p>
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    string message;
+
+    Parent parent = new Parent();
+
+    protected override void OnInitialized()
+    {
+        parent = Service.GetParent(Id);
+    }
+
+    public void UpdateAddress()
+    {
+        // Edit Address
+        Service.UpdateParent(parent);
+
+        message = "Parent updated successfully";
+    }
+}
