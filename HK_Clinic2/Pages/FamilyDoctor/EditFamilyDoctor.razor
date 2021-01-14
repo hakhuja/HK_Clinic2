@@ -52,7 +52,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    string message;
+    //string message;
 
     FamilyDoctor familyDoctor = new FamilyDoctor();
 
@@ -66,6 +66,6 @@
         // Edit Family Doctor
         Service.UpdateFamilyDoctor(familyDoctor);
 
-        message = "Family Doctor is updated successfully";
+        //message = "Family Doctor is updated successfully";
     }
 }

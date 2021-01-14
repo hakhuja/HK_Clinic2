@@ -10,14 +10,27 @@
 
 @inject PatientService Service
 @inject AddressService AdService
+@inject StudentService SService
+@inject EmployeeService EService
+@inject ClassService CService
 @inject NavigationManager NavigationManager
 @inject HKClinicDbContext db
 
 <div class="container-fluid">
-    <h3>Add the patient's address from the link below if it is not existed in the Address dropdown list</h3>
+    <h3>Add the patient's address, parent, family doctor from the link below if it is not existed in the dropdown lists in the form</h3>
     <a href="Address/Add">
         <span class="oi oi-plus"></span> &nbsp;
         Add New Address
+    </a>
+    <br />
+    <a href="Parent/Add">
+        <span class="oi oi-plus"></span> &nbsp;
+        Add New Parent
+    </a>
+    <br />
+    <a href="Family-Doctor/Add">
+        <span class="oi oi-plus"></span> &nbsp;
+        Add New Family Doctor
     </a>
     <div class="mt-4"></div>
     <RadzenFieldset Text="Add a Patient">
@@ -59,8 +72,8 @@
                     </div>
 
                     <div class="form-group col-3">
-                        <label for="birthDate">Date Of Birth:</label>
-                        <InputDate id="birthDate" @bind-Value="patient.DateOfBirth" @bind-Value:format="yyyy-MM-dd" class="form-control" />
+                        <label for="birthDate">Date of Birth:</label>
+                        <InputDate id="birthDate" @bind-Value="patient.DateOfBirth" @bind-Value:format="yyyy-dd-mm" class="form-control" />
                         <ValidationMessage For="@(() => patient.DateOfBirth)" />
                     </div>
 
@@ -72,7 +85,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-4">
+                    <div class="form-group col-3">
                         <label style="display: flex; align-items: center">
                             <span>Patient Type:*</span>
                         </label>
@@ -80,7 +93,7 @@
                         <ValidationMessage For="@(() => patientType)" />
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-3">
                         <label style="display: flex; align-items: center">
                             <span>Gender:*</span>
                         </label>
@@ -88,7 +101,7 @@
                         <ValidationMessage For="@(() => patientGender)" />
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-3">
                         <label style="display: flex; align-items: center">
                             <span>Language:</span>
                         </label>
@@ -96,7 +109,7 @@
                         <ValidationMessage For="@(() => patientLanguage)" />
                     </div>
 
-                    <div class="form-group col">
+                    <div class="form-group col-3">
                         <label style="display: flex; align-items: center">
                             <span>Patient Level of Risk:*</span>
                         </label>
@@ -157,65 +170,56 @@
                 <br />
             </RadzenFieldset>
             <br />
-            <!--<RadzenFieldset Text="Student Information">
-                <div class="form-row">-->
-            @*<div class="form-group col-3">
-                    <label for="student-id">Student ID:*</label>
-                    <InputNumber id="student-id" @bind-Value="patient.StudentId" class="form-control" placeholder="Enter Student's ID" />
-                    <ValidationMessage For="@(() => patient.StudentId)" />
-                </div>*@
+            <RadzenFieldset Text="Student Information">
+                <div class="form-row">
+                    <div class="form-group col-3">
+                        <label for="student-id">Student ID:*</label>
+                        <input type="number" id="student-id" class="form-control" placeholder="Enter Student's ID" />
+                    </div>
 
-            @*<div class="form-group col-3">
-                    <label for="education-level">Education Level:*</label>
-                    <InputSelect class="form-control" id="education-level" @bind-Value="student.EducationLevel">
-                        @foreach (var item in Enum.GetValues(typeof(EducationLevelEnum)))
-                        {
+                    <div class="form-group col-3">
+                        <label for="education-level" style="display: flex; align-items: center">
+                            <span>Education Level:*</span>
+                        </label>
+                        <RadzenDropDown id="education-level" Data="@educationLevels" @bind-Value="patientEducationLevel" Change="ChooseEducationLevel" />
+                    </div>
+
+                    @*<div class="form-group col-2">
+                        <label for="grade">Grade:*</label>
+                        <InputSelect class="form-control" id="grade" @bind-Value="class.Grade" placeholder="---Select a Grade---">
+                            @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
+                                                                            {
                             <option value="@item">@item</option>
-                        }
-                    </InputSelect>
-                </div>*@
+                                                                            }
+                        </InputSelect>
+                    </div>*@
 
-            @*<div class="form-group col-2">
-                    <label for="grade">Grade:*</label>
-                    <InputSelect class="form-control" id="grade" @bind-Value="student.Class.Grade" placeholder="---Select a Grade---">
-                        @foreach (var item in Enum.GetValues(typeof(GradeEnum)))
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </InputSelect>
+                    @*<div class="form-group col-2">
+                        <label for="class-number">Class Number:</label>
+                        <InputText id="class-number" class="form-control" placeholder="Enter student's class number" />
+                    </div>
+
+                    <div class="form-group col-2">
+                        <label for="year">Year:</label>
+                        <input type="number" id="year" class="form-control" placeholder="Enter the year yyyy" />
+                    </div>*@
                 </div>
-
-                <div class="form-group col-2">
-                    <label for="class-number">Class Number:*</label>
-                    <InputText id="class-number" @bind-Value="student.Class.ClassNumber" class="form-control" placeholder="Enter student's class number" />
-                                            <ValidationMessage For="@(() => student.Class.ClassNumber)" />
-                </div>
-
-                <div class="form-group col-2">
-                    <label for="year">Year:*</label>
-                    <InputNumber id="year" @bind-Value="student.Class.Year" class="form-control" placeholder="Enter the year yyyy" />
-                                            <ValidationMessage For="@(() => student.Class.Year)" />
-                </div>*@
-            <!--</div>
             </RadzenFieldset>
             <br />
-            <RadzenFieldset Text="Employee Information">
-                <div class="form-row">-->
-            @*<div class="form-group col-3">
-                    <label for="student-id">Employee ID:*</label>
-                    <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
-                    <ValidationMessage For="@(() => patient.EmployeeId)" />
-                </div>*@
-
+            <!--<RadzenFieldset Text="Employee Information">
+                <div class="form-row">
+                    <div class="form-group col-3">
+                        <label for="student-id">Employee ID:*</label>
+                        <InputNumber id="student-id" @bind-Value="patient.EmployeeId" class="form-control" placeholder="Enter Employee's ID" />
+                    </div>-->
             @*<div class="form-group col-3">
                     <label for="emergency-contact-number">Emergency Contact Number:</label>
                     <InputText id="emergency-contact-number" @bind-Value="patient.Employee.EmergencyContactNumber" class="form-control" placeholder="0500000000" />
-                    <ValidationMessage For="@(() => patient.Employee.EmergencyContactNumber)" />
                 </div>*@
 
             @*<div class="form-group col-3">
                     <label for="marital-status">Marital Status:</label>
-                    <InputSelect class="form-control" id="marital-status" @bind-Value="patient.Employee.MaritalStatus">
+                    <InputSelect class="form-control" id="marital-status" @bind-Value="employee.MaritalStatus">
                         @foreach (var item in Enum.GetValues(typeof(MaritalStatusEnum)))
                         {
                             <option value="@item">@item</option>
@@ -238,6 +242,9 @@
 @code {
     //Creating Patient object
     Patient patient = new Patient();
+    Student student = new Student();
+    Employee employee = new Employee();
+    Class studentClass = new Class();
 
     string message;
 
@@ -252,6 +259,7 @@
     int languageValue;
     int levelOfRiskValue;
     int bloodTypeValue;
+    int educationLevelValue;
 
     //Code for the dropdown list
     IEnumerable<PatientGender> genders = Enum.GetValues(typeof(PatientGender)).Cast<PatientGender>();
@@ -259,6 +267,7 @@
     IEnumerable<PatientType> types = Enum.GetValues(typeof(PatientType)).Cast<PatientType>();
     IEnumerable<PatientLevelOfRisk> levelOfRisks = Enum.GetValues(typeof(PatientLevelOfRisk)).Cast<PatientLevelOfRisk>();
     IEnumerable<PatientBloodType> bloodTypes = Enum.GetValues(typeof(PatientBloodType)).Cast<PatientBloodType>();
+    IEnumerable<EducationLevelEnum> educationLevels = Enum.GetValues(typeof(EducationLevelEnum)).Cast<EducationLevelEnum>();
     IEnumerable<Address> addresses;
     IEnumerable<Parent> parents;
     IEnumerable<FamilyDoctor> doctors;
@@ -268,6 +277,7 @@
     PatientType patientType = PatientType.Student;
     PatientLevelOfRisk patientLevelOfRisk = PatientLevelOfRisk.Low;
     PatientBloodType patientBloodType = PatientBloodType.A;
+    EducationLevelEnum patientEducationLevel = EducationLevelEnum.Elementary_School;
 
     public void ChooseType()
     {
@@ -299,6 +309,12 @@
         patient.BloodType = bloodTypeValue;
     }
 
+    public void ChooseEducationLevel()
+    {
+        educationLevelValue = (int)patientEducationLevel;
+        student.EducationLevel = educationLevelValue;
+    }
+
     protected override void OnInitialized()
     {
         patients = Service.GetPatients();
@@ -307,6 +323,14 @@
     private void CreatePatient()
     {
         patient.IsArchived = isArchived;
+
+        //SService.AddStudent(student);
+        //int id = SService.GetStudents().Last().PatientId;
+        //patient.PatientId = id;
+
+        //CService.AddClass(studentClass);
+
+        //EService.AddEmployee(employee);
 
         Service.AddPatient(patient);
 

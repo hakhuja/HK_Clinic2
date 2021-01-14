@@ -7,7 +7,7 @@
 @using HK_Clinic2.Models
 @using HK_Clinic2.Services
 
-@inject PatientService Service
+@inject StudentService SService
 
 <h2>Students</h2>
 <br />
@@ -54,6 +54,6 @@ else
 
     protected override void OnInitialized()
     {
-        patients = Service.GetStudentsPatients();
+        patients = SService.GetStudents();
     }
 }

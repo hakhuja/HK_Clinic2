@@ -31,7 +31,7 @@ namespace HK_Clinic2.Services
         /// Get a treatment
         /// </summary>
         /// <param name="id">Id of the treatment to return</param>
-        /// <returns>A treatments with the provided id or null</returns>
+        /// <returns>A treatment with the provided id or null</returns>
         public Treatment GetTreatment(int id)
         {
             return db.Treatment.SingleOrDefault(c => c.TreatmentId == id);

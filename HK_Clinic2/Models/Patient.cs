@@ -27,6 +27,7 @@ namespace HK_Clinic2.Models
         public string MiddleName { get; set; }
         [Required(ErrorMessage = "The Last Name field is required.")]
         public string LastName { get; set; }
+        [Required(ErrorMessage = "The Date of Birth field is required and must be a date.")]
         [Column(TypeName = "date")]
         public DateTime DateOfBirth { get; set; }
         [StringLength(10)]
