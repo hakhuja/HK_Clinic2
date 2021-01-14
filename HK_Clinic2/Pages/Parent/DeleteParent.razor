@@ -1,5 +1,68 @@
-﻿<h3>DeleteParent</h3>
+﻿@*This page is to delete a parent*@
+
+@page "/Parent/Delete/{Id:int}"
+
+@layout NurseLayout
+
+@inject ParentService Service
+
+<h3>Delete Parent</h3>
+<br />
+<div class="col-5">
+    <div class="alert alert-danger">
+        Do you want to delete this parent?
+    </div>
+</div>
+<div class="col-5">
+    <table class="table table-hover">
+        <tr>
+            <td>First Name: </td>
+            <td>@parent.FirstName</td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td>@parent.LastName</td>
+        </tr>
+        <tr>
+            <td>Mobile: </td>
+            <td>@parent.Mobile</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>@parent.Email</td>
+        </tr>
+        <tr>
+            <td>Guardian: </td>
+            <td>@parent.Guardian</td>
+        </tr>
+        <tr>
+            <td>Relationship: </td>
+            <td>@parent.Relationship</td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-danger" @onclick="RemoveParent">Delete</button>
+    &nbsp;&nbsp;
+    <a href="/Parent/List" class="btn btn-info" role="button">Go back to the list</a>
+</div>
+
+<p style="color:red; text-align:center;">@message</p>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
+    string message;
+
+    Parent parent = new Parent();
+
+    private void RemoveParent()
+    {
+        Service.DeleteParent(Id);
+        message = "Address deleted successfully";
+    }
+
+    protected override void OnInitialized()
+    {
+        parent = Service.GetParent(Id);
+    }
 }

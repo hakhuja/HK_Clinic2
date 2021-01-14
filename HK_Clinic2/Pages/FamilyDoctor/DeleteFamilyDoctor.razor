@@ -1,0 +1,61 @@
+﻿@*This page is to delete a family doctor*@
+
+@page "/Family-Doctor/Delete/{Id:int}"
+
+@layout NurseLayout
+
+@inject FamilyDoctorService Service
+
+<h3>Delete Family Doctor</h3>
+<br />
+<div class="col-5">
+    <div class="alert alert-danger">
+        Do you want to delete this family doctor?
+    </div>
+</div>
+<div class="col-5">
+    <table class="table table-hover">
+        <tr>
+            <td>First Name: </td>
+            <td>@familyDoctor.FirstName</td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td>@familyDoctor.LastName</td>
+        </tr>
+        <tr>
+            <td>Mobile: </td>
+            <td>@familyDoctor.Mobile</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>@familyDoctor.Email</td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-danger" @onclick="RemoveFamilyDoctor">Delete</button>
+    &nbsp;&nbsp;
+    <a href="/Family-Doctor/List" class="btn btn-info" role="button">Go back to the list</a>
+</div>
+
+<p style="color:red; text-align:center;">@message</p>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    string message;
+
+    FamilyDoctor familyDoctor = new FamilyDoctor();
+
+    private void RemoveFamilyDoctor()
+    {
+        Service.DeleteFamilyDoctor(Id);
+        message = "Family doctor is deleted successfully";
+    }
+
+    protected override void OnInitialized()
+    {
+        familyDoctor = Service.GetFamilyDoctor(Id);
+    }
+
+}

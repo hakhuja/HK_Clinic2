@@ -1,5 +1,57 @@
-﻿<h3>ParentDetails</h3>
+﻿@*This page is to display the details of the parent*@
+
+@page "/Parent/Details/{Id:int}"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject ParentService Service
+
+<div class="container">
+    <h3>Parent Details</h3>
+    <RadzenFieldset Text="Parent Details">
+        <table class="table table-hover">
+            <tr>
+                <td>First Name: </td>
+                <td>@parent.FirstName</td>
+            </tr>
+            <tr>
+                <td>Last Name: </td>
+                <td>@parent.LastName</td>
+            </tr>
+            <tr>
+                <td>Mobile: </td>
+                <td>@parent.Mobile</td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td>@parent.Email</td>
+            </tr>
+            <tr>
+                <td>Guardian: </td>
+                <td>@parent.Guardian</td>
+            </tr>
+            <tr>
+                <td>Relationship: </td>
+                <td>@parent.Relationship</td>
+            </tr>
+        </table>
+        <br />
+        <a href="/Parent/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+        <div class="mt-4"></div>
+    </RadzenFieldset>
+</div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
+    Parent parent = new Parent();
+
+    protected override void OnInitialized()
+    {
+        parent = Service.GetParent(Id);
+    }
 }

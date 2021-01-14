@@ -1,0 +1,71 @@
+﻿@*This page is to edit a family doctor*@
+
+@page "/Family-Doctor/Edit/{Id:int}"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services;
+
+@inject FamilyDoctorService Service
+@inject HKClinicDbContext db
+
+<div class="container">
+    <h3>Edit a Family Doctor</h3>
+    <RadzenFieldset Text="Edit">
+        <form>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="first-name">First Name:* </label>
+                    <input type="text" id="first-name" class="form-control" placeholder="Enter doctor's first name" />
+                </div>
+
+                <div class="form-group col">
+                    <label for="last-name">Last Name:* </label>
+                    <input type="text" id="last-name" class="form-control" placeholder="Enter doctor's last name" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="mobile">Mobile: </label>
+                    <input type="text" id="mobile" class="form-control" placeholder="Enter mobile number" />
+                </div>
+
+                <div class="form-group col">
+                    <label for="email">Email: </label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter email" />
+                </div>
+            </div>
+            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-outline-primary">Edit</button>
+            &nbsp;&nbsp;
+            <a href="Family-Doctor/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+            <div class="mt-4"></div>
+        </form>
+    </RadzenFieldset>
+</div>
+<br />
+@*<p style="color:green; text-align:center;">@message</p>*@
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    string message;
+
+    FamilyDoctor familyDoctor = new FamilyDoctor();
+
+    protected override void OnInitialized()
+    {
+        familyDoctor = Service.GetFamilyDoctor(Id);
+    }
+
+    public void UpdateAddress()
+    {
+        // Edit Family Doctor
+        Service.UpdateFamilyDoctor(familyDoctor);
+
+        message = "Family Doctor is updated successfully";
+    }
+}

@@ -67,7 +67,7 @@
     </RadzenFieldset>
 </div>
 <br />
-<p style="color:green; text-align:center;">@message</p>
+@*<p style="color:green; text-align:center;">@message</p>*@
 
 @code{
     [Parameter]
@@ -84,7 +84,7 @@
 
     public void UpdateAddress()
     {
-        // Edit Address
+        // Edit parent
         Service.UpdateParent(parent);
 
         message = "Parent updated successfully";

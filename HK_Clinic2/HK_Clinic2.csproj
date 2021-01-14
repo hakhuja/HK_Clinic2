@@ -25,7 +25,6 @@
     <Folder Include="Pages\Equipment\" />
     <Folder Include="Pages\Event\" />
     <Folder Include="Pages\External_Medical_Report\" />
-    <Folder Include="Pages\FamilyDoctor\" />
     <Folder Include="Pages\Medical_Incident\" />
     <Folder Include="Pages\Medicine\" />
     <Folder Include="Pages\Notification\" />

@@ -95,9 +95,7 @@
                         <RadzenDropDown Data="@languages" @bind-Value="patientLanguage" Change="ChooseLanguage" />
                         <ValidationMessage For="@(() => patientLanguage)" />
                     </div>
-                </div>
 
-                <div class="form-row">
                     <div class="form-group col">
                         <label style="display: flex; align-items: center">
                             <span>Patient Level of Risk:*</span>
@@ -105,10 +103,12 @@
                         <RadzenDropDown Data="@levelOfRisks" @bind-Value="patientLevelOfRisk" Change="ChooseLevelOfRisk" />
                         <ValidationMessage For="@(() => patientLevelOfRisk)" />
                     </div>
+                </div>
 
+                <div class="form-row">
                     <div class="form-group col">
                         <label style="display: flex; align-items: center">
-                            <span>Blood Type</span>
+                            <span>Blood Type:</span>
                         </label>
                         <RadzenDropDown Data="@bloodTypes" @bind-Value="patientBloodType" Change="ChooseBloodType" />
                         <ValidationMessage For="@(() => patientBloodType)" />
@@ -122,6 +122,26 @@
                                         LoadData="@LoadData" AllowFiltering="true"
                                         Data="@addresses" TextProperty="StreetName" ValueProperty="AddressId" Style="margin-bottom: 20px" Placeholder="Select Address..." @bind-Value="patient.AddressId"
                                         Change="@(args => Change(args, "Address DropDown "))" />
+                    </div>
+
+                    <div class="form-group col">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">Parent Name: </span>
+                        </label>
+                        <RadzenDropDown AllowClear="true" TValue="int"
+                                        LoadData="@LoadingData" AllowFiltering="true"
+                                        Data="@parents" TextProperty="FirstName" ValueProperty="ParentId" Style="margin-bottom: 20px" Placeholder="Select Parent..."
+                                        Change="@(args => Change(args, "Parent DropDown "))" />
+                    </div>
+
+                    <div class="form-group col">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">Family Doctor Name: </span>
+                        </label>
+                        <RadzenDropDown AllowClear="true" TValue="int"
+                                        LoadData="@LoadedData" AllowFiltering="true"
+                                        Data="@doctors" TextProperty="FirstName" ValueProperty="DoctorId" Style="margin-bottom: 20px" Placeholder="Select Family Doctor..."
+                                        Change="@(args => Change(args, "Doctor DropDown "))" />
                     </div>
                 </div>
 
@@ -240,6 +260,8 @@
     IEnumerable<PatientLevelOfRisk> levelOfRisks = Enum.GetValues(typeof(PatientLevelOfRisk)).Cast<PatientLevelOfRisk>();
     IEnumerable<PatientBloodType> bloodTypes = Enum.GetValues(typeof(PatientBloodType)).Cast<PatientBloodType>();
     IEnumerable<Address> addresses;
+    IEnumerable<Parent> parents;
+    IEnumerable<FamilyDoctor> doctors;
 
     PatientGender patientGender = PatientGender.Female;
     PatientLanguage patientLanguage = PatientLanguage.English;
@@ -294,7 +316,7 @@
         message = "Patient added successfully";
     }
 
-    //Code used for the address dropdown list
+    //Code used for the address and parent dropdown list
     void Change(object value, string name)
     {
         var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
@@ -308,6 +330,26 @@
         var query = db.Address.AsQueryable();
 
         addresses = query.ToList();
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    //Code used for the parent dropdown list
+    void LoadingData(LoadDataArgs args)
+    {
+        var query = db.Parent.AsQueryable();
+
+        parents = query.ToList();
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    //Code used for the parent dropdown list
+    void LoadedData(LoadDataArgs args)
+    {
+        var query = db.FamilyDoctor.AsQueryable();
+
+        doctors = query.ToList();
 
         InvokeAsync(StateHasChanged);
     }

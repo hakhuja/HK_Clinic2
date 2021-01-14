@@ -1,0 +1,59 @@
+﻿@*This page is to list all patients of type student for the teacher layout*@
+
+@page "/Student/List"
+
+@layout TeacherLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject PatientService Service
+
+<h2>Students</h2>
+<br />
+
+@if (patients == null)
+{
+    <p>Loading data ...</p>
+}
+else
+{
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Student Id</th>
+            <th>Level of Risk</th>
+            <th>Gender</th>
+            <th>National Id</th>
+            <th>Display</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in patients)
+        {
+        <tr>
+            <td>@item.FirstName @item.MiddleName @item.LastName</td>
+            <td>@item.StudentId</td>
+            <td>@item.LevelOfRisk</td>
+            <td>@item.Gender</td>
+            <td>@item.NationalId</td>
+            <td>
+                &nbsp;&nbsp;&nbsp;<a href="Student/Details/@item.PatientId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+
+@code {
+
+    // Create a list of student patients to be displayed in the component
+    private List<Patient> patients = new List<Patient>();
+
+    protected override void OnInitialized()
+    {
+        patients = Service.GetStudentsPatients();
+    }
+}

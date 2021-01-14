@@ -1,0 +1,72 @@
+﻿@*This page is to list all family doctors of Students*@
+
+@page "/Family-Doctor/List"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services
+
+@inject FamilyDoctorService Service
+
+<h2>Family Doctors</h2>
+
+<a href="Family-Doctor/Add">
+    <span class="oi oi-plus"></span> &nbsp;
+    Add New Family Doctor
+</a>
+
+<div class="mt-2"></div>
+
+@if (familyDoctors == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Display/Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in familyDoctors)
+            {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Mobile</td>
+                <td>@item.Email</td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="Family-Doctor/Details/@item.DoctorId"><span class="oi oi-list"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="Family-Doctor/Edit/@item.DoctorId"><span class="oi oi-pencil"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="Family-Doctor/Delete/@item.DoctorId"><span class="oi oi-trash"></span></a>&nbsp;
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    // Create a list of Family Doctors to be displayed in the component
+    List<FamilyDoctor> familyDoctors = new List<FamilyDoctor>();
+
+    protected override void OnInitialized()
+    {
+        // Get the address from the service
+        familyDoctors = Service.GetFamilyDoctors();
+    }
+}

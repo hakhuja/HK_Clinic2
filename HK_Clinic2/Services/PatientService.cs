@@ -28,6 +28,16 @@ namespace HK_Clinic2.Services
         }
 
         /// <summary>
+        /// Get patients of type student
+        /// </summary>
+        /// <returns>List of all students</returns>
+        public List<Patient> GetStudentsPatients()
+        {
+            return db.Patient.Where(c => c.Type == 1).ToList();
+        }
+
+
+        /// <summary>
         /// Get a patient
         /// </summary>
         /// <param name="id">Id of the patient to return</param>

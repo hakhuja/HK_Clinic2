@@ -1,0 +1,93 @@
+﻿@*This page is to display the details of a student patient*@
+
+@page "/Student/Details/{Id:int}"
+
+@layout TeacherLayout
+
+@inject PatientService Service
+
+@using HK_Clinic2.Models;
+@using HK_Clinic2.Services;
+
+<div class="container">
+    <h3>Student Details</h3>
+
+    <table class="table table-hover">
+        <tr>
+            <td>Patient ID: </td>
+            <td>@patient.PatientId</td>
+        </tr>
+        <tr>
+            <td>Student ID: </td>
+            <td>@patient.StudentId</td>
+        </tr>
+        <tr>
+            <td>First Name: </td>
+            <td>@patient.FirstName</td>
+        </tr>
+        <tr>
+            <td>Middle Name: </td>
+            <td>@patient.MiddleName</td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td>@patient.LastName</td>
+        </tr>
+        <tr>
+            <td>Mobile:</td>
+            <td>@patient.Mobile</td>
+        </tr>
+        <tr>
+            <td>National Id:</td>
+            <td>@patient.NationalId</td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td>@patient.DateOfBirth</td>
+        </tr>
+        <tr>
+            <td>Blood Type:</td>
+            <td>@patient.BloodType</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>@patient.Email</td>
+        </tr>
+        <tr>
+            <td>Gender: </td>
+            <td>@patient.Gender</td>
+        </tr>
+        <tr>
+            <td>Language: </td>
+            <td>@patient.Language</td>
+        </tr>
+        <tr>
+            <td>Level of Risk: </td>
+            <td>@patient.LevelOfRisk</td>
+        </tr>
+        <tr>
+            <td>Photo: </td>
+            <td>@patient.Image</td>
+        </tr>
+        <tr>
+            <td>Archived: </td>
+            <td>@patient.IsArchived</td>
+        </tr>
+    </table>
+    <br />
+    <a href="/Student/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+    <div class="mt-4"></div>
+</div>
+
+@code {
+
+    Patient patient = new Patient();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        patient = Service.GetPatient(Id);
+    }
+}

@@ -1,0 +1,49 @@
+﻿@*This page is to display the details of the family doctor of students*@
+
+@page "/Family-Doctor/Details/{Id:int}"
+
+@layout NurseLayout
+
+@using HK_Clinic2.Models
+@using HK_Clinic2.Services
+
+@inject FamilyDoctorService Service
+
+<div class="container">
+    <h3>Family Doctor Details</h3>
+    <RadzenFieldset Text="Family Doctor Details">
+        <table class="table table-hover">
+            <tr>
+                <td>First Name: </td>
+                <td>@familyDoctor.FirstName</td>
+            </tr>
+            <tr>
+                <td>Last Name: </td>
+                <td>@familyDoctor.LastName</td>
+            </tr>
+            <tr>
+                <td>Mobile: </td>
+                <td>@familyDoctor.Mobile</td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td>@familyDoctor.Email</td>
+            </tr>
+        </table>
+        <br />
+        <a href="/Family-Doctor/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+        <div class="mt-4"></div>
+    </RadzenFieldset>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    FamilyDoctor familyDoctor = new FamilyDoctor();
+
+    protected override void OnInitialized()
+    {
+        familyDoctor = Service.GetFamilyDoctor(Id);
+    }
+}
