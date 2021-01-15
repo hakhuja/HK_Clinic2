@@ -5,84 +5,344 @@
 @layout NurseLayout
 
 @inject PatientService Service
+@inject AppointmentService AService
+@inject SickLeaveService SService
+@inject ExternalMedicalReportService EMRService
 
 @using HK_Clinic2.Models;
 @using HK_Clinic2.Services;
 
 <div class="container">
-    <h3>Patient Details</h3>
-
-    <table class="table table-hover">
-        <tr>
-            <td>Patient ID: </td>
-            <td>@patient.PatientId</td>
-        </tr>
-        <tr>
-            <td>First Name: </td>
-            <td>@patient.FirstName</td>
-        </tr>
-        <tr>
-            <td>Middle Name: </td>
-            <td>@patient.MiddleName</td>
-        </tr>
-        <tr>
-            <td>Last Name:</td>
-            <td>@patient.LastName</td>
-        </tr>
-        <tr>
-            <td>Mobile:</td>
-            <td>@patient.Mobile</td>
-        </tr>
-        <tr>
-            <td>Type: </td>
-            <td>@patient.Type</td>
-        </tr>
-        <tr>
-            <td>National Id:</td>
-            <td>@patient.NationalId</td>
-        </tr>
-        <tr>
-            <td>Date of Birth:</td>
-            <td>@patient.DateOfBirth</td>
-        </tr>
-        <tr>
-            <td>Blood Type:</td>
-            <td>@patient.BloodType</td>
-        </tr>
-        <tr>
-            <td>Email: </td>
-            <td>@patient.Email</td>
-        </tr>
-        <tr>
-            <td>Gender: </td>
-            <td>@patient.Gender</td>
-        </tr>
-        <tr>
-            <td>Language: </td>
-            <td>@patient.Language</td>
-        </tr>
-        <tr>
-            <td>Level of Risk: </td>
-            <td>@patient.LevelOfRisk</td>
-        </tr>
-        <tr>
-            <td>Photo: </td>
-            <td>@patient.Image</td>
-        </tr>
-        <tr>
-            <td>Archived: </td>
-            <td>@patient.IsArchived</td>
-        </tr>
-    </table>
-
-    <br />
-    <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
-    <div class="mt-4"></div>
+    <div class="row">
+        <div class="col-2">
+            <img src="/css/Pictures/Picture2.jpg" alt="Photo" width="100" height="100">
+        </div>
+        <div class="col-10">
+            <div class="row">
+                <label>Patient ID: </label>&nbsp;
+                <label>@patient.PatientId</label>
+            </div>
+            <br />
+            <div class="row">
+                <label>Name: </label>&nbsp;
+                <label>@patient.FirstName @patient.MiddleName @patient.LastName</label>
+            </div>
+        </div>
+    </div>
+    <RadzenTabs SelectedIndex="0">
+        <Tabs>
+            <RadzenTabsItem Text="Patient Profile">
+                <RadzenFieldset Text="Patient Details">
+                    <div class="col-9">
+                        <table class="table table-hover">
+                            <tr>
+                                <td>Mobile:</td>
+                                <td>@patient.Mobile</td>
+                            </tr>
+                            <tr>
+                                <td>Type: </td>
+                                <td>@patient.Type</td>
+                            </tr>
+                            <tr>
+                                <td>National Id:</td>
+                                <td>@patient.NationalId</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth:</td>
+                                <td>@patient.DateOfBirth</td>
+                            </tr>
+                            <tr>
+                                <td>Blood Type:</td>
+                                <td>@patient.BloodType</td>
+                            </tr>
+                            <tr>
+                                <td>Email: </td>
+                                <td>@patient.Email</td>
+                            </tr>
+                            <tr>
+                                <td>Gender: </td>
+                                <td>@patient.Gender</td>
+                            </tr>
+                            <tr>
+                                <td>Language: </td>
+                                <td>@patient.Language</td>
+                            </tr>
+                            <tr>
+                                <td>Level of Risk: </td>
+                                <td>@patient.LevelOfRisk</td>
+                            </tr>
+                            <tr>
+                                <td>Archived: </td>
+                                <td>@patient.IsArchived</td>
+                            </tr>
+                        </table>
+                    </div>                
+                </RadzenFieldset>
+                <RadzenFieldset Text="Address">
+                    <div class="col-6">
+                        <table class="table table-hover">
+                            <tr>
+                                <td>Country: </td>
+                                <td>Saudi Arabia</td>
+                            </tr>
+                            <tr>
+                                <td>City: </td>
+                                <td>Jeddah</td>
+                            </tr>
+                            <tr>
+                                <td>Street Name: </td>
+                                <td>Al Tahlia</td>
+                            </tr>
+                            <tr>
+                                <td>Unit Number: </td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>Building Number: </td>
+                                <td>6254</td>
+                            </tr>
+                            <tr>
+                                <td>Zip Code: </td>
+                                <td>12345</td>
+                            </tr>
+                        </table>
+                    </div>                
+                </RadzenFieldset>
+                <br />
+                <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                <div class="mt-4"></div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Appointments">
+                <RadzenFieldset Text="Patient's Appointments">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nurse ID</th>
+                                <th>Teacher ID</th>
+                                <th>Appointment Date and Time</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1234</td>
+                                <td>4567</td>
+                                <td>1/5/2021 9:46:38 PM</td>
+                                <td>Headache</td>
+                                <td>1</td>
+                                <td>Not urgent</td>
+                            </tr>
+                            <tr>
+                                <td>2345</td>
+                                <td>5678</td>
+                                <td>1/5/2021 9:46:38 PM</td>
+                                <td>Allergy</td>
+                                <td>1</td>
+                                <td>Urgent</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </RadzenFieldset>
+                <br />
+                <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                <div class="mt-4"></div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Visits">
+                <RadzenFieldset Text="Patient's Visits">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Visit Date and Time</th>
+                                <th>Assessment</th>
+                                <th>Treatment</th>
+                                <th>Status</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>5/2/2020 3:15:22 PM</td>
+                                <td>Headache</td>
+                                <td>was given a tablet of Panadol</td>
+                                <td>1</td>
+                                <td>Need to rest</td>
+                            </tr>
+                            <tr>
+                                <td>1/5/2021 9:46:38 PM</td>
+                                <td>Fever</td>
+                                <td>A tablet of Fevadol</td>
+                                <td>1</td>
+                                <td>Will be given a sick leave</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </RadzenFieldset>
+                <br />
+                <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                <div class="mt-4"></div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Vitals">
+                <RadzenFieldset Text="Patient's Vitals">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Weight</th>
+                                <th>Height</th>
+                                <th>Heart Rate</th>
+                                <th>Respiratory Rate</th>
+                                <th>Temperature</th>
+                                <th>Blood Sugar</th>
+                                <th>Blood Pressure</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20</td>
+                                <td>120</td>
+                                <td>70</td>
+                                <td>16</td>
+                                <td>37</td>
+                                <td>130</td>
+                                <td>80/120</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </RadzenFieldset>
+                <br />
+                <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                <div class="mt-4"></div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Allergies">
+                <RadzenFieldset Text="Patient's Allergies">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Food Allergy</td>
+                                <td>Allergic to peanut butter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </RadzenFieldset>
+                <br />
+                <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                <div class="mt-4"></div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Medical Incidents">
+                <RadzenFieldset Text="Patient's Medical Incidents">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Answer</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Eye Problems</td>
+                                <td>Has problem in eyes such as vision weakness</td>
+                                <td>No</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Heart Problems</td>
+                                <td>Has problem in the heart</td>
+                                <td>No</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Wear Glasses</td>
+                                <td></td>
+                                <td>No</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Surgeries</td>
+                                <td>had a surgery before</td>
+                                <td>Yes</td>
+                                <td>She underwent a vision correction surgery</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </RadzenFieldset>
+                <br />
+                <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                <div class="mt-4"></div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Sick Leaves">
+                <RadzenFieldset Text="Patient's Sick Leaves">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in sick_Leaves)
+                            {
+                                <tr>
+                                    <td>@item.StartDate</td>
+                                    <td>@item.EndDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </RadzenFieldset>
+                <br />
+                <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                <div class="mt-4"></div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="External Medical Reports">
+                <RadzenFieldset Text="Patient's External Medical Reports">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Attachment Date & Time</th>
+                                <th>Medical Report Date</th>
+                                <th>Scanned File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in external_Medical_Reports)
+                            {
+                                <tr>
+                                    <td>@item.Title</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.AttachmentDateTime</td>
+                                    <td>@item.MedicalReportDate</td>
+                                    <td>@item.ScannedFile</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </RadzenFieldset>
+                <br />
+                <a href="/Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                <div class="mt-4"></div>
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs>
 </div>
 
 @code {
 
     Patient patient = new Patient();
+
+    List<Sick_Leave> sick_Leaves = new List<Sick_Leave>();
+
+    List<External_Medical_Report> external_Medical_Reports = new List<External_Medical_Report>();
 
     [Parameter]
     public int Id { get; set; }
@@ -90,5 +350,9 @@
     protected override void OnInitialized()
     {
         patient = Service.GetPatient(Id);
+
+        sick_Leaves = SService.GetSickLeaves();
+
+        external_Medical_Reports = EMRService.GetMedicalReports();
     }
 }

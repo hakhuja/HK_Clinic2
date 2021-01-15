@@ -26,7 +26,6 @@ namespace HK_Clinic2.Services
         {
             return db.Appointment.ToList();
         }
-
         public List<Appointment> GetConfirmedAppointments()
         {
             return db.Appointment.Where(x => x.Status == 1).ToList();
