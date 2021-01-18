@@ -1,0 +1,82 @@
+﻿@*This page is to add an inventory*@
+
+@page "/Inventory/Add"
+
+@layout NurseLayout
+
+<div class="container">
+    <h3>Add a New Item to the Inventory</h3>
+    <RadzenFieldset Text="Add an item to the inventory">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" class="form-control" placeholder="Enter the name of the item" />
+                </div>
+                <div class="form-group col-7">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" class="form-control" placeholder="Enter a description" />
+                </div>
+                <div class="form-group col-2">
+                    <label for="quantity-in-stock">Quantity in Stock:</label>
+                    <input type="number" id="quantity-in-stock" class="form-control" placeholder="The quantity" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="registration-date-time">Registration Date & Time:</label>
+                    <input type="datetime-local" id="registration-date-time" class="form-control" placeholder="Enter the registration date & time" />
+                </div>
+                <div class="form-group col-3">
+                    <label for="expiry-date">Expiry Date:</label>
+                    <input type="date" id="expiry-date" class="form-control" placeholder="Enter the expiry date" />
+                </div>
+                <div class="form-group col-3">
+                    <label for="limit">Limit:</label>
+                    <input type="number" id="limit" class="form-control" />
+                </div>
+                <div class="form-group col-3">
+                    <label for="type">Type:</label>
+                    <select id="type" class="form-control">
+                        <option value="" selected>Select a type ...</option>
+                        <option value="1">Medicine</option>
+                        <option value="2">Equipment</option>
+                    </select>
+                </div>
+            </div>
+            <RadzenFieldset Text="Medicine">
+                <div class="form-row">
+                    <div class="form-group col-4">
+                        <label for="dosage">Dosage:</label>
+                        <input type="text" id="dosage" class="form-control" placeholder="Enter the expiry date" />
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="dosage">Barcode:</label>
+                        <input type="text" id="dosage" class="form-control" placeholder="Enter the expiry date" />
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="type">Type:</label>
+                        <input type="text" id="type" class="form-control" placeholder="Enter the expiry date" />
+                    </div>
+                </div>
+            </RadzenFieldset>
+            <RadzenFieldset Text="Equipment">
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="serial-number">Serial Number:</label>
+                        <input type="text" id="serial-number" class="form-control" placeholder="Enter the expiry date" />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="manufacturer">Manufacturer:</label>
+                        <input type="text" id="manufacturer" class="form-control" placeholder="Enter the expiry date" />
+                    </div>
+                </div>
+            </RadzenFieldset>
+            <div class="mt-4"></div>
+            <button type="submit" class="btn btn-outline-primary">Add Item</button>
+            &nbsp;&nbsp;
+            <a href="Inventory/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+            <div class="mt-4"></div>
+        </form>
+    </RadzenFieldset>
+</div>

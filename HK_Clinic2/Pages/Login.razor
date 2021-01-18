@@ -11,39 +11,42 @@
 
 
 <div class="container-fluid" align="center">
-
-    <h3><strong>Welcome to HK Clinic</strong></h3>
-    <br />
-    <h5>Please enter your username and password to log in</h5>
-
     <div>
-        <EditForm Model="db.User">
-            <RadzenFieldset Text="Login" class="col-5">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="form-group row">
-                    <label for="username" class="col-sm-3 col-form-label">Username:*</label>
-                    <div class="col-sm-9">
-                        <InputText type="text" id="username" name="username" @bind-Value="@username" class="form-control" Placeholder="Enter your username"></InputText>
+        <img src="/css/Pictures/Logo.png" alt="Logo" width="150" height="150" />
+    </div>
+    <br />
+    <div>
+        <h3><strong>Welcome to HK Clinic</strong></h3>
+        <h5>Please enter your username and password to log in</h5>
+        <div>
+            <EditForm Model="db.User">
+                <RadzenFieldset Text="Login" class="col-5">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="form-group row">
+                        <label for="username" class="col-sm-3 col-form-label">Username:*</label>
+                        <div class="col-sm-9">
+                            <InputText type="text" id="username" name="username" @bind-Value="@username" class="form-control" Placeholder="Enter your username"></InputText>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label for="password" class="col-sm-3 col-form-label">Password:*</label>
-                    <div class="col-sm-9">
-                        <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control" aria-describedby="passwordHelp" Placeholder="Enter your password"></InputText>
-                        <small id="passwordHelp" class="text-muted">Must be 8-20 characters long.</small>
-                    </div>                    
-                </div>
-                <div>
-                    <label style="color:red; font:smaller">@message</label>
-                </div>
-                <br />
-                <div>
-                    <button type="submit" class="btn btn-outline-primary" @onclick="LoginButtonClicked">Log in</button>
-                </div>
-            </RadzenFieldset>
-        </EditForm>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-3 col-form-label">Password:*</label>
+                        <div class="col-sm-9">
+                            <InputText type="password" id="password" name="password" @bind-Value="@password" class="form-control" aria-describedby="passwordHelp" Placeholder="Enter your password"></InputText>
+                            <small id="passwordHelp" class="text-muted">Must be 8-20 characters long.</small>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="color:red; font:smaller">@message</label>
+                    </div>
+                    <br />
+                    <div>
+                        <button type="submit" class="btn btn-outline-primary" @onclick="LoginButtonClicked">Log in</button>
+                    </div>
+                </RadzenFieldset>
+            </EditForm>
+        </div>
     </div>
 </div>
 

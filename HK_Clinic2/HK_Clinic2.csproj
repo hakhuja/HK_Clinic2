@@ -19,23 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Allergy\" />
-    <Folder Include="Pages\Clinic\" />
-    <Folder Include="Pages\Employee\" />
-    <Folder Include="Pages\Equipment\" />
-    <Folder Include="Pages\Event\" />
-    <Folder Include="Pages\External_Medical_Report\" />
-    <Folder Include="Pages\Medical_Incident\" />
-    <Folder Include="Pages\Medicine\" />
-    <Folder Include="Pages\Notification\" />
-    <Folder Include="Pages\Prescription\" />
-    <Folder Include="Pages\Sick_Leave\" />
-    <Folder Include="Pages\Vitals\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Shared\AccountForTeacher.razor" />
-    <None Include="Shared\Account.razor" />
+    <None Include="Pages\AccountForTeacher.razor" />
+    <None Include="Pages\Account.razor" />
   </ItemGroup>
 
 </Project>

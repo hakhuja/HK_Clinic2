@@ -184,6 +184,48 @@
                 <div class="mt-4"></div>
             </RadzenTabsItem>
             <RadzenTabsItem Text="Vitals">
+                <RadzenFieldset Text="Add Vitals">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-3">
+                                <label for="weight">Weight:</label>
+                                <input type="number" id="weight" class="form-control" placeholder="Enter weight" />
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="height">Height:</label>
+                                <input type="number" id="height" class="form-control" placeholder="Enter height" />
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="heart-rate">Heart rate: </label>
+                                <input type="number" id="heart-rate" class="form-control" placeholder="Enter heart rate" />
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="respiratory-rate">Respiratory rate:</label>
+                                <input type="number" id="respiratory-rate" class="form-control" placeholder="Enter respiratory rate" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-4">
+                                <label for="temperature">Temperature: </label>
+                                <input type="number" id="temperature" class="form-control" placeholder="Enter temperature" />
+                            </div>                     
+                            <div class="form-group col-4">
+                                <label for="blood-suger">Blood sugar: </label>
+                                <input type="number" id="blood-suger" class="form-control" placeholder="Enter blood sugar:" />
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="blood-pressure">Blood pressure: </label>
+                                <input type="text" id="blood-pressure" class="form-control" placeholder="Enter blood pressure" />
+                            </div>
+                        </div>
+                        <div class="mt-4"></div>
+                        <button type="submit" class="btn btn-outline-primary">Add Vitals</button>
+                        &nbsp;&nbsp;
+                        <a href="Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                        <div class="mt-4"></div>
+                    </form>
+                </RadzenFieldset>
+                <hr />
                 <RadzenFieldset Text="Patient's Vitals">
                     <table class="table table-hover">
                         <thead>
@@ -215,6 +257,26 @@
                 <div class="mt-4"></div>
             </RadzenTabsItem>
             <RadzenTabsItem Text="Allergies">
+                <RadzenFieldset Text="Add Allergy">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="type">Type:</label>
+                                <input type="number" id="type" class="form-control" placeholder="Enter type of the allergy" />
+                            </div>
+                            <div class="form-group col">
+                                <label for="description">Description:</label>
+                                <input type="text" id="description" class="form-control" placeholder="Enter a description for the allergy" />
+                            </div>
+                        </div>
+                        <div class="mt-4"></div>
+                        <button type="submit" class="btn btn-outline-primary">Add Allergy</button>
+                        &nbsp;&nbsp;
+                        <a href="Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                        <div class="mt-4"></div>
+                    </form>
+                </RadzenFieldset>
+                <hr />
                 <RadzenFieldset Text="Patient's Allergies">
                     <table class="table table-hover">
                         <thead>
@@ -236,6 +298,39 @@
                 <div class="mt-4"></div>
             </RadzenTabsItem>
             <RadzenTabsItem Text="Medical Incidents">
+                <RadzenFieldset Text="Add Medical Incident">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" class="form-control" placeholder="Enter name of the medical incident" />
+                            </div>
+                            <div class="form-group col">
+                                <label for="description">Description:</label>
+                                <input type="number" id="description" class="form-control" placeholder="Enter description" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="answer">Answer: </label>
+                                <select id="answer" class="form-control">
+                                    <option value="1" selected>No</option>
+                                    <option value="2">Yes</option>
+                                </select>                            
+                            </div>
+                            <div class="form-group col">
+                                <label for="note">Note:</label>
+                                <input type="number" id="note" class="form-control" placeholder="Enter note" />
+                            </div>
+                        </div>
+                        <div class="mt-4"></div>
+                        <button type="submit" class="btn btn-outline-primary">Add Medical Incidents</button>
+                        &nbsp;&nbsp;
+                        <a href="Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                        <div class="mt-4"></div>
+                    </form>
+                </RadzenFieldset>
+                <hr />
                 <RadzenFieldset Text="Patient's Medical Incidents">
                     <table class="table table-hover">
                         <thead>
@@ -279,6 +374,26 @@
                 <div class="mt-4"></div>
             </RadzenTabsItem>
             <RadzenTabsItem Text="Sick Leaves">
+                <RadzenFieldset Text="Add Sick Leave">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="start-date">Start Date:</label>
+                                <input type="datetime-local" id="start-date" class="form-control" placeholder="Enter start date" />
+                            </div>
+                            <div class="form-group col">
+                                <label for="end-date">End Date:</label>
+                                <input type="datetime-local" id="end-date" class="form-control" placeholder="Enter end date" />
+                            </div>
+                        </div>
+                        <div class="mt-4"></div>
+                        <button type="submit" class="btn btn-outline-primary">Add Allergy</button>
+                        &nbsp;&nbsp;
+                        <a href="Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                        <div class="mt-4"></div>
+                    </form>
+                </RadzenFieldset>
+                <hr />
                 <RadzenFieldset Text="Patient's Sick Leaves">
                     <table class="table table-hover">
                         <thead>
@@ -303,6 +418,45 @@
                 <div class="mt-4"></div>
             </RadzenTabsItem>
             <RadzenTabsItem Text="External Medical Reports">
+                <RadzenFieldset Text="Add External Medical Report">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-3">
+                                <label for="title">Title:</label>
+                                <input type="text" id="title" class="form-control" placeholder="Enter title" />
+                            </div>
+                            <div class="form-group col-9">
+                                <label for="description">Description:</label>
+                                <input type="text" id="description" class="form-control" placeholder="Enter description" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-3">
+                                <label for="attachment-date-time">Attachment Date & Time: </label>
+                                <input type="datetime-local" id="attachment-date-time" class="form-control" placeholder="Enter attachment date and time" />
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="medical-report-date">Medical Report Date:</label>
+                                <input type="date" id="medical-report-date" class="form-control" placeholder="Enter medical report date" />
+                            </div>
+                            <div class="file-field">
+                                <label for="scanned-file">Scanned File: </label>
+                                <br />
+                                <div class="btn btn-primary btn-sm float-left">
+                                    <span>Upload scanned file</span>
+                                    <input type="file" id="scanned-file" class="form-control">
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="mt-4"></div>
+                        <button type="submit" class="btn btn-outline-primary">Add External Medical Report</button>
+                        &nbsp;&nbsp;
+                        <a href="Patient/List" class="btn btn-outline-secondary" role="button">Go back to the list</a>
+                        <div class="mt-4"></div>
+                    </form>
+                </RadzenFieldset>
+                <hr />
                 <RadzenFieldset Text="Patient's External Medical Reports">
                     <table class="table table-hover">
                         <thead>

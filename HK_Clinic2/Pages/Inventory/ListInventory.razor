@@ -1,0 +1,51 @@
+﻿@*This page is to list all items at the inventory*@
+
+@page "/Inventory/List"
+
+@layout NurseLayout
+
+@inject InventoryService Service
+
+<h2>Inventory</h2>
+
+<a href="Inventory/Add">
+    <span class="oi oi-plus"></span> &nbsp;
+    Add New Item to the inventory
+</a>
+
+<div class="mt-2"></div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity In Stock</th>
+            <th>Registration Date & Time</th>
+            <th>Expiry Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Panadol</td>
+            <td>Panadol Extra</td>
+            <td>10</td>
+            <td>8/19/2020 12:19:12 PM</td>
+            <td>8/19/2022</td>
+        </tr>
+        <tr>
+            <td>Fevadol</td>
+            <td></td>
+            <td>5</td>
+            <td>10/11/2020 10:10:14 AM</td>
+            <td>10/11/2024</td>
+        </tr>
+        <tr>
+            <td>Mask</td>
+            <td>Disposable face mask</td>
+            <td>50</td>
+            <td>10/11/2020 10:10:14 AM</td>
+            <td>10/11/2024</td>
+        </tr>
+    </tbody>
+</table>
